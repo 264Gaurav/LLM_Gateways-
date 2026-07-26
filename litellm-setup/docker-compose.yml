@@ -1,25 +1,56 @@
+version: "3.8"
+
 services:
+  # -------------------------------------------------------------
+  # REDIS STACK (Exact & Semantic Caching)
+  # -------------------------------------------------------------
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: litellm-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+      - "8001:8001" # Optional: Redis Insight GUI
+    environment:
+      - REDIS_ARGS=--requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # -------------------------------------------------------------
+  # POSTGRES DATABASE (Spend & Audit Logging)
+  # -------------------------------------------------------------
   postgres:
     image: postgres:16
     container_name: litellm-postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: litellm
-      POSTGRES_PASSWORD: litellm
-      POSTGRES_DB: litellm
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U litellm -d litellm"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 20
-    restart: unless-stopped
 
+  # -------------------------------------------------------------
+  # LITELLM GATEWAY PROXY
+  # -------------------------------------------------------------
   litellm:
     image: docker.litellm.ai/berriai/litellm:main-latest
     container_name: litellm-local
+    restart: unless-stopped
     depends_on:
       postgres:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     ports:
       - "4000:4000"
@@ -29,17 +60,73 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: postgresql://litellm:litellm@postgres:5432/litellm
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
       ZEN_API_KEY: ${ZEN_API_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
       NVIDIA_API_KEY: ${NVIDIA_API_KEY:-${NVIDIA_NIM_API_KEY:-}}
       NVIDIA_NIM_API_KEY: ${NVIDIA_NIM_API_KEY:-${NVIDIA_API_KEY:-}}
       GITHUB_COPILOT_TOKEN_DIR: /root/.config/litellm/github_copilot
     command: ["--config", "/app/config.yaml", "--detailed_debug"]
     extra_hosts:
-      - "host.docker.internal:host-gateway" # <--- Enables access to host Ollama
-    restart: unless-stopped
+      - "host.docker.internal:host-gateway" # Connects to host Ollama instance
 
+# -------------------------------------------------------------
+# PERSISTENT VOLUMES
+# -------------------------------------------------------------
 volumes:
   postgres_data:
+  redis_data:
+
+
+
+
+# services:
+#   postgres:
+#     image: postgres:16
+#     container_name: litellm-postgres
+#     environment:
+#       POSTGRES_USER: litellm
+#       POSTGRES_PASSWORD: litellm
+#       POSTGRES_DB: litellm
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     healthcheck:
+#       test: ["CMD-SHELL", "pg_isready -U litellm -d litellm"]
+#       interval: 5s
+#       timeout: 5s
+#       retries: 20
+#     restart: unless-stopped
+
+#   litellm:
+#     image: docker.litellm.ai/berriai/litellm:main-latest
+#     container_name: litellm-local
+#     depends_on:
+#       postgres:
+#         condition: service_healthy
+#     ports:
+#       - "4000:4000"
+#     volumes:
+#       - ./litellm_config.yaml:/app/config.yaml:ro
+#       - ./copilot_tokens:/root/.config/litellm/github_copilot
+#     env_file:
+#       - .env
+#     environment:
+#       DATABASE_URL: postgresql://litellm:litellm@postgres:5432/litellm
+#       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+#       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+#       ZEN_API_KEY: ${ZEN_API_KEY:-}
+#       NVIDIA_API_KEY: ${NVIDIA_API_KEY:-${NVIDIA_NIM_API_KEY:-}}
+#       NVIDIA_NIM_API_KEY: ${NVIDIA_NIM_API_KEY:-${NVIDIA_API_KEY:-}}
+#       GITHUB_COPILOT_TOKEN_DIR: /root/.config/litellm/github_copilot
+#     command: ["--config", "/app/config.yaml", "--detailed_debug"]
+#     extra_hosts:
+#       - "host.docker.internal:host-gateway" # <--- Enables access to host Ollama
+#     restart: unless-stopped
+
+# volumes:
+#   postgres_data:
