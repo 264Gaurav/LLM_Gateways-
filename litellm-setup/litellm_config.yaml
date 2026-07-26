@@ -115,25 +115,34 @@ model_list:
   # ==========================================
   # EMBEDDING MODELS (Primary + Cloud Fallbacks)
   # ==========================================
-  
-  # Primary Embedding: Local Ollama Nomic
+
+  # Route standard text-embedding-3-small requests to local Ollama
+  - model_name: text-embedding-3-small
+    litellm_params:
+      model: ollama/nomic-embed-text:latest 
+      api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 30
+
+  # Alias matching local-embedding
   - model_name: local-embedding
     litellm_params:
-      model: ollama/nomic-embed-text
+      model: ollama/nomic-embed-text:latest 
       api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 30
 
-  # Fallback Embedding 1: Google Gemini
+  # Fallback 1: Gemini
   - model_name: gemini-embedding
     litellm_params:
       model: gemini/text-embedding-004
       api_key: os.environ/GEMINI_API_KEY
 
-  # Fallback Embedding 2: OpenRouter / OpenAI
+  # Fallback 2: OpenRouter
   - model_name: openrouter-embedding
     litellm_params:
       model: openrouter/openai/text-embedding-3-small
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
+
 
 # ==========================================
 # GLOBAL ROUTER & FALLBACK SETTINGS
@@ -154,21 +163,23 @@ router_settings:
     - gemini-flash: ["openrouter-fast", "zen-minimax-free", "llama3"]
     
     # Embedding Fallback Chain for Semantic Cache
+    - text-embedding-3-small: ["gemini-embedding", "openrouter-embedding"]
     - local-embedding: ["gemini-embedding", "openrouter-embedding"]
 
 
 # ==========================================
-# REDIS CACHE CONFIGURATION
+# Litellm CACHE CONFIGURATION
 # ==========================================
 litellm_settings:
+  drop_params: true  # Strips unsupported params (e.g. encoding_format) before sending to Ollama
+  
+  # Global Caching Configuration
   cache: true
   enable_redis_auth_cache: os.environ/REDIS_AUTH_CACHE
 
-  # logfire observability
-  callbacks: ["logfire"]
-
   cache_params:
-    type: os.environ/CACHE_TYPE
+    type: os.environ/CACHE_TYPE  # Recommended value in .env: "redis-semantic" or "redis"
+    supported_call_types: ["completion", "acompletion"] # Explicitly omit 'embedding'
     
     # Connection Parameters
     host: os.environ/REDIS_HOST
@@ -176,17 +187,22 @@ litellm_settings:
     password: os.environ/REDIS_PASSWORD
     ttl: os.environ/REDIS_TTL
     
-    # Semantic Caching Parameters
+    # Semantic Caching Parameters (active when CACHE_TYPE=redis-semantic)
     redis_semantic_cache_embedding_model: local-embedding
-    similarity_threshold: 0.95  # <--- MUST be an unquoted float here
+    similarity_threshold: 0.95  # Unquoted float
     namespace: "litellm.cache"
 
+  # Privacy & Verbosity
+  turn_off_message_logging: false
+  set_verbose: true  # Set to false once proxy logs look good in production
 
-    # Ensure prompt/response details are NOT turned off globally
-    turn_off_message_logging: false
-    # Set detailed logging levels for proxy traces
-    set_verbose: true  # Set to true temporarily if debugging UI logs
-
+  # Observability (Logfire)
+  callbacks: ["logfire"]
+  logfire_default_tags:
+    - "cache_hit"
+    - "cache_key"
+    - "semantic-similarity"
+    - "user_api_key_alias"
 
 
 # ==========================================
@@ -196,14 +212,12 @@ general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
   disable_responses_id_security: true
 
-# Enable UI database logging for prompts, responses, & fallback routing
+  # Database logging for UI, Prompts, and Spend tracking
   store_model_in_db: true
   store_prompts_in_spend_logs: true
-  
-  # Database connection for logs
   database_url: os.environ/DATABASE_URL
   
-  # Ensure callbacks write request/response payloads to DB
+  # Callbacks to persist request/response payloads to PostgreSQL DB and Logfire
   success_callback: ["db", "logfire"]
   failure_callback: ["db", "logfire"]
 
