@@ -60,7 +60,10 @@ services:
     env_file:
       - .env
     environment:
+      # Database & Logging Controls (Fixes missing UI Request/Response logs)
       DATABASE_URL: ${DATABASE_URL}
+      STORE_MODEL_IN_DB: "True"
+      STORE_PROMPTS_IN_SPEND_LOGS: "True"
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_PASSWORD: ${REDIS_PASSWORD}

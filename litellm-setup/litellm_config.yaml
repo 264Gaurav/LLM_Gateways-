@@ -154,7 +154,7 @@ router_settings:
     # Embedding Fallback Chain for Semantic Cache
     - local-embedding: ["gemini-embedding", "openrouter-embedding"]
 
-    
+
 # ==========================================
 # REDIS CACHE CONFIGURATION
 # ==========================================
@@ -176,12 +176,35 @@ litellm_settings:
     similarity_threshold: 0.8  # <--- MUST be an unquoted float here
     namespace: "litellm.cache"
 
+
+    # Ensure prompt/response details are NOT turned off globally
+    turn_off_message_logging: false
+  
+    # Set detailed logging levels for proxy traces
+    set_verbose: true  # Set to true temporarily if debugging UI logs
+
+
+
 # ==========================================
 # GENERAL & SECURITY SETTINGS
 # ==========================================
 general_settings:
   master_key: os.environ/LITELLM_MASTER_KEY
   disable_responses_id_security: true
+
+# Enable UI database logging for prompts, responses, & fallback routing
+  store_model_in_db: true
+  store_prompts_in_spend_logs: true
+  
+  # Database connection for logs
+  database_url: os.environ/DATABASE_URL
+  
+  # Ensure callbacks write request/response payloads to DB
+  success_callback: ["db"]
+  failure_callback: ["db"]
+
+
+
 
 
 
