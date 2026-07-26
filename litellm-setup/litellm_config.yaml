@@ -6,16 +6,18 @@ model_list:
     litellm_params:
       model: auto_router/complexity_router
       drop_params: true
+
       complexity_router_config:
+        session_affinity: false  # Re-evaluate every single incoming message
         tiers:
           SIMPLE: budget
           MEDIUM: smart-fast
           COMPLEX: smart-best
           REASONING: smart-reasoning
         tier_boundaries:
-          simple_medium: 0.20
-          medium_complex: 0.40
-          complex_reasoning: 0.60
+          simple_medium: 0.05
+          medium_complex: 0.35
+          complex_reasoning: 0.55
       complexity_router_default_model: smart-fast
 
   # ==========================================
@@ -173,7 +175,7 @@ litellm_settings:
     
     # Semantic Caching Parameters
     redis_semantic_cache_embedding_model: local-embedding
-    similarity_threshold: 0.8  # <--- MUST be an unquoted float here
+    similarity_threshold: 0.97  # <--- MUST be an unquoted float here
     namespace: "litellm.cache"
 
 

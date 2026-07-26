@@ -13,3 +13,5 @@
 
 -----
 
+### You can see the Redis UI - 
+http://localhost:8001

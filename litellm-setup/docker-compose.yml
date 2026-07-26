@@ -5,7 +5,7 @@ services:
   # REDIS STACK (Exact & Semantic Caching)
   # -------------------------------------------------------------
   redis:
-    image: redis/redis-stack-server:latest
+    image: redis/redis-stack:latest
     container_name: litellm-redis
     restart: unless-stopped
     ports:
