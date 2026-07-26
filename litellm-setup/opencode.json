@@ -1,0 +1,19 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "model": "opencode/big-pickle",
+    "provider": {
+        "litellm-local": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "Local LiteLLM",
+            "options": {
+                "baseURL": "http://localhost:4000/v1",
+                "apiKey": "{env:LITELLM_KEY}"
+            },
+            "models": {
+                "gateway-model": {
+                    "name": "All Proxy Models"
+                }
+            }
+        }
+    }
+}

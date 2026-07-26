@@ -1,0 +1,300 @@
+model_list:
+  # ==========================================
+  # ROUTER ENTRYPOINT
+  # ==========================================
+  - model_name: gateway-model
+    litellm_params:
+      model: auto_router/complexity_router
+      drop_params: true
+      complexity_router_config:
+        tiers:
+          SIMPLE: budget
+          MEDIUM: smart-fast
+          COMPLEX: smart-best
+          REASONING: smart-reasoning
+        tier_boundaries:
+          simple_medium: 0.25
+          medium_complex: 0.45
+          complex_reasoning: 0.60
+      complexity_router_default_model: smart-fast
+
+  # ==========================================
+  # TIERED ROUTING GROUPS
+  # ==========================================
+
+  # Tier: COMPLEX / High Quality
+  - model_name: smart-best
+    litellm_params:
+      model: openrouter/openai/gpt-5.4-mini
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+      num_retries: 2
+
+  # Tier: MEDIUM / Ultra-Fast Everyday Chat
+  - model_name: smart-fast
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+      num_retries: 2
+
+  # Tier: REASONING / Analytical & Deep Thinking
+  - model_name: smart-reasoning
+    litellm_params:
+      model: openai/big-pickle
+      api_key: os.environ/ZEN_API_KEY
+      api_base: https://opencode.ai/zen/v1
+      num_retries: 2
+
+  # Tier: SIMPLE / Free & Low-Cost
+  - model_name: budget
+    litellm_params:
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
+      num_retries: 1
+
+  # ==========================================
+  # DIRECT PROVIDER ENDPOINTS
+  # ==========================================
+
+  # Groq (Ultra-low latency inference)
+  - model_name: groq-fast
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: groq-instant
+    litellm_params:
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
+
+  # Nvidia NIM Cloud Endpoint
+  - model_name: nvidia-llama-70b
+    litellm_params:
+      model: nvidia_nim/meta/llama-3.3-70b-instruct
+      api_key: os.environ/NVIDIA_API_KEY
+
+  # Google Gemini Direct
+  - model_name: gemini-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # OpenRouter Direct
+  - model_name: openrouter-fast
+    litellm_params:
+      model: openrouter/openai/gpt-5.4-mini
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+
+  # Zen Stealth Free Endpoints
+  - model_name: zen-big-pickle
+    litellm_params:
+      model: openai/big-pickle
+      api_key: os.environ/ZEN_API_KEY
+      api_base: https://opencode.ai/zen/v1
+
+  - model_name: zen-minimax-free
+    litellm_params:
+      model: openai/minimax-m2.5-free
+      api_key: os.environ/ZEN_API_KEY
+      api_base: https://opencode.ai/zen/v1
+
+  # Local Ollama Endpoints
+  - model_name: llama3
+    litellm_params:
+      model: ollama/llama3.1:8b
+      api_base: os.environ/OLLAMA_BASE_URL
+
+  - model_name: gemma
+    litellm_params:
+      model: ollama/gemma2:2b
+      api_base: os.environ/OLLAMA_BASE_URL
+
+# ==========================================
+# GLOBAL ROUTER & FALLBACK SETTINGS
+# ==========================================
+router_settings:
+  num_retries: 2
+  timeout: 60
+  allowed_fails: 1        # Cool down model after 1 failure (e.g. rate limit 429)
+  cooldown_time: 60        # Put rate-limited models on 60-second cooldown
+
+  # Clean, explicit tier-to-tier fallback chain
+  fallbacks:
+    - gateway-model: ["smart-fast", "budget", "openrouter-fast"]
+    - smart-best: ["nvidia-llama-70b", "zen-big-pickle", "openrouter-fast", "gemma"]
+    - smart-fast: ["groq-fast", "openrouter-fast", "llama3"]
+    - smart-reasoning: ["zen-big-pickle", "openrouter-fast", "groq-fast"]
+    - budget: ["groq-instant", "zen-minimax-free", "llama3"]
+    # Separate rate-limit protection for direct Gemini calls
+    - gemini-flash: ["openrouter-fast", "zen-minimax-free", "llama3"]
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  disable_responses_id_security: true
+
+
+
+
+# model_list:
+#   # Lean setup: 3 core models from 3 providers, reused across categories
+
+#   # Single complexity-based entrypoint: routes by request complexity
+#   - model_name: gateway-model
+#     litellm_params:
+#       model: auto_router/complexity_router
+#       complexity_router_config:
+#         tiers:
+#           SIMPLE: budget
+#           MEDIUM: smart-fast
+#           COMPLEX: smart-best
+#           REASONING: smart-reasoning
+#         tier_boundaries:
+#           simple_medium: 0.25
+#           medium_complex: 0.45
+#           complex_reasoning: 0.60
+#       complexity_router_default_model: smart-fast
+#       num_retries: 2
+#       retry_after: ["rate_limit_error", "context_window_error"]
+
+#   # Best overall group for complex, high-quality answers and difficult tasks
+#   - model_name: smart-best
+#     litellm_params:
+#       model: openrouter/openai/gpt-5.4-mini
+#       api_key: os.environ/OPENROUTER_API_KEY
+#       api_base: https://openrouter.ai/api/v1
+#       fallbacks:
+#         [
+#           {
+#             "model": "openai/big-pickle",
+#             "api_key": "os.environ/ZEN_API_KEY",
+#             "api_base": "https://opencode.ai/zen/v1",
+#           },
+#           {
+#             "model": "gemini/gemini-2.5-flash",
+#             "api_key": "os.environ/GEMINI_API_KEY",
+#           },
+#         ]
+#       num_retries: 2
+#       retry_after: ["rate_limit_error", "context_window_error"]
+
+#   # Fast general-purpose group for daily questions, chat, and lightweight tasks
+#   - model_name: smart-fast
+#     litellm_params:
+#       model: gemini/gemini-2.5-flash
+#       api_key: os.environ/GEMINI_API_KEY
+#       fallbacks:
+#         [
+#           {
+#             "model": "openrouter/openai/gpt-5.4-mini",
+#             "api_key": "os.environ/OPENROUTER_API_KEY",
+#             "api_base": "https://openrouter.ai/api/v1",
+#           },
+#           {
+#             "model": "openai/big-pickle",
+#             "api_key": "os.environ/ZEN_API_KEY",
+#             "api_base": "https://opencode.ai/zen/v1",
+#           },
+#           {
+#             "model": "openai/minimax-m2.5-free",
+#             "api_key": "os.environ/ZEN_API_KEY",
+#             "api_base": "https://opencode.ai/zen/v1",
+#           },
+#         ]
+#       num_retries: 2
+#       retry_after: ["rate_limit_error", "context_window_error"]
+
+#   # Reasoning group for analysis, planning, architecture, and deeper thinking tasks
+#   - model_name: smart-reasoning
+#     litellm_params:
+#       model: openai/big-pickle
+#       api_key: os.environ/ZEN_API_KEY
+#       api_base: https://opencode.ai/zen/v1
+#       fallbacks:
+#         [
+#           {
+#             "model": "openrouter/openai/gpt-5.4-mini",
+#             "api_key": "os.environ/OPENROUTER_API_KEY",
+#             "api_base": "https://openrouter.ai/api/v1",
+#           },
+#           {
+#             "model": "gemini/gemini-2.5-flash",
+#             "api_key": "os.environ/GEMINI_API_KEY",
+#           },
+#         ]
+#       num_retries: 2
+#       retry_after: ["rate_limit_error", "context_window_error"]
+ 
+#   # Low-cost group for simple prompts, short tasks, and frequent requests
+#   - model_name: budget
+#     litellm_params:
+#       model: openai/minimax-m2.5-free
+#       api_key: os.environ/ZEN_API_KEY
+#       api_base: https://opencode.ai/zen/v1
+#       fallbacks:
+#         [
+#           {
+#             "model": "openai/big-pickle",
+#             "api_key": "os.environ/ZEN_API_KEY",
+#             "api_base": "https://opencode.ai/zen/v1",
+#           },
+#           {
+#             "model": "openrouter/openai/gpt-5.4-mini",
+#             "api_key": "os.environ/OPENROUTER_API_KEY",
+#             "api_base": "https://openrouter.ai/api/v1",
+#           },
+#           {
+#             "model": "gemini/gemini-2.5-flash",
+#             "api_key": "os.environ/GEMINI_API_KEY",
+#           },
+#         ]
+#       num_retries: 1
+#       retry_after: ["rate_limit_error", "context_window_error"]
+
+#   # Direct OpenRouter endpoint used as a real fallback target when Gemini is rate-limited
+#   - model_name: openrouter-fast
+#     litellm_params:
+#       model: openrouter/openai/gpt-5.4-mini
+#       api_key: os.environ/OPENROUTER_API_KEY
+#       api_base: https://openrouter.ai/api/v1
+
+#   # Direct OpenCode Zen free endpoint for a verified free stealth model
+#   - model_name: zen-big-pickle
+#     litellm_params:
+#       model: openai/big-pickle
+#       api_key: os.environ/ZEN_API_KEY
+#       api_base: https://opencode.ai/zen/v1
+
+#   # Direct OpenCode Zen free endpoint for MiniMax M2.5 Free
+#   - model_name: zen-minimax-free
+#     litellm_params:
+#       model: openai/minimax-m2.5-free
+#       api_key: os.environ/ZEN_API_KEY
+#       api_base: https://opencode.ai/zen/v1
+
+#   #Ollama local models configuring 
+#   - model_name: llama3 # Name exposed via LiteLLM endpoint
+#     litellm_params:
+#       model: ollama/llama3.1:8b # Provider format: ollama/<model>
+#       api_base: http://host.docker.internal:11434
+
+#   - model_name: gemma
+#     litellm_params:
+#       model: ollama/gemma4:e4b 
+#       api_base: http://host.docker.internal:11434
+
+# router_settings:
+#   num_retries: 2
+#   timeout: 60
+#   allowed_fails: 2
+#   cooldown_time: 30
+#   fallbacks:
+#     - {"gateway-model": ["budget", "smart-fast", "openrouter-fast", "zen-big-pickle"]}
+#     - {"budget": ["zen-minimax-free", "openrouter-fast", "smart-fast"]}
+#     - {"smart-fast": ["openrouter-fast", "zen-big-pickle", "zen-minimax-free"]}
+#     - {"smart-best": ["openrouter-fast", "smart-fast", "zen-big-pickle"]}
+#     - {"smart-reasoning": ["openrouter-fast", "smart-best", "zen-big-pickle"]}
+
+# general_settings:
+#   master_key: os.environ/LITELLM_MASTER_KEY
+#   disable_responses_id_security: True

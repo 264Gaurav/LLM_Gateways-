@@ -1,0 +1,5 @@
+.venv/
+.env
+copilot_tokens/
+__pycache__/
+*.pyc
