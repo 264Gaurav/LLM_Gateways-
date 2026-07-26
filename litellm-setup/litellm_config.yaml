@@ -164,6 +164,9 @@ litellm_settings:
   cache: true
   enable_redis_auth_cache: os.environ/REDIS_AUTH_CACHE
 
+  # logfire observability
+  callbacks: ["logfire"]
+
   cache_params:
     type: os.environ/CACHE_TYPE
     
@@ -175,13 +178,12 @@ litellm_settings:
     
     # Semantic Caching Parameters
     redis_semantic_cache_embedding_model: local-embedding
-    similarity_threshold: 0.97  # <--- MUST be an unquoted float here
+    similarity_threshold: 0.95  # <--- MUST be an unquoted float here
     namespace: "litellm.cache"
 
 
     # Ensure prompt/response details are NOT turned off globally
     turn_off_message_logging: false
-  
     # Set detailed logging levels for proxy traces
     set_verbose: true  # Set to true temporarily if debugging UI logs
 
@@ -202,8 +204,8 @@ general_settings:
   database_url: os.environ/DATABASE_URL
   
   # Ensure callbacks write request/response payloads to DB
-  success_callback: ["db"]
-  failure_callback: ["db"]
+  success_callback: ["db", "logfire"]
+  failure_callback: ["db", "logfire"]
 
 
 

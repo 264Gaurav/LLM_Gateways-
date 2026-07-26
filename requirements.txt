@@ -1,0 +1,8 @@
+# Standard OpenAI client (pure Python, builds fast without Rust/C++ errors)
+openai>=1.50.0
+
+# Logfire Observability SDK
+logfire>=3.0.0
+
+# Environment Variable Loader
+python-dotenv>=1.0.0

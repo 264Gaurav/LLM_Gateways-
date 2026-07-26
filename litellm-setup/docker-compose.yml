@@ -62,8 +62,13 @@ services:
     environment:
       # Database & Logging Controls (Fixes missing UI Request/Response logs)
       DATABASE_URL: ${DATABASE_URL}
+      # UI Request & Response Audit Controls
       STORE_MODEL_IN_DB: "True"
       STORE_PROMPTS_IN_SPEND_LOGS: "True"
+      
+      # Observability (Logfire / OTEL)
+      LOGFIRE_TOKEN: ${LOGFIRE_TOKEN}
+
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
