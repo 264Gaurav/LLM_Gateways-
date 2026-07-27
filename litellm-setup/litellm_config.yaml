@@ -119,14 +119,14 @@ model_list:
   # Route standard text-embedding-3-small requests to local Ollama
   - model_name: text-embedding-3-small
     litellm_params:
-      model: ollama/nomic-embed-text:latest 
+      model: ollama/qwen3-embedding:0.6b 
       api_base: os.environ/OLLAMA_BASE_URL
       request_timeout: 30
 
   # Alias matching local-embedding
   - model_name: local-embedding
     litellm_params:
-      model: ollama/nomic-embed-text:latest 
+      model: ollama/qwen3-embedding:0.6b
       api_base: os.environ/OLLAMA_BASE_URL
       request_timeout: 30
 
@@ -189,7 +189,7 @@ litellm_settings:
     
     # Semantic Caching Parameters (active when CACHE_TYPE=redis-semantic)
     redis_semantic_cache_embedding_model: local-embedding
-    similarity_threshold: 0.95  # Unquoted float
+    similarity_threshold: 0.86  # Unquoted float
     namespace: "litellm.cache"
 
   # Privacy & Verbosity

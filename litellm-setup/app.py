@@ -77,7 +77,7 @@ def query_semantic_cache(prompt: str):
 def cosine_distance(v1, v2):
     return 1 - (np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
 
-v_dry = get_embedding_and_inspect("What is SOLID Concept in software engineering?")
+v_dry = get_embedding_and_inspect("What is DRY Principle?")
 v_solid = get_embedding_and_inspect("What is SOLID Principle")
 
 print("DRY  [0:5]:", v_dry[:5])
@@ -90,11 +90,11 @@ print(f"Cosine Distance: {dist:.4f}")
 if __name__ == "__main__":
     # First call: Cache Miss (Generates embedding & queries LLM)
     print("Executing Query 1 (Expect Cache Miss)...")
-    query_semantic_cache("What is API Gateway?")
+    query_semantic_cache("What is Load balancer?")
 
     # Second call (Reworded): Cache Hit (Triggers semantic match threshold)
     print("\nExecuting Query 2 (Expect Semantic Cache Hit)...")
-    query_semantic_cache("Tell about Api gateway")
+    query_semantic_cache("Tell me about Load Balancer")
 
 
 
