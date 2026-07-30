@@ -4,10 +4,13 @@
 [LiteLLM](/basics/README.md)
 
 ## Learn about Different Embedding models selection as per need, use cases and by knowing their limitation/tradeoffs: 
-[Comparison](/litellm-setup/Embedding_COMPARISON.md)
+[Embedding_and_Indexing_Strategies](/litellm-setup/Embedding_COMPARISON.md)
 
 ## Learn about different strategy of Re-Ranking (After First stage of Retrival - ReRanking is important to achieve context precision):
 [ReRanking](/litellm-setup/RE_RANKING.md)
+
+## Learn about Caching Strategies in LiteLLM (LLM Gateways) and their selection: 
+[Caching](/litellm-setup/Caching.md)
 
 
 ## LiteLLM Setup - with docker (medium to advanced)
