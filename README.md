@@ -1,6 +1,12 @@
 # LiteLLM - LLM Gateway (ai gateway): See basics here 
 [LiteLLM](/basics/README.md)
 
+# Learn about Different Embedding models selection as per need, use cases and by knowing their limitation/tradeoffs: 
+[Comparison](/litellm-setup/Embedding_COMPARISON.md)
+
+# Learn about different strategy of Re-Ranking (After First stage of Retrival - ReRanking is important to achieve context precision):
+[ReRanking](/litellm-setup/RE_RANKING.md)
+
 
 # LiteLLM Setup - with docker (medium to advanced)
 This repository provides a complete local setup for a [LiteLLM Proxy](https://docs.litellm.ai/docs/proxy/quick_start) with a PostgreSQL database. It enables routing, load balancing, cost tracking, and unified access to multiple LLM providers through a standard OpenAI-compatible API.
