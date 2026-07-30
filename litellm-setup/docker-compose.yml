@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
-      - "8001:8001" # Optional: Redis Insight GUI
+      - "8001:8001"
     environment:
       - REDIS_ARGS=--requirepass ${REDIS_PASSWORD}
     volumes:
@@ -41,10 +41,40 @@ services:
       retries: 20
 
   # -------------------------------------------------------------
+  # BGE-M3 EMBEDDING SERVICE
+  # -------------------------------------------------------------
+  # -------------------------------------------------------------
+  # BGE-M3 EMBEDDING SERVICE
+  # -------------------------------------------------------------
+  bge-m3-infinity:
+    image: michaelf34/infinity:latest
+    container_name: bge-m3-hybrid-server
+    command: v2 --model-id BAAI/bge-m3 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - infinity-cache:/root/.cache
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/health\")' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 45s
+    # Uncomment if running on an NVIDIA GPU:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  # -------------------------------------------------------------
   # LITELLM GATEWAY PROXY
   # -------------------------------------------------------------
   litellm:
-    image: docker.litellm.ai/berriai/litellm:main-latest
+    image: ghcr.io/berriai/litellm:main-latest
     container_name: litellm-local
     restart: unless-stopped
     depends_on:
@@ -52,6 +82,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      bge-m3-infinity:
+        condition: service_healthy # Fixed service reference name
     ports:
       - "4000:4000"
     volumes:
@@ -60,15 +92,10 @@ services:
     env_file:
       - .env
     environment:
-      # Database & Logging Controls (Fixes missing UI Request/Response logs)
       DATABASE_URL: ${DATABASE_URL}
-      # UI Request & Response Audit Controls
       STORE_MODEL_IN_DB: "True"
       STORE_PROMPTS_IN_SPEND_LOGS: "True"
-      
-      # Observability (Logfire / OTEL)
       LOGFIRE_TOKEN: ${LOGFIRE_TOKEN}
-
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
@@ -81,40 +108,74 @@ services:
       GITHUB_COPILOT_TOKEN_DIR: /root/.config/litellm/github_copilot
     command: ["--config", "/app/config.yaml", "--detailed_debug"]
     extra_hosts:
-      - "host.docker.internal:host-gateway" # Connects to host Ollama instance
+      - "host.docker.internal:host-gateway"
 
-# -------------------------------------------------------------
-# PERSISTENT VOLUMES
-# -------------------------------------------------------------
 volumes:
   postgres_data:
   redis_data:
+  infinity-cache: # Fixed missing volume declaration
 
 
 
+
+
+
+
+
+
+# version: "3.8"
 
 # services:
+#   # -------------------------------------------------------------
+#   # REDIS STACK (Exact & Semantic Caching)
+#   # -------------------------------------------------------------
+#   redis:
+#     image: redis/redis-stack:latest
+#     container_name: litellm-redis
+#     restart: unless-stopped
+#     ports:
+#       - "6379:6379"
+#       - "8001:8001" # Optional: Redis Insight GUI
+#     environment:
+#       - REDIS_ARGS=--requirepass ${REDIS_PASSWORD}
+#     volumes:
+#       - redis_data:/data
+#     healthcheck:
+#       test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+#       interval: 5s
+#       timeout: 5s
+#       retries: 5
+
+#   # -------------------------------------------------------------
+#   # POSTGRES DATABASE (Spend & Audit Logging)
+#   # -------------------------------------------------------------
 #   postgres:
 #     image: postgres:16
 #     container_name: litellm-postgres
+#     restart: unless-stopped
 #     environment:
-#       POSTGRES_USER: litellm
-#       POSTGRES_PASSWORD: litellm
-#       POSTGRES_DB: litellm
+#       POSTGRES_USER: ${POSTGRES_USER}
+#       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+#       POSTGRES_DB: ${POSTGRES_DB}
 #     volumes:
 #       - postgres_data:/var/lib/postgresql/data
 #     healthcheck:
-#       test: ["CMD-SHELL", "pg_isready -U litellm -d litellm"]
+#       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
 #       interval: 5s
 #       timeout: 5s
 #       retries: 20
-#     restart: unless-stopped
 
+#   # -------------------------------------------------------------
+#   # LITELLM GATEWAY PROXY
+#   # -------------------------------------------------------------
 #   litellm:
 #     image: docker.litellm.ai/berriai/litellm:main-latest
 #     container_name: litellm-local
+#     restart: unless-stopped
 #     depends_on:
 #       postgres:
+#         condition: service_healthy
+#       redis:
 #         condition: service_healthy
 #     ports:
 #       - "4000:4000"
@@ -124,17 +185,32 @@ volumes:
 #     env_file:
 #       - .env
 #     environment:
-#       DATABASE_URL: postgresql://litellm:litellm@postgres:5432/litellm
+#       # Database & Logging Controls (Fixes missing UI Request/Response logs)
+#       DATABASE_URL: ${DATABASE_URL}
+#       # UI Request & Response Audit Controls
+#       STORE_MODEL_IN_DB: "True"
+#       STORE_PROMPTS_IN_SPEND_LOGS: "True"
+      
+#       # Observability (Logfire / OTEL)
+#       LOGFIRE_TOKEN: ${LOGFIRE_TOKEN}
+
+#       REDIS_HOST: ${REDIS_HOST}
+#       REDIS_PORT: ${REDIS_PORT}
+#       REDIS_PASSWORD: ${REDIS_PASSWORD}
 #       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
 #       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
 #       ZEN_API_KEY: ${ZEN_API_KEY:-}
+#       GROQ_API_KEY: ${GROQ_API_KEY:-}
 #       NVIDIA_API_KEY: ${NVIDIA_API_KEY:-${NVIDIA_NIM_API_KEY:-}}
 #       NVIDIA_NIM_API_KEY: ${NVIDIA_NIM_API_KEY:-${NVIDIA_API_KEY:-}}
 #       GITHUB_COPILOT_TOKEN_DIR: /root/.config/litellm/github_copilot
 #     command: ["--config", "/app/config.yaml", "--detailed_debug"]
 #     extra_hosts:
-#       - "host.docker.internal:host-gateway" # <--- Enables access to host Ollama
-#     restart: unless-stopped
+#       - "host.docker.internal:host-gateway" # Connects to host Ollama instance
 
+# # -------------------------------------------------------------
+# # PERSISTENT VOLUMES
+# # -------------------------------------------------------------
 # volumes:
 #   postgres_data:
+#   redis_data:

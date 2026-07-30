@@ -116,6 +116,13 @@ model_list:
   # EMBEDDING MODELS (Primary + Cloud Fallbacks)
   # ==========================================
 
+  #BGE-M3 Embedding (Custom - running locally, accessing usign fast api url)
+  - model_name: local-bge-m3
+    litellm_params:
+      model: openai/BAAI/bge-m3
+      api_base: http://bge-m3-service:8000/v1
+      api_key: "not-needed"
+
   # Route standard text-embedding-3-small requests to local Ollama
   - model_name: text-embedding-3-small
     litellm_params:
@@ -188,7 +195,7 @@ litellm_settings:
     ttl: os.environ/REDIS_TTL
     
     # Semantic Caching Parameters (active when CACHE_TYPE=redis-semantic)
-    redis_semantic_cache_embedding_model: local-embedding
+    redis_semantic_cache_embedding_model: local-bge-m3
     similarity_threshold: 0.86  # Unquoted float
     namespace: "litellm.cache"
 
