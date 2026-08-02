@@ -1,0 +1,27 @@
+2026-08-02 19:33:19,005 | INFO | __main__ | Creating agent - using create_agent function
+2026-08-02 19:34:12,991 | INFO | __main__ | Creating agent - using create_agent function
+2026-08-02 19:34:25,187 | INFO | __main__ | Creating agent - using create_agent function
+2026-08-02 19:34:25,207 | INFO | __main__ | Agent created with langsmith PIImiddleware 
+2026-08-02 19:36:25,633 | INFO | __main__ | Creating agent - using create_agent function
+2026-08-02 19:36:25,650 | INFO | __main__ | Agent created with langsmith PIImiddleware 
+2026-08-02 19:37:40,350 | INFO | __main__ | Creating agent - using create_agent function
+2026-08-02 19:37:40,366 | INFO | __main__ | Agent created with langsmith PIImiddleware 
+2026-08-02 19:38:49,051 | INFO | __main__ | Creating agent - using create_agent function
+2026-08-02 19:38:49,069 | INFO | __main__ | Agent created with langsmith PIImiddleware 
+2026-08-02 19:40:07,984 | INFO | __main__ | Creating agent - using create_agent function
+2026-08-02 19:40:08,000 | INFO | __main__ | Agent created with langsmith PIImiddleware 
+2026-08-02 19:40:24,384 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:41:01,822 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:41:30,496 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:42:32,260 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:43:08,312 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:43:34,506 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:43:47,390 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:44:10,216 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:44:30,179 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:44:46,297 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:49:37,098 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:54:21,338 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:54:37,063 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:54:45,644 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 19:55:09,913 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"

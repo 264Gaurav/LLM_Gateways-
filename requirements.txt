@@ -8,3 +8,9 @@ logfire>=3.0.0
 python-dotenv>=1.0.0
 
 numpy
+langsmith
+
+dotenv
+langchain-groq
+langchain
+langchain-core
