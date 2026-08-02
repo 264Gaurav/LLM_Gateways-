@@ -10,8 +10,7 @@ import logging
 from datetime import datetime
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parents[1]
-LOGS_DIR = BASE_DIR / "logs"
+LOGS_DIR = "logs"
 LOGS_DIR.mkdir(exist_ok=True)
 
 # One log file per run, named with the time the run started.
