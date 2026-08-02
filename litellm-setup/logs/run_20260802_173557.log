@@ -1,0 +1,3 @@
+2026-08-02 17:35:57,739 | WARNING | app | Logfire is unavailable; continuing without tracing instrumentation.
+2026-08-02 17:36:04,731 | INFO | openai._base_client | Retrying request to /embeddings in 0.452842 seconds
+2026-08-02 17:36:09,253 | INFO | openai._base_client | Retrying request to /embeddings in 0.858187 seconds

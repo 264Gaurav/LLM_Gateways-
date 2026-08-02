@@ -1,0 +1,11 @@
+2026-08-02 17:55:18,536 | INFO | __main__ | Loading environment variables from .env file
+2026-08-02 17:55:18,544 | INFO | __main__ | Initializing Logfire configuration
+2026-08-02 17:55:18,642 | INFO | __main__ | Logfire configuration completed successfully
+2026-08-02 17:55:18,643 | INFO | __main__ | Instrumenting OpenAI client calls with Logfire
+2026-08-02 17:55:18,803 | INFO | __main__ | Instantiating OpenAI client connecting to LiteLLM Proxy at: http://localhost:4000/v1
+2026-08-02 17:55:19,608 | INFO | __main__ | OpenAI client instantiated successfully
+2026-08-02 17:55:19,608 | INFO | __main__ | === Starting LiteLLM Semantic Inspector Pipeline ===
+2026-08-02 17:55:19,609 | INFO | __main__ | --- Comparing DRY vs SOLID Principle Vector Distances ---
+2026-08-02 17:55:19,609 | INFO | __main__ | Requesting embedding generation for prompt: 'What is DRY Principle?'
+2026-08-02 17:55:21,091 | INFO | openai._base_client | Retrying request to /embeddings in 0.439239 seconds
+2026-08-02 17:55:21,540 | INFO | openai._base_client | Retrying request to /embeddings in 0.901672 seconds

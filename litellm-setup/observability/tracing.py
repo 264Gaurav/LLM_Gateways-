@@ -1,5 +1,6 @@
 """Step 0b: LangSmith tracing.
-
+LangSmith is a service that collects traces of LLM calls, tool calls, and agent steps. 
+It is part of the LangChain ecosystem and provides a web interface for visualizing and analyzing traces.
 LangSmith tracing needs no wiring in our own code - LangChain looks for
 LANGSMITH_TRACING / LANGSMITH_ENDPOINT / LANGSMITH_API_KEY / LANGSMITH_PROJECT
 directly in the environment (loaded from .env by config.py) and, if

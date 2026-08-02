@@ -1,8 +1,9 @@
 """Step 0: shared logger used by every other step.
 
-Every module in this app asks this file for a logger instead of
+Every module in the app asks this file for a logger instead of
 setting up its own. That way all logs (from document loading to the
-final answer) end up in one place, in one consistent format.
+final answer) end up in one place, in one consistent format. Use the same setup in every app 
+for Robust Observability and Debugging.
 """
 
 import logging

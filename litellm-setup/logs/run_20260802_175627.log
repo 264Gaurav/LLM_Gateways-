@@ -1,0 +1,33 @@
+2026-08-02 17:56:27,592 | INFO | __main__ | Loading environment variables from .env file
+2026-08-02 17:56:27,601 | INFO | __main__ | Initializing Logfire configuration
+2026-08-02 17:56:27,712 | INFO | __main__ | Logfire configuration completed successfully
+2026-08-02 17:56:27,712 | INFO | __main__ | Instrumenting OpenAI client calls with Logfire
+2026-08-02 17:56:27,880 | INFO | __main__ | Instantiating OpenAI client connecting to LiteLLM Proxy at: http://localhost:4000/v1
+2026-08-02 17:56:28,568 | INFO | __main__ | OpenAI client instantiated successfully
+2026-08-02 17:56:28,569 | INFO | __main__ | === Starting LiteLLM Semantic Inspector Pipeline ===
+2026-08-02 17:56:28,570 | INFO | __main__ | --- Comparing DRY vs SOLID Principle Vector Distances ---
+2026-08-02 17:56:28,570 | INFO | __main__ | Requesting embedding generation for prompt: 'What is DRY Principle?'
+2026-08-02 17:56:51,297 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 17:56:51,384 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 17:56:51,395 | INFO | __main__ | Requesting embedding generation for prompt: 'What is SOLID Principle'
+2026-08-02 17:56:52,132 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 17:56:52,137 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 17:56:52,144 | INFO | __main__ | Calculating cosine distance between two vectors
+2026-08-02 17:56:52,149 | INFO | __main__ | Computed cosine distance: 0.3019
+2026-08-02 17:56:52,150 | INFO | __main__ | Executing Query 1 (Expect Cache Miss)
+2026-08-02 17:56:52,150 | INFO | __main__ | Executing query against semantic cache with prompt: 'What is Load balancer?'
+2026-08-02 17:56:52,153 | INFO | __main__ | Requesting embedding generation for prompt: 'What is Load balancer?'
+2026-08-02 17:56:52,434 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 17:56:52,443 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 17:56:52,452 | INFO | __main__ | Sending chat completion request to LiteLLM proxy
+2026-08-02 17:56:57,658 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 17:56:57,695 | INFO | __main__ | Received chat completion response successfully
+2026-08-02 17:56:57,733 | INFO | __main__ | Executing Query 2 (Expect Semantic Cache Hit)
+2026-08-02 17:56:57,734 | INFO | __main__ | Executing query against semantic cache with prompt: 'Tell me about Load Balancer'
+2026-08-02 17:56:57,739 | INFO | __main__ | Requesting embedding generation for prompt: 'Tell me about Load Balancer'
+2026-08-02 17:56:58,150 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 17:56:58,156 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 17:56:58,165 | INFO | __main__ | Sending chat completion request to LiteLLM proxy
+2026-08-02 17:56:58,593 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 17:56:58,595 | INFO | __main__ | Received chat completion response successfully
+2026-08-02 17:56:58,597 | INFO | __main__ | === Pipeline Execution Complete ===
