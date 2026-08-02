@@ -50,8 +50,8 @@ model_list:
   # Tier: SIMPLE / Free & Low-Cost
   - model_name: budget
     litellm_params:
-      model: gemini/gemini-2.5-flash
-      api_key: os.environ/GEMINI_API_KEY
+      model: groq/llama-3.1-8b-instant
+      api_key: os.environ/GROQ_API_KEY
       num_retries: 1
 
   # ==========================================
@@ -116,13 +116,6 @@ model_list:
   # EMBEDDING MODELS (Primary + Cloud Fallbacks)
   # ==========================================
 
-  #BGE-M3 Embedding (Custom - running locally, accessing usign fast api url)
-  - model_name: local-bge-m3
-    litellm_params:
-      model: openai/BAAI/bge-m3
-      api_base: http://bge-m3-service:8000/v1
-      api_key: "not-needed"
-
   # Route standard text-embedding-3-small requests to local Ollama
   - model_name: text-embedding-3-small
     litellm_params:
@@ -166,7 +159,7 @@ router_settings:
     - smart-best: ["nvidia-llama-70b", "zen-big-pickle", "openrouter-fast", "gemma"]
     - smart-fast: ["groq-fast", "openrouter-fast", "llama3"]
     - smart-reasoning: ["zen-big-pickle", "openrouter-fast", "groq-fast"]
-    - budget: ["nvidia-llama-70b", "gemini-flash", "groq-instant", "zen-minimax-free", "llama3"]
+    - budget: ["groq-instant", "zen-minimax-free", "llama3"]
     - gemini-flash: ["openrouter-fast", "zen-minimax-free", "llama3"]
     
     # Embedding Fallback Chain for Semantic Cache
@@ -195,7 +188,7 @@ litellm_settings:
     ttl: os.environ/REDIS_TTL
     
     # Semantic Caching Parameters (active when CACHE_TYPE=redis-semantic)
-    redis_semantic_cache_embedding_model: local-bge-m3
+    redis_semantic_cache_embedding_model: local-embedding
     similarity_threshold: 0.86  # Unquoted float
     namespace: "litellm.cache"
 
@@ -231,7 +224,9 @@ general_settings:
 
 
 
-# model_list:
+
+
+  # model_list:
 #   # ==========================================
 #   # ROUTER ENTRYPOINT
 #   # ==========================================

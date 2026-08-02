@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
-      - "8001:8001"
+      - "8001:8001" # Optional: Redis Insight GUI
     environment:
       - REDIS_ARGS=--requirepass ${REDIS_PASSWORD}
     volumes:
@@ -41,40 +41,10 @@ services:
       retries: 20
 
   # -------------------------------------------------------------
-  # BGE-M3 EMBEDDING SERVICE
-  # -------------------------------------------------------------
-  # -------------------------------------------------------------
-  # BGE-M3 EMBEDDING SERVICE
-  # -------------------------------------------------------------
-  bge-m3-infinity:
-    image: michaelf34/infinity:latest
-    container_name: bge-m3-hybrid-server
-    command: v2 --model-id BAAI/bge-m3 --port 8000
-    ports:
-      - "8000:8000"
-    volumes:
-      - infinity-cache:/root/.cache
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/health\")' || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 45s
-    # Uncomment if running on an NVIDIA GPU:
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
-
-  # -------------------------------------------------------------
   # LITELLM GATEWAY PROXY
   # -------------------------------------------------------------
   litellm:
-    image: ghcr.io/berriai/litellm:main-latest
+    image: docker.litellm.ai/berriai/litellm:main-latest
     container_name: litellm-local
     restart: unless-stopped
     depends_on:
@@ -82,8 +52,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-      bge-m3-infinity:
-        condition: service_healthy # Fixed service reference name
     ports:
       - "4000:4000"
     volumes:
@@ -92,10 +60,15 @@ services:
     env_file:
       - .env
     environment:
+      # Database & Logging Controls (Fixes missing UI Request/Response logs)
       DATABASE_URL: ${DATABASE_URL}
+      # UI Request & Response Audit Controls
       STORE_MODEL_IN_DB: "True"
       STORE_PROMPTS_IN_SPEND_LOGS: "True"
+      
+      # Observability (Logfire / OTEL)
       LOGFIRE_TOKEN: ${LOGFIRE_TOKEN}
+
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
       REDIS_PASSWORD: ${REDIS_PASSWORD}
@@ -108,14 +81,14 @@ services:
       GITHUB_COPILOT_TOKEN_DIR: /root/.config/litellm/github_copilot
     command: ["--config", "/app/config.yaml", "--detailed_debug"]
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway" # Connects to host Ollama instance
 
+# -------------------------------------------------------------
+# PERSISTENT VOLUMES
+# -------------------------------------------------------------
 volumes:
   postgres_data:
   redis_data:
-  infinity-cache: # Fixed missing volume declaration
-
-
 
 
 

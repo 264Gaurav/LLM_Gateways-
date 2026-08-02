@@ -1,6 +1,6 @@
 # Comparison of different Embedding models and their speciality: 
 
-# Comprehensive Guide: Nomic Embed vs. Qwen3-Embedding (0.6B) vs. BGE-M3 & The Three Pillars of Retrieval
+## Comprehensive Guide: Nomic Embed vs. Qwen3-Embedding (0.6B) vs. BGE-M3 & The Three Pillars of Retrieval
 
 ---
 
