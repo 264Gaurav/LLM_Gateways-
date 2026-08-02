@@ -1,0 +1,11 @@
+2026-08-02 18:43:07,869 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:43:07,870 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:43:07,870 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://api.smith.langchain.com
+2026-08-02 18:43:07,871 | INFO | __main__ | Loading environment variables from .env file
+2026-08-02 18:43:07,875 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:43:07,875 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:43:07,876 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://api.smith.langchain.com
+2026-08-02 18:43:07,876 | INFO | __main__ | Initializing Logfire configuration
+2026-08-02 18:43:07,950 | INFO | __main__ | Logfire configuration completed successfully
+2026-08-02 18:43:07,950 | INFO | __main__ | Instrumenting OpenAI client calls with Logfire
+2026-08-02 18:43:08,097 | INFO | __main__ | Instantiating OpenAI client connecting to LiteLLM Proxy at: http://localhost:4000/v1

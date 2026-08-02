@@ -1,0 +1,17 @@
+2026-08-02 18:48:07,856 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:48:07,856 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:48:07,856 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://smith.langchain.com
+2026-08-02 18:48:08,117 | INFO | __main__ | Loading environment variables from .env file
+2026-08-02 18:48:08,120 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:48:08,120 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:48:08,121 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://smith.langchain.com
+2026-08-02 18:48:08,121 | INFO | __main__ | Initializing Logfire configuration
+2026-08-02 18:48:08,175 | INFO | __main__ | Logfire configuration completed successfully
+2026-08-02 18:48:08,175 | INFO | __main__ | Instrumenting OpenAI client calls with Logfire
+2026-08-02 18:48:08,266 | INFO | __main__ | Instantiating OpenAI client connecting to LiteLLM Proxy at: http://localhost:4000/v1
+2026-08-02 18:48:08,572 | INFO | __main__ | OpenAI client instantiated successfully
+2026-08-02 18:48:08,572 | INFO | __main__ | === Starting LiteLLM Semantic Inspector Pipeline ===
+2026-08-02 18:48:08,573 | INFO | __main__ | --- Comparing DRY vs SOLID Principle Vector Distances ---
+2026-08-02 18:48:08,667 | INFO | __main__ | Requesting embedding generation for prompt: 'What is DRY Principle?'
+2026-08-02 18:48:09,392 | INFO | openai._base_client | Retrying request to /embeddings in 0.419425 seconds
+2026-08-02 18:48:09,826 | INFO | openai._base_client | Retrying request to /embeddings in 0.935447 seconds

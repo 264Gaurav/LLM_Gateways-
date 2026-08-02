@@ -1,0 +1,39 @@
+2026-08-02 18:48:23,256 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:48:23,256 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:48:23,256 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://smith.langchain.com
+2026-08-02 18:48:23,489 | INFO | __main__ | Loading environment variables from .env file
+2026-08-02 18:48:23,491 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:48:23,491 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:48:23,492 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://smith.langchain.com
+2026-08-02 18:48:23,492 | INFO | __main__ | Initializing Logfire configuration
+2026-08-02 18:48:23,541 | INFO | __main__ | Logfire configuration completed successfully
+2026-08-02 18:48:23,541 | INFO | __main__ | Instrumenting OpenAI client calls with Logfire
+2026-08-02 18:48:23,632 | INFO | __main__ | Instantiating OpenAI client connecting to LiteLLM Proxy at: http://localhost:4000/v1
+2026-08-02 18:48:23,941 | INFO | __main__ | OpenAI client instantiated successfully
+2026-08-02 18:48:23,941 | INFO | __main__ | === Starting LiteLLM Semantic Inspector Pipeline ===
+2026-08-02 18:48:23,941 | INFO | __main__ | --- Comparing DRY vs SOLID Principle Vector Distances ---
+2026-08-02 18:48:24,032 | INFO | __main__ | Requesting embedding generation for prompt: 'What is DRY Principle?'
+2026-08-02 18:48:25,062 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 18:48:25,125 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 18:48:25,138 | INFO | __main__ | Requesting embedding generation for prompt: 'What is SOLID Principle'
+2026-08-02 18:48:25,404 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 18:48:25,407 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 18:48:25,412 | INFO | __main__ | Calculating cosine distance between two vectors
+2026-08-02 18:48:25,413 | INFO | __main__ | Computed cosine distance: 0.3019
+2026-08-02 18:48:25,414 | INFO | __main__ | Executing Query 1 (Expect Cache Miss)
+2026-08-02 18:48:25,414 | INFO | __main__ | Executing query against semantic cache with prompt: 'What is Load balancer?'
+2026-08-02 18:48:25,417 | INFO | __main__ | Requesting embedding generation for prompt: 'What is Load balancer?'
+2026-08-02 18:48:25,663 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 18:48:25,667 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 18:48:25,672 | INFO | __main__ | Sending chat completion request to LiteLLM proxy
+2026-08-02 18:48:26,734 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 18:48:26,741 | INFO | __main__ | Received chat completion response successfully
+2026-08-02 18:48:26,745 | INFO | __main__ | Executing Query 2 (Expect Semantic Cache Hit)
+2026-08-02 18:48:26,746 | INFO | __main__ | Executing query against semantic cache with prompt: 'Tell me about Load Balancer'
+2026-08-02 18:48:26,748 | INFO | __main__ | Requesting embedding generation for prompt: 'Tell me about Load Balancer'
+2026-08-02 18:48:27,007 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-02 18:48:27,010 | INFO | __main__ | Successfully generated embedding for text. Vector dimension: 1024
+2026-08-02 18:48:27,014 | INFO | __main__ | Sending chat completion request to LiteLLM proxy
+2026-08-02 18:48:27,321 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-02 18:48:27,323 | INFO | __main__ | Received chat completion response successfully
+2026-08-02 18:48:27,323 | INFO | __main__ | === Pipeline Execution Complete ===

@@ -50,9 +50,14 @@ model_list:
   # Tier: SIMPLE / Free & Low-Cost
   - model_name: budget
     litellm_params:
-      model: groq/llama-3.1-8b-instant
-      api_key: os.environ/GROQ_API_KEY
-      num_retries: 1
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/GEMINI_API_KEY
+
+  # - model_name: budget
+  #   litellm_params:
+  #     model: groq/llama-3.1-8b-instant
+  #     api_key: os.environ/GROQ_API_KEY
+  #     num_retries: 1
 
   # ==========================================
   # DIRECT PROVIDER ENDPOINTS

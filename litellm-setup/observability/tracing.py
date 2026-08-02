@@ -21,13 +21,14 @@ if str(PROJECT_DIR) not in sys.path:
 
 import config
 from observability.logger import get_logger
-
 logger = get_logger(__name__)
 
 
 def check_langsmith_tracing() -> None:
     """Log whether LangSmith tracing is enabled for this run."""
+    logger.info("Checking LangSmith tracing configuration...")
     tracing_on = str(config.LANGSMITH_TRACING).lower() == "true"
+    logger.info("LangSmith tracing is set to: %s", config.LANGSMITH_TRACING)
 
     if tracing_on and config.LANGSMITH_API_KEY:
         logger.info(
@@ -37,3 +38,6 @@ def check_langsmith_tracing() -> None:
         )
     else:
         logger.info("LangSmith tracing is OFF (set LANGSMITH_TRACING=true in .env to enable)")
+
+
+check_langsmith_tracing()

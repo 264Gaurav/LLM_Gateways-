@@ -1,0 +1,6 @@
+2026-08-02 18:40:43,962 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:40:43,962 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:40:43,962 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://api.smith.langchain.com
+2026-08-02 18:40:43,963 | INFO | observability.tracing | Checking LangSmith tracing configuration...
+2026-08-02 18:40:43,963 | INFO | observability.tracing | LangSmith tracing is set to: true
+2026-08-02 18:40:43,963 | INFO | observability.tracing | LangSmith tracing ENABLED - project 'litellm', traces at https://api.smith.langchain.com

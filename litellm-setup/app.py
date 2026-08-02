@@ -5,12 +5,17 @@ from dotenv import load_dotenv
 import numpy as np
 
 from observability.logger import get_logger
+from observability import tracing
+from langsmith import traceable
+
 
 logger = get_logger(__name__)
 
 # Load environment variables
 logger.info("Loading environment variables from .env file")
 load_dotenv()
+
+tracing.check_langsmith_tracing()
 
 # 1. Initialize Logfire
 logger.info("Initializing Logfire configuration")
@@ -34,7 +39,7 @@ client = OpenAI(
 )
 logger.info("OpenAI client instantiated successfully")
 
-
+@traceable
 def get_embedding_and_inspect(text: str):
     """Generates embeddings and attaches raw vector numbers to Logfire trace"""
     logger.info("Requesting embedding generation for prompt: '%s'", text)
@@ -66,7 +71,7 @@ def get_embedding_and_inspect(text: str):
         
         return vector_numbers
 
-
+@traceable
 def query_semantic_cache(prompt: str):
     """Executes query and captures cache hits & similarity scores"""
     logger.info("Executing query against semantic cache with prompt: '%s'", prompt)
@@ -94,7 +99,7 @@ def query_semantic_cache(prompt: str):
         print("\n--- Response ---")
         print(content)
 
-
+@traceable
 def cosine_distance(v1, v2):
     logger.info("Calculating cosine distance between two vectors")
     distance = 1 - (np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2)))
