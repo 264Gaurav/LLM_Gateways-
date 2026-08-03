@@ -14,3 +14,7 @@ dotenv
 langchain-groq
 langchain
 langchain-core
+
+nemoguardrails
+langchain-google-genai
+langchain-community
