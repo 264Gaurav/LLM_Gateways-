@@ -124,7 +124,7 @@ model_list:
   # Route standard text-embedding-3-small requests to local Ollama
   - model_name: text-embedding-3-small
     litellm_params:
-      model: ollama/qwen3-embedding:0.6b 
+      model: ollama/qwen3-embedding:0.6b
       api_base: os.environ/OLLAMA_BASE_URL
       request_timeout: 30
 
@@ -147,6 +147,24 @@ model_list:
       model: openrouter/openai/text-embedding-3-small
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
+
+  # ==========================================
+  # LOCAL LLAMA GUARD (Ollama Endpoint)
+  # ==========================================
+  - model_name: llama-guard-3-1b
+    litellm_params:
+      model: ollama_chat/llama-guard3:1b
+      api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 10
+      temperature: 0.0
+
+  # Alias fallback mapping if actions target llama-guard-3-8b
+  - model_name: llama-guard-3-8b
+    litellm_params:
+      model: ollama_chat/llama-guard3:1b
+      api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 10
+      temperature: 0.0
 
 
 # ==========================================

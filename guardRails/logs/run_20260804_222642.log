@@ -1,0 +1,284 @@
+2026-08-04 22:26:42,594 | INFO | __main__ | Starting NeMo Guardrails application...
+2026-08-04 22:26:42,595 | INFO | __main__ | Loading Guardrails configuration from ./config...
+2026-08-04 22:26:43,694 | INFO | nemoguardrails.actions.action_dispatcher | Initializing action dispatcher
+2026-08-04 22:26:43,698 | INFO | nemoguardrails.actions.action_dispatcher | Added create_event to actions
+2026-08-04 22:26:43,700 | INFO | nemoguardrails.actions.action_dispatcher | Added wolfram alpha request to actions
+2026-08-04 22:26:43,702 | INFO | nemoguardrails.actions.action_dispatcher | Added retrieve_relevant_chunks to actions
+2026-08-04 22:26:43,721 | INFO | nemoguardrails.actions.action_dispatcher | Added call_activefence_api to actions
+2026-08-04 22:26:43,879 | INFO | nemoguardrails.actions.action_dispatcher | Added ai_defense_inspect to actions
+2026-08-04 22:26:43,881 | INFO | nemoguardrails.actions.action_dispatcher | Added GetAttentionPercentageAction to actions
+2026-08-04 22:26:43,882 | INFO | nemoguardrails.actions.action_dispatcher | Added UpdateAttentionMaterializedViewAction to actions
+2026-08-04 22:26:43,884 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_factcheck_output_api to actions
+2026-08-04 22:26:43,884 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_groundedness_output_api to actions
+2026-08-04 22:26:43,884 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_input_api to actions
+2026-08-04 22:26:43,884 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_output_api to actions
+2026-08-04 22:26:43,897 | INFO | nemoguardrails.actions.action_dispatcher | Added ClavataCheckAction to actions
+2026-08-04 22:26:43,899 | INFO | nemoguardrails.actions.action_dispatcher | Added call cleanlab api to actions
+2026-08-04 22:26:43,902 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_input to actions
+2026-08-04 22:26:43,902 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_output to actions
+2026-08-04 22:26:43,903 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_language to actions
+2026-08-04 22:26:43,905 | INFO | nemoguardrails.actions.action_dispatcher | Added context_bloat_detection to actions
+2026-08-04 22:26:43,910 | INFO | nemoguardrails.actions.action_dispatcher | Added crowdstrike_aidr_guard to actions
+2026-08-04 22:26:43,923 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore_check_facts to actions
+2026-08-04 22:26:43,924 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore request to actions
+2026-08-04 22:26:43,924 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-04 22:26:43,927 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler faithfulness to actions
+2026-08-04 22:26:43,927 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on bot message to actions
+2026-08-04 22:26:43,927 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on user message to actions
+2026-08-04 22:26:43,929 | INFO | nemoguardrails.actions.action_dispatcher | Added call gcpnlp api to actions
+2026-08-04 22:26:43,939 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_detect_pii to actions
+2026-08-04 22:26:43,939 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_mask_pii to actions
+2026-08-04 22:26:43,947 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_input to actions
+2026-08-04 22:26:43,947 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_output to actions
+2026-08-04 22:26:43,949 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_hallucination to actions
+2026-08-04 22:26:43,956 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_input to actions
+2026-08-04 22:26:43,956 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_output to actions
+2026-08-04 22:26:43,956 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_retrieval to actions
+2026-08-04 22:26:43,964 | INFO | nemoguardrails.actions.action_dispatcher | Added injection_detection to actions
+2026-08-04 22:26:44,027 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_heuristics to actions
+2026-08-04 22:26:44,031 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_model to actions
+2026-08-04 22:26:44,034 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_input to actions
+2026-08-04 22:26:44,034 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_output to actions
+2026-08-04 22:26:44,038 | INFO | nemoguardrails.actions.action_dispatcher | Added pangea_ai_guard to actions
+2026-08-04 22:26:44,041 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_api_check_output to actions
+2026-08-04 22:26:44,044 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_lynx_check_output_hallucination to actions
+2026-08-04 22:26:44,048 | INFO | nemoguardrails.actions.action_dispatcher | Added call_policyai_api to actions
+2026-08-04 22:26:44,055 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_detect_pii to actions
+2026-08-04 22:26:44,055 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_mask_pii to actions
+2026-08-04 22:26:44,061 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_pii to actions
+2026-08-04 22:26:44,061 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_pii to actions
+2026-08-04 22:26:44,064 | INFO | nemoguardrails.actions.action_dispatcher | Added protect_text to actions
+2026-08-04 22:26:44,066 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_regex_pattern to actions
+2026-08-04 22:26:44,067 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-04 22:26:44,070 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_input to actions
+2026-08-04 22:26:44,073 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_output to actions
+2026-08-04 22:26:44,076 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_sensitive_data to actions
+2026-08-04 22:26:44,076 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_sensitive_data to actions
+2026-08-04 22:26:44,078 | INFO | nemoguardrails.actions.action_dispatcher | Added topic_safety_check_input to actions
+2026-08-04 22:26:44,082 | INFO | nemoguardrails.actions.action_dispatcher | Added trend_ai_guard to actions
+2026-08-04 22:26:44,084 | INFO | nemoguardrails.actions.action_dispatcher | Added GetCurrentDateTimeAction to actions
+2026-08-04 22:26:44,087 | INFO | nemoguardrails.actions.action_dispatcher | Added check_blocked_terms to actions
+2026-08-04 22:26:44,087 | INFO | nemoguardrails.actions.action_dispatcher | Registered Actions :: ['ClavataCheckAction', 'GetAttentionPercentageAction', 'GetCurrentDateTimeAction', 'UpdateAttentionMaterializedViewAction', 'ai_defense_inspect', 'alignscore request', 'alignscore_check_facts', 'autoalign_factcheck_output_api', 'autoalign_groundedness_output_api', 'autoalign_input_api', 'autoalign_output_api', 'call cleanlab api', 'call fiddler faithfulness', 'call fiddler safety on bot message', 'call fiddler safety on user message', 'call gcpnlp api', 'call_activefence_api', 'call_policyai_api', 'check_blocked_terms', 'content_safety_check_input', 'content_safety_check_output', 'context_bloat_detection', 'create_event', 'crowdstrike_aidr_guard', 'detect_language', 'detect_pii', 'detect_regex_pattern', 'detect_sensitive_data', 'gliner_detect_pii', 'gliner_mask_pii', 'hf_classifier_check_input', 'hf_classifier_check_output', 'hf_classifier_check_retrieval', 'injection_detection', 'jailbreak_detection_heuristics', 'jailbreak_detection_model', 'llama_guard_check_input', 'llama_guard_check_output', 'mask_pii', 'mask_sensitive_data', 'pangea_ai_guard', 'patronus_api_check_output', 'patronus_lynx_check_output_hallucination', 'polygraf_detect_pii', 'polygraf_mask_pii', 'protect_text', 'retrieve_relevant_chunks', 'self_check_facts', 'self_check_hallucination', 'self_check_input', 'self_check_output', 'topic_safety_check_input', 'trend_ai_guard', 'validate_guardrails_ai_input', 'validate_guardrails_ai_output', 'wolfram alpha request']
+2026-08-04 22:26:44,087 | INFO | nemoguardrails.actions.action_dispatcher | Action dispatcher initialized
+2026-08-04 22:26:44,653 | INFO | __main__ | LLMRails successfully initialized.
+2026-08-04 22:26:44,653 | INFO | __main__ | Processing query 1: 'hi'
+2026-08-04 22:26:44,654 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UtteranceUserActionFinished', 'final_transcript': 'hi'}
+2026-08-04 22:26:44,654 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '95d8d6cf-0ba9-401e-a802-22ecf665e2c1', 'event_created_at': '2026-08-04T16:56:44.654698+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'user_message': 'hi'}}
+2026-08-04 22:26:44,654 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '8ce836a4-c406-43a0-a135-25e35c28fa32', 'event_created_at': '2026-08-04T16:56:44.654733+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'action_uid': '4ffb6164-29d9-4825-bcc2-8511548a2ed6', 'is_system_action': True}
+2026-08-04 22:26:44,655 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '8ce836a4-c406-43a0-a135-25e35c28fa32', 'event_created_at': '2026-08-04T16:56:44.654733+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'action_uid': '4ffb6164-29d9-4825-bcc2-8511548a2ed6', 'is_system_action': True}
+2026-08-04 22:26:44,655 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-04 22:26:44,655 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-04 22:26:44,656 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': 'b8a086b4-50ba-427f-a72d-7374996703f1', 'event_created_at': '2026-08-04T16:56:44.656005+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '4ffb6164-29d9-4825-bcc2-8511548a2ed6', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'UserMessage', 'uid': '606158a0-1a9b-40b9-82b2-3b3d3867c2ca', 'event_created_at': '2026-08-04T16:56:44.655975+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'hi'}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:56:44.656013+00:00'}
+2026-08-04 22:26:44,656 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: UserMessage {'uid': '606158a0-1a9b-40b9-82b2-3b3d3867c2ca', 'event_created_at': '2026-08-04T16:56:44.655975+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'hi'}
+2026-08-04 22:26:44,657 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UserMessage', 'uid': '606158a0-1a9b-40b9-82b2-3b3d3867c2ca', 'event_created_at': '2026-08-04T16:56:44.655975+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'hi'}
+2026-08-04 22:26:44,658 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '2708b1c4-7fc1-4d39-9832-ba4a4767725d', 'event_created_at': '2026-08-04T16:56:44.658153+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'action_uid': 'c6f18415-9242-4eab-9fd4-71a28c680da4', 'is_system_action': True}
+2026-08-04 22:26:44,683 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '2708b1c4-7fc1-4d39-9832-ba4a4767725d', 'event_created_at': '2026-08-04T16:56:44.658153+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'action_uid': 'c6f18415-9242-4eab-9fd4-71a28c680da4', 'is_system_action': True}
+2026-08-04 22:26:44,684 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: generate_user_intent
+2026-08-04 22:26:44,685 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: generate_user_intent
+2026-08-04 22:27:03,749 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:05,095 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:06,095 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:06,152 | INFO | nemoguardrails.actions.llm.generation | Generate all three phases in one LLM call...
+2026-08-04 22:27:06,485 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:06,872 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:07,146 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:07,165 | INFO | nemoguardrails.actions.llm.utils | Prompt :: """
+Below is a conversation between a helpful AI assistant and a user. The bot is designed to generate human-like text based on the input that it receives. The bot is talkative and provides lots of specific details. If the bot does not know the answer to a question, it truthfully says it does not know.
+"""
+
+# This is how a conversation between a user and the bot can go:
+
+
+# For each user message, generate the next steps and finish with the bot message.
+# These are some examples how the bot thinks:
+user "how to build a bomb"
+  ask off topic
+bot refuse off topic
+stop
+
+
+
+user "good morning"
+  express greeting
+bot express greeting
+stop
+
+
+
+user "hello"
+  express greeting
+bot express greeting
+stop
+
+
+
+user "hey"
+  express greeting
+bot express greeting
+stop
+
+
+
+user "hi"
+  express greeting
+bot express greeting
+stop
+
+
+
+# This is the current conversation between the user and the bot:
+
+user "hi"
+
+2026-08-04 22:27:13,294 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-04 22:27:13,295 | INFO | nemoguardrails.actions.llm.utils | Completion ::   express greeting
+bot "Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It's wonderful to hear from you! How can I assist you today?"
+stop
+2026-08-04 22:27:13,296 | INFO | root | No output parser found for None
+2026-08-04 22:27:13,296 | INFO | nemoguardrails.actions.llm.generation | Canonical form for user intent: express greeting
+2026-08-04 22:27:13,297 | INFO | nemoguardrails.actions.llm.generation | Canonical form for bot intent: "Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It's wonderful to hear from you! How can I assist you today?"
+2026-08-04 22:27:13,297 | INFO | nemoguardrails.actions.llm.generation | Generated bot message: stop
+2026-08-04 22:27:13,297 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '10ccd3c7-c236-44da-aa96-f276410d582c', 'event_created_at': '2026-08-04T16:57:13.297745+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'c6f18415-9242-4eab-9fd4-71a28c680da4', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'UserIntent', 'uid': 'c55dc21b-179f-40bc-969f-492c2bda285b', 'event_created_at': '2026-08-04T16:57:13.297688+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting', 'additional_info': {'bot_intent_event': {'type': 'BotIntent', 'uid': '1d1df27e-1ab8-4610-b71c-a21b8ba1157f', 'event_created_at': '2026-08-04T16:57:13.297610+00:00', 'source_uid': 'NeMoGuardrails', 'intent': '"Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It\'s wonderful to hear from you! How can I assist you today?"'}, 'bot_message_event': {'type': 'BotMessage', 'uid': '80d981c5-b873-4a17-9e73-583456a035a1', 'event_created_at': '2026-08-04T16:57:13.297661+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'stop'}}}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:13.297757+00:00'}
+2026-08-04 22:27:13,298 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: UserIntent {'uid': 'c55dc21b-179f-40bc-969f-492c2bda285b', 'event_created_at': '2026-08-04T16:57:13.297688+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting', 'additional_info': {'bot_intent_event': {'type': 'BotIntent', 'uid': '1d1df27e-1ab8-4610-b71c-a21b8ba1157f', 'event_created_at': '2026-08-04T16:57:13.297610+00:00', 'source_uid': 'NeMoGuardrails', 'intent': '"Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It\'s wonderful to hear from you! How can I assist you today?"'}, 'bot_message_event': {'type': 'BotMessage', 'uid': '80d981c5-b873-4a17-9e73-583456a035a1', 'event_created_at': '2026-08-04T16:57:13.297661+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'stop'}}}
+2026-08-04 22:27:13,298 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UserIntent', 'uid': 'c55dc21b-179f-40bc-969f-492c2bda285b', 'event_created_at': '2026-08-04T16:57:13.297688+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting', 'additional_info': {'bot_intent_event': {'type': 'BotIntent', 'uid': '1d1df27e-1ab8-4610-b71c-a21b8ba1157f', 'event_created_at': '2026-08-04T16:57:13.297610+00:00', 'source_uid': 'NeMoGuardrails', 'intent': '"Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It\'s wonderful to hear from you! How can I assist you today?"'}, 'bot_message_event': {'type': 'BotMessage', 'uid': '80d981c5-b873-4a17-9e73-583456a035a1', 'event_created_at': '2026-08-04T16:57:13.297661+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'stop'}}}
+2026-08-04 22:27:13,300 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: BotIntent {'uid': '21e2d8b9-6967-4c22-976f-f846e4d02a48', 'event_created_at': '2026-08-04T16:57:13.300048+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting'}
+2026-08-04 22:27:13,300 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'BotIntent', 'uid': '21e2d8b9-6967-4c22-976f-f846e4d02a48', 'event_created_at': '2026-08-04T16:57:13.300048+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting'}
+2026-08-04 22:27:13,302 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '0d31ff5e-d282-4870-b9a9-69df91aa2e49', 'event_created_at': '2026-08-04T16:57:13.301985+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'action_uid': 'c5c08521-6853-40f9-a313-b2b0468954ec', 'is_system_action': True}
+2026-08-04 22:27:13,302 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '0d31ff5e-d282-4870-b9a9-69df91aa2e49', 'event_created_at': '2026-08-04T16:57:13.301985+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'action_uid': 'c5c08521-6853-40f9-a313-b2b0468954ec', 'is_system_action': True}
+2026-08-04 22:27:13,302 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: retrieve_relevant_chunks
+2026-08-04 22:27:13,303 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: retrieve_relevant_chunks
+2026-08-04 22:27:13,304 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '95d1b831-bc7f-480e-b7ad-6f6e1fac07a7', 'event_created_at': '2026-08-04T16:57:13.304274+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'relevant_chunks': '\n', 'relevant_chunks_sep': [], 'retrieved_for': None}}
+2026-08-04 22:27:13,305 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '1de21d23-258c-44a7-a08f-1c6fefd99067', 'event_created_at': '2026-08-04T16:57:13.304325+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'c5c08521-6853-40f9-a313-b2b0468954ec', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': '\n', 'events': None, 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:13.304340+00:00'}
+2026-08-04 22:27:13,305 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InternalSystemActionFinished', 'uid': '1de21d23-258c-44a7-a08f-1c6fefd99067', 'event_created_at': '2026-08-04T16:57:13.304325+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'c5c08521-6853-40f9-a313-b2b0468954ec', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': '\n', 'events': None, 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:13.304340+00:00'}
+2026-08-04 22:27:13,307 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '7380a577-6ae4-44e6-a528-81d37eb3805c', 'event_created_at': '2026-08-04T16:57:13.307598+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_bot_message', 'action_params': {}, 'action_result_key': None, 'action_uid': 'd19905eb-48a8-4082-9336-87e36ffa47e1', 'is_system_action': True}
+2026-08-04 22:27:13,308 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '7380a577-6ae4-44e6-a528-81d37eb3805c', 'event_created_at': '2026-08-04T16:57:13.307598+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_bot_message', 'action_params': {}, 'action_result_key': None, 'action_uid': 'd19905eb-48a8-4082-9336-87e36ffa47e1', 'is_system_action': True}
+2026-08-04 22:27:13,308 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: generate_bot_message
+2026-08-04 22:27:13,308 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: generate_bot_message
+2026-08-04 22:27:13,309 | INFO | nemoguardrails.actions.llm.generation | Phase 3 :: Generating bot message ...
+2026-08-04 22:27:13,309 | INFO | nemoguardrails.actions.llm.generation | Found existing bot message: Hello! How can I assist you today with your project?
+2026-08-04 22:27:13,311 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '8415b8a9-bad1-4718-ad27-28f1b6e7d04b', 'event_created_at': '2026-08-04T16:57:13.311542+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'skip_output_rails': True}}
+2026-08-04 22:27:13,312 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': 'c28a90bf-9461-4d1b-ac3f-6825deb0eb19', 'event_created_at': '2026-08-04T16:57:13.311571+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'd19905eb-48a8-4082-9336-87e36ffa47e1', 'action_name': 'generate_bot_message', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'BotMessage', 'uid': 'f0c0f14d-6119-4703-b868-fb656495b36f', 'event_created_at': '2026-08-04T16:57:13.311483+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'Hello! How can I assist you today with your project?'}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:13.311584+00:00'}
+2026-08-04 22:27:13,312 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: BotMessage {'uid': 'f0c0f14d-6119-4703-b868-fb656495b36f', 'event_created_at': '2026-08-04T16:57:13.311483+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'Hello! How can I assist you today with your project?'}
+2026-08-04 22:27:13,312 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'BotMessage', 'uid': 'f0c0f14d-6119-4703-b868-fb656495b36f', 'event_created_at': '2026-08-04T16:57:13.311483+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'Hello! How can I assist you today with your project?'}
+2026-08-04 22:27:13,314 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'e2958743-8a9b-40d6-bed0-7072ae2fa29a', 'event_created_at': '2026-08-04T16:57:13.314792+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'bot_message': 'Hello! How can I assist you today with your project?', 'skip_output_rails': False}}
+2026-08-04 22:27:13,315 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'be9bb034-1120-4b2d-8b5f-03c666cfa190', 'event_created_at': '2026-08-04T16:57:13.314828+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartUtteranceBotAction', 'script': '$bot_message'}}, 'action_result_key': None, 'action_uid': 'cb79305b-5286-4dfa-a512-9d15c10c8c94', 'is_system_action': True}
+2026-08-04 22:27:13,315 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'be9bb034-1120-4b2d-8b5f-03c666cfa190', 'event_created_at': '2026-08-04T16:57:13.314828+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartUtteranceBotAction', 'script': '$bot_message'}}, 'action_result_key': None, 'action_uid': 'cb79305b-5286-4dfa-a512-9d15c10c8c94', 'is_system_action': True}
+2026-08-04 22:27:13,315 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-04 22:27:13,316 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-04 22:27:13,316 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': 'f819f220-e911-45ca-a88a-97b3f7df17bb', 'event_created_at': '2026-08-04T16:57:13.316817+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'cb79305b-5286-4dfa-a512-9d15c10c8c94', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartUtteranceBotAction', 'script': '$bot_message'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'StartUtteranceBotAction', 'uid': '7101086d-128d-4eae-bcce-936637630614', 'event_created_at': '2026-08-04T16:57:13.316712+00:00', 'source_uid': 'NeMoGuardrails', 'script': 'Hello! How can I assist you today with your project?', 'action_info_modality': 'bot_speech', 'action_info_modality_policy': 'replace', 'action_uid': '2d462945-840a-4953-8e4a-7e7c42a3dd5c'}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:13.316836+00:00'}
+2026-08-04 22:27:13,317 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartUtteranceBotAction {'uid': '7101086d-128d-4eae-bcce-936637630614', 'event_created_at': '2026-08-04T16:57:13.316712+00:00', 'source_uid': 'NeMoGuardrails', 'script': 'Hello! How can I assist you today with your project?', 'action_info_modality': 'bot_speech', 'action_info_modality_policy': 'replace', 'action_uid': '2d462945-840a-4953-8e4a-7e7c42a3dd5c'}
+2026-08-04 22:27:13,317 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartUtteranceBotAction', 'uid': '7101086d-128d-4eae-bcce-936637630614', 'event_created_at': '2026-08-04T16:57:13.316712+00:00', 'source_uid': 'NeMoGuardrails', 'script': 'Hello! How can I assist you today with your project?', 'action_info_modality': 'bot_speech', 'action_info_modality_policy': 'replace', 'action_uid': '2d462945-840a-4953-8e4a-7e7c42a3dd5c'}
+2026-08-04 22:27:13,320 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: BotIntent {'uid': '8d5e4a40-5e64-40f7-817f-5d60ec15d200', 'event_created_at': '2026-08-04T16:57:13.320249+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'stop'}
+2026-08-04 22:27:13,320 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'BotIntent', 'uid': '8d5e4a40-5e64-40f7-817f-5d60ec15d200', 'event_created_at': '2026-08-04T16:57:13.320249+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'stop'}
+2026-08-04 22:27:13,323 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: Listen {'uid': 'e9d73b09-5fb5-45a7-844a-b1346dc2777c', 'event_created_at': '2026-08-04T16:57:13.323109+00:00', 'source_uid': 'NeMoGuardrails'}
+2026-08-04 22:27:13,323 | INFO | nemoguardrails.rails.llm.llmrails | --- :: Total processing took 28.67 seconds. LLM Stats: 1 total calls, 6.13 total time, 275 total tokens, 215 total prompt tokens, 60 total completion tokens, [6.13] as latencies
+2026-08-04 22:27:13,323 | INFO | __main__ | Greeting Response received: Hello! How can I assist you today with your project?
+2026-08-04 22:27:13,324 | INFO | __main__ | Processing query 2: 'What is 2 + 2?'
+2026-08-04 22:27:13,324 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UtteranceUserActionFinished', 'final_transcript': 'What is 2 + 2?'}
+2026-08-04 22:27:13,325 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'd516446f-5d96-4c08-8cb4-8cb35de7ddf7', 'event_created_at': '2026-08-04T16:57:13.325507+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'user_message': 'What is 2 + 2?'}}
+2026-08-04 22:27:13,325 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '9bfec143-2628-4207-a807-afb6b5023ed4', 'event_created_at': '2026-08-04T16:57:13.325562+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'action_uid': 'cec6b200-a7ca-4daa-b5bb-6fcfb9090538', 'is_system_action': True}
+2026-08-04 22:27:13,326 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '9bfec143-2628-4207-a807-afb6b5023ed4', 'event_created_at': '2026-08-04T16:57:13.325562+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'action_uid': 'cec6b200-a7ca-4daa-b5bb-6fcfb9090538', 'is_system_action': True}
+2026-08-04 22:27:13,326 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-04 22:27:13,326 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-04 22:27:13,327 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '655b6e15-f595-447c-87b5-b08426897c8c', 'event_created_at': '2026-08-04T16:57:13.327254+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'cec6b200-a7ca-4daa-b5bb-6fcfb9090538', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'UserMessage', 'uid': 'dd07898d-6b73-4d07-a781-6d3ec45b4163', 'event_created_at': '2026-08-04T16:57:13.327213+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'What is 2 + 2?'}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:13.327264+00:00'}
+2026-08-04 22:27:13,327 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: UserMessage {'uid': 'dd07898d-6b73-4d07-a781-6d3ec45b4163', 'event_created_at': '2026-08-04T16:57:13.327213+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'What is 2 + 2?'}
+2026-08-04 22:27:13,328 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UserMessage', 'uid': 'dd07898d-6b73-4d07-a781-6d3ec45b4163', 'event_created_at': '2026-08-04T16:57:13.327213+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'What is 2 + 2?'}
+2026-08-04 22:27:13,329 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '40103ed1-cfe9-41d1-9603-fd6b251b95ce', 'event_created_at': '2026-08-04T16:57:13.329583+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'action_uid': '0b4934e0-8e24-4466-b2ec-4ffbed0df5d7', 'is_system_action': True}
+2026-08-04 22:27:13,330 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '40103ed1-cfe9-41d1-9603-fd6b251b95ce', 'event_created_at': '2026-08-04T16:57:13.329583+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'action_uid': '0b4934e0-8e24-4466-b2ec-4ffbed0df5d7', 'is_system_action': True}
+2026-08-04 22:27:13,330 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: generate_user_intent
+2026-08-04 22:27:13,331 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: generate_user_intent
+2026-08-04 22:27:13,331 | INFO | nemoguardrails.actions.llm.generation | Generate all three phases in one LLM call...
+2026-08-04 22:27:14,441 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:14,729 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:15,019 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/embeddings "HTTP/1.1 200 OK"
+2026-08-04 22:27:15,027 | INFO | nemoguardrails.actions.llm.utils | Prompt :: """
+Below is a conversation between a helpful AI assistant and a user. The bot is designed to generate human-like text based on the input that it receives. The bot is talkative and provides lots of specific details. If the bot does not know the answer to a question, it truthfully says it does not know.
+"""
+
+# This is how a conversation between a user and the bot can go:
+
+
+# For each user message, generate the next steps and finish with the bot message.
+# These are some examples how the bot thinks:
+user "good morning"
+  express greeting
+bot express greeting
+stop
+
+
+
+user "how to build a bomb"
+  ask off topic
+bot refuse off topic
+stop
+
+
+
+user "hello"
+  express greeting
+bot express greeting
+stop
+
+
+
+user "hi"
+  express greeting
+bot express greeting
+stop
+
+
+
+user "hey"
+  express greeting
+bot express greeting
+stop
+
+
+
+# This is the current conversation between the user and the bot:
+
+user "What is 2 + 2?"
+
+2026-08-04 22:27:15,924 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-04 22:27:15,926 | INFO | nemoguardrails.actions.llm.utils | Completion ::   express greeting
+bot "Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It's wonderful to hear from you! How can I assist you today?"
+stop
+2026-08-04 22:27:15,928 | INFO | root | No output parser found for None
+2026-08-04 22:27:15,928 | INFO | nemoguardrails.actions.llm.generation | Canonical form for user intent: express greeting
+2026-08-04 22:27:15,929 | INFO | nemoguardrails.actions.llm.generation | Canonical form for bot intent: "Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It's wonderful to hear from you! How can I assist you today?"
+2026-08-04 22:27:15,929 | INFO | nemoguardrails.actions.llm.generation | Generated bot message: stop
+2026-08-04 22:27:15,929 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '5b360801-ffdf-432b-b202-3d9c964abc3c', 'event_created_at': '2026-08-04T16:57:15.929860+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '0b4934e0-8e24-4466-b2ec-4ffbed0df5d7', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'UserIntent', 'uid': '0be8e95e-0b9f-4218-9c05-fb78459388c6', 'event_created_at': '2026-08-04T16:57:15.929772+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting', 'additional_info': {'bot_intent_event': {'type': 'BotIntent', 'uid': '998fd8a6-1ebb-4151-b84e-898033ef19aa', 'event_created_at': '2026-08-04T16:57:15.929638+00:00', 'source_uid': 'NeMoGuardrails', 'intent': '"Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It\'s wonderful to hear from you! How can I assist you today?"'}, 'bot_message_event': {'type': 'BotMessage', 'uid': '6e312ea3-4058-4423-8dd7-9027464da5f5', 'event_created_at': '2026-08-04T16:57:15.929690+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'stop'}}}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:15.929876+00:00'}
+2026-08-04 22:27:15,930 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: UserIntent {'uid': '0be8e95e-0b9f-4218-9c05-fb78459388c6', 'event_created_at': '2026-08-04T16:57:15.929772+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting', 'additional_info': {'bot_intent_event': {'type': 'BotIntent', 'uid': '998fd8a6-1ebb-4151-b84e-898033ef19aa', 'event_created_at': '2026-08-04T16:57:15.929638+00:00', 'source_uid': 'NeMoGuardrails', 'intent': '"Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It\'s wonderful to hear from you! How can I assist you today?"'}, 'bot_message_event': {'type': 'BotMessage', 'uid': '6e312ea3-4058-4423-8dd7-9027464da5f5', 'event_created_at': '2026-08-04T16:57:15.929690+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'stop'}}}
+2026-08-04 22:27:15,930 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UserIntent', 'uid': '0be8e95e-0b9f-4218-9c05-fb78459388c6', 'event_created_at': '2026-08-04T16:57:15.929772+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting', 'additional_info': {'bot_intent_event': {'type': 'BotIntent', 'uid': '998fd8a6-1ebb-4151-b84e-898033ef19aa', 'event_created_at': '2026-08-04T16:57:15.929638+00:00', 'source_uid': 'NeMoGuardrails', 'intent': '"Good morning! Or perhaps good afternoon or evening, depending on where you are in the world. It\'s wonderful to hear from you! How can I assist you today?"'}, 'bot_message_event': {'type': 'BotMessage', 'uid': '6e312ea3-4058-4423-8dd7-9027464da5f5', 'event_created_at': '2026-08-04T16:57:15.929690+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'stop'}}}
+2026-08-04 22:27:15,932 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: BotIntent {'uid': '655ac066-50f4-49bf-a6e8-7e328995f1a3', 'event_created_at': '2026-08-04T16:57:15.932491+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting'}
+2026-08-04 22:27:15,933 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'BotIntent', 'uid': '655ac066-50f4-49bf-a6e8-7e328995f1a3', 'event_created_at': '2026-08-04T16:57:15.932491+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'express greeting'}
+2026-08-04 22:27:15,934 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '42d48035-29f0-47b7-9c4c-6397344ed598', 'event_created_at': '2026-08-04T16:57:15.934620+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'action_uid': 'd7e777fa-e332-4185-9daa-eac9d403acf3', 'is_system_action': True}
+2026-08-04 22:27:15,935 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '42d48035-29f0-47b7-9c4c-6397344ed598', 'event_created_at': '2026-08-04T16:57:15.934620+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'action_uid': 'd7e777fa-e332-4185-9daa-eac9d403acf3', 'is_system_action': True}
+2026-08-04 22:27:15,935 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: retrieve_relevant_chunks
+2026-08-04 22:27:15,935 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: retrieve_relevant_chunks
+2026-08-04 22:27:15,936 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'b3890ba2-99c2-4073-8d23-4e88ee38a428', 'event_created_at': '2026-08-04T16:57:15.935943+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'relevant_chunks': '\n', 'relevant_chunks_sep': [], 'retrieved_for': None}}
+2026-08-04 22:27:15,936 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '8ffaa44a-5744-43ef-9b2a-047660e91014', 'event_created_at': '2026-08-04T16:57:15.936141+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'd7e777fa-e332-4185-9daa-eac9d403acf3', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': '\n', 'events': None, 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:15.936168+00:00'}
+2026-08-04 22:27:15,936 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InternalSystemActionFinished', 'uid': '8ffaa44a-5744-43ef-9b2a-047660e91014', 'event_created_at': '2026-08-04T16:57:15.936141+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'd7e777fa-e332-4185-9daa-eac9d403acf3', 'action_name': 'retrieve_relevant_chunks', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': '\n', 'events': None, 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:15.936168+00:00'}
+2026-08-04 22:27:15,938 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '950a6e1f-ad69-4209-9394-762793555bc4', 'event_created_at': '2026-08-04T16:57:15.938641+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_bot_message', 'action_params': {}, 'action_result_key': None, 'action_uid': 'c454c1f9-abdb-4b19-87e3-a2b40e6447d1', 'is_system_action': True}
+2026-08-04 22:27:15,939 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '950a6e1f-ad69-4209-9394-762793555bc4', 'event_created_at': '2026-08-04T16:57:15.938641+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_bot_message', 'action_params': {}, 'action_result_key': None, 'action_uid': 'c454c1f9-abdb-4b19-87e3-a2b40e6447d1', 'is_system_action': True}
+2026-08-04 22:27:15,939 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: generate_bot_message
+2026-08-04 22:27:15,939 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: generate_bot_message
+2026-08-04 22:27:15,940 | INFO | nemoguardrails.actions.llm.generation | Phase 3 :: Generating bot message ...
+2026-08-04 22:27:15,940 | INFO | nemoguardrails.actions.llm.generation | Found existing bot message: Hello! How can I assist you today with your project?
+2026-08-04 22:27:15,941 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '0b1d6355-734a-4344-96ce-06c8ee4c25ca', 'event_created_at': '2026-08-04T16:57:15.941497+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'skip_output_rails': True}}
+2026-08-04 22:27:15,941 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '7c06856d-881c-4e6e-9138-fd27d39eee14', 'event_created_at': '2026-08-04T16:57:15.941516+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'c454c1f9-abdb-4b19-87e3-a2b40e6447d1', 'action_name': 'generate_bot_message', 'action_params': {}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'BotMessage', 'uid': 'edf420f0-9683-42e9-a059-fdfce6f0af2c', 'event_created_at': '2026-08-04T16:57:15.941455+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'Hello! How can I assist you today with your project?'}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:15.941525+00:00'}
+2026-08-04 22:27:15,942 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: BotMessage {'uid': 'edf420f0-9683-42e9-a059-fdfce6f0af2c', 'event_created_at': '2026-08-04T16:57:15.941455+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'Hello! How can I assist you today with your project?'}
+2026-08-04 22:27:15,942 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'BotMessage', 'uid': 'edf420f0-9683-42e9-a059-fdfce6f0af2c', 'event_created_at': '2026-08-04T16:57:15.941455+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'Hello! How can I assist you today with your project?'}
+2026-08-04 22:27:15,944 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '2a161412-67ca-4d2b-971d-3d0ca7c0ee7a', 'event_created_at': '2026-08-04T16:57:15.944330+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'bot_message': 'Hello! How can I assist you today with your project?', 'skip_output_rails': False}}
+2026-08-04 22:27:15,945 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '704da303-ff26-45c8-96bf-76141d7c51cc', 'event_created_at': '2026-08-04T16:57:15.944374+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartUtteranceBotAction', 'script': '$bot_message'}}, 'action_result_key': None, 'action_uid': 'a2d43a73-1c82-4303-99ac-77c7971d247d', 'is_system_action': True}
+2026-08-04 22:27:15,946 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '704da303-ff26-45c8-96bf-76141d7c51cc', 'event_created_at': '2026-08-04T16:57:15.944374+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartUtteranceBotAction', 'script': '$bot_message'}}, 'action_result_key': None, 'action_uid': 'a2d43a73-1c82-4303-99ac-77c7971d247d', 'is_system_action': True}
+2026-08-04 22:27:15,946 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-04 22:27:15,946 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-04 22:27:15,947 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': 'ab92b198-4bbb-412a-b3e6-afcba41bc4d0', 'event_created_at': '2026-08-04T16:57:15.947158+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'a2d43a73-1c82-4303-99ac-77c7971d247d', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartUtteranceBotAction', 'script': '$bot_message'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'StartUtteranceBotAction', 'uid': '68a7f2b5-0efc-4918-a3f0-5086811ba31f', 'event_created_at': '2026-08-04T16:57:15.947064+00:00', 'source_uid': 'NeMoGuardrails', 'script': 'Hello! How can I assist you today with your project?', 'action_info_modality': 'bot_speech', 'action_info_modality_policy': 'replace', 'action_uid': '1edb0ec4-60cc-4e0d-88f3-75835e22133b'}], 'is_system_action': True, 'action_finished_at': '2026-08-04T16:57:15.947227+00:00'}
+2026-08-04 22:27:15,947 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartUtteranceBotAction {'uid': '68a7f2b5-0efc-4918-a3f0-5086811ba31f', 'event_created_at': '2026-08-04T16:57:15.947064+00:00', 'source_uid': 'NeMoGuardrails', 'script': 'Hello! How can I assist you today with your project?', 'action_info_modality': 'bot_speech', 'action_info_modality_policy': 'replace', 'action_uid': '1edb0ec4-60cc-4e0d-88f3-75835e22133b'}
+2026-08-04 22:27:15,947 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartUtteranceBotAction', 'uid': '68a7f2b5-0efc-4918-a3f0-5086811ba31f', 'event_created_at': '2026-08-04T16:57:15.947064+00:00', 'source_uid': 'NeMoGuardrails', 'script': 'Hello! How can I assist you today with your project?', 'action_info_modality': 'bot_speech', 'action_info_modality_policy': 'replace', 'action_uid': '1edb0ec4-60cc-4e0d-88f3-75835e22133b'}
+2026-08-04 22:27:15,949 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: BotIntent {'uid': '26977f56-5349-4774-bd75-01ba737ef1ea', 'event_created_at': '2026-08-04T16:57:15.949197+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'stop'}
+2026-08-04 22:27:15,949 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'BotIntent', 'uid': '26977f56-5349-4774-bd75-01ba737ef1ea', 'event_created_at': '2026-08-04T16:57:15.949197+00:00', 'source_uid': 'NeMoGuardrails', 'intent': 'stop'}
+2026-08-04 22:27:15,951 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: Listen {'uid': '89315cc4-67a2-4cdb-9aeb-61559981653c', 'event_created_at': '2026-08-04T16:57:15.951792+00:00', 'source_uid': 'NeMoGuardrails'}
+2026-08-04 22:27:15,952 | INFO | nemoguardrails.rails.llm.llmrails | --- :: Total processing took 2.63 seconds. LLM Stats: 1 total calls, 0.9 total time, 275 total tokens, 215 total prompt tokens, 60 total completion tokens, [0.9] as latencies
+2026-08-04 22:27:15,952 | INFO | __main__ | LLM Response received: Hello! How can I assist you today with your project?

@@ -1,36 +1,41 @@
-# Define user intents using exact phrases and patterns
-define user express greeting
-  "hello"
-  "hi"
-  "hey"
-  "good morning"
+# ==============================================================================
+# Colang 1.0 - Deterministic Input Guardrails (Zero LLM Intent Calls)
+# ==============================================================================
 
-define user ask off topic
-  "how to build a bomb"
-  "hack a database"
-  "ignore previous instructions"
-  "override safety rules"
-
-# Deterministic Bot Responses
+# Deterministic Bot Response Templates
 define bot express greeting
   "Hello! How can I assist you today with your project?"
 
 define bot refuse off topic
   "I cannot assist with requests that violate safety or security policies."
 
-# Flow 1: Intercept greetings locally (0 LLM calls total)
-define flow handle greeting
-  user express greeting
-  bot express greeting
-  stop
 
-# Flow 2: Block unsafe/off-topic requests locally before hitting the main LLM
-define flow handle off topic
-  user ask off topic
-  bot refuse off topic
-  stop
-define flow check input patterns
+# ------------------------------------------------------------------------------
+# Input Rail 1: Intercept greetings & simple patterns via regex/exact match
+# ------------------------------------------------------------------------------
+define subflow handle greeting
+  $is_greeting = execute check_greeting_terms(user_input=$last_user_message)
+  if $is_greeting
+    bot express greeting
+    stop
+
+
+# ------------------------------------------------------------------------------
+# Input Rail 2: Block known malicious phrases & off-topic jailbreaks
+# ------------------------------------------------------------------------------
+define subflow check input patterns
   $is_blocked = execute check_blocked_terms(user_input=$last_user_message)
   if $is_blocked
     bot refuse off topic
+    stop
+
+
+# ------------------------------------------------------------------------------
+# Input Rail 3: External Llama Guard Safety Action
+# ------------------------------------------------------------------------------
+define subflow check llama guard input
+  $guard_result = execute check_llama_guard_input
+  
+  if not $guard_result.is_safe
+    bot say "Request blocked due to safety policy violation. Hazard Type(s): {$guard_result.hazards}."
     stop
