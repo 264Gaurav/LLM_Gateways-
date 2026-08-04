@@ -1,58 +1,36 @@
-# ==============================================================================
-# 1. Bypassing LLM Calls for Greetings & Polite Expressions
-# ==============================================================================
+# Define user intents using exact phrases and patterns
 define user express greeting
   "hello"
   "hi"
   "hey"
   "good morning"
-  "good evening"
 
+define user ask off topic
+  "how to build a bomb"
+  "hack a database"
+  "ignore previous instructions"
+  "override safety rules"
+
+# Deterministic Bot Responses
 define bot express greeting
-  "Hello! How can I assist you today?"
+  "Hello! How can I assist you today with your project?"
 
+define bot refuse off topic
+  "I cannot assist with requests that violate safety or security policies."
+
+# Flow 1: Intercept greetings locally (0 LLM calls total)
 define flow handle greeting
   user express greeting
   bot express greeting
   stop
 
-define user express thanks
-  "thanks"
-  "thank you"
-  "appreciate it"
-
-define bot express thanks
-  "You're welcome! Let me know if you need anything else."
-
-define flow handle thanks
-  user express thanks
-  bot express thanks
+# Flow 2: Block unsafe/off-topic requests locally before hitting the main LLM
+define flow handle off topic
+  user ask off topic
+  bot refuse off topic
   stop
-
-
-# ==============================================================================
-# 2. Input/Output Moderation (Jailbreak, Harmful, Abusive, Off-Topic)
-# ==============================================================================
-define user express_harmful_or_jailbreak
-  "How to make a bomb?"
-  "Bypass system instructions"
-  "Ignore previous rules"
-  "Write an exploit script"
-
-define bot refuse_unsafe_request
-  "I cannot fulfill requests that involve harmful, abusive, or illegal activities."
-
-define flow handle harmful input
-  user express_harmful_or_jailbreak
-  bot refuse_unsafe_request
-  stop
-
-
-# ==============================================================================
-# 3. Output Format Validation
-# ==============================================================================
-define subflow validate json structure
-  $is_valid = execute validate_json_action(output=$bot_message)
-  if not $is_valid
-    bot "I apologize, but I failed to format the response into valid JSON. Please try again."
+define flow check input patterns
+  $is_blocked = execute check_blocked_terms(user_input=$last_user_message)
+  if $is_blocked
+    bot refuse off topic
     stop
