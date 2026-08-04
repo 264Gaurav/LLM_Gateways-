@@ -12,6 +12,9 @@
 ## Learn about Caching Strategies in LiteLLM (LLM Gateways) and their selection: 
 [Caching](/litellm-setup/Caching.md)
 
+## Learch about GuardRail (with Nemo GuardRails, LLama Guard - as classification modal based guarding, and GuardRail-Ai for schema & strict data format validation)
+[GuardRails](/guardRails/Notes_drawing/GuardRails.md)
+
 
 ## LiteLLM Setup - with docker (medium to advanced)
 This repository provides a complete local setup for a [LiteLLM Proxy](https://docs.litellm.ai/docs/proxy/quick_start) with a PostgreSQL database. It enables routing, load balancing, cost tracking, and unified access to multiple LLM providers through a standard OpenAI-compatible API.

@@ -1,4 +1,7 @@
 # GuardRail 
 
+## Basic Flow of GuardRail 
+![General Guardrail](basic.png)
+
 ## Architecture/flow diagram
-![alt text](image.png)
+![Architecture and flow](flow.png)
