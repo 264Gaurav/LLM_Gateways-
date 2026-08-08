@@ -1,6 +1,9 @@
+import importlib.util
 import os
 import re
+import sys
 from pathlib import Path
+from types import ModuleType
 from typing import Any, AsyncGenerator, Dict, List, Optional, Union
 
 import httpx
@@ -15,6 +18,45 @@ from .logger import get_logger
 ROOT_DIR = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT_DIR / ".env")
 
+
+def load_guardrails_actions() -> None:
+    global guardrails_actions
+    config_dir = ROOT_DIR / "guardRails" / "config"
+    actions_root = ROOT_DIR / "guardRails"
+    if actions_root.exists() and str(actions_root) not in sys.path:
+        sys.path.insert(0, str(actions_root))
+
+    guardrails_actions = {}
+    if config_dir.exists():
+        for actions_path in sorted(config_dir.glob("*.py")):
+            if actions_path.name == "__init__.py":
+                continue
+
+            module_name = f"guardrails_config_{actions_path.stem}"
+            spec = importlib.util.spec_from_file_location(module_name, str(actions_path))
+            module = importlib.util.module_from_spec(spec)
+            sys.modules[module_name] = module
+            if spec.loader is None:
+                get_logger(__name__).warning("Guardrails action loader spec has no loader: %s", actions_path)
+                continue
+
+            spec.loader.exec_module(module)
+            get_logger(__name__).info("Loaded Guardrails custom actions from %s", actions_path)
+
+            for func_name in [
+                "check_greeting_terms",
+                "check_blocked_terms",
+                "check_pii_and_mask",
+                "check_llama_guard_input",
+            ]:
+                if hasattr(module, func_name):
+                    guardrails_actions[func_name] = getattr(module, func_name)
+
+        if not guardrails_actions:
+            get_logger(__name__).warning("No Guardrails action functions were loaded from %s", config_dir)
+    else:
+        get_logger(__name__).warning("Guardrails config directory not found: %s", config_dir)
+
 LITELLM_PROXY_URL = os.getenv("LITELLM_PROXY_URL", "http://localhost:4000/v1").rstrip("/")
 LITELLM_MASTER_KEY = os.getenv("LITELLM_MASTER_KEY") or os.getenv("OPENAI_API_KEY") or ""
 DEFAULT_CHAT_MODEL = "gateway-model"
@@ -25,6 +67,7 @@ logger = get_logger(__name__)
 app = FastAPI(title="LLM Gateways API", version="0.1.0")
 
 guardrails: Optional[LLMRails] = None
+guardrails_actions: Dict[str, Any] = {}
 
 
 class ChatCompletionRequest(BaseModel):
@@ -76,6 +119,11 @@ async def startup_event() -> None:
         logger.warning("Guardrails config directory not found: %s", GUARDRAILS_CONFIG_DIR)
         return
 
+    if LITELLM_MASTER_KEY:
+        os.environ["OPENAI_API_KEY"] = LITELLM_MASTER_KEY
+        os.environ["LITELLM_MASTER_KEY"] = LITELLM_MASTER_KEY
+
+    load_guardrails_actions()
     logger.info("Loading Guardrails configuration from %s", GUARDRAILS_CONFIG_DIR)
     rails_config = RailsConfig.from_path(str(GUARDRAILS_CONFIG_DIR))
     guardrails = LLMRails(rails_config)
@@ -105,6 +153,45 @@ async def run_input_guard(user_query: str) -> tuple[bool, str]:
     except Exception as exc:
         logger.error("Guardrails input check failed: %s", exc, exc_info=True)
         return True, ""
+
+
+async def validate_guardrails_input(user_query: str) -> tuple[bool, str, str]:
+    if not user_query.strip():
+        return True, "", "pass"
+
+    if not guardrails_actions:
+        logger.warning("Guardrails actions not loaded; skipping custom validation.")
+        return True, "", "pass"
+
+    if "check_greeting_terms" in guardrails_actions and await guardrails_actions["check_greeting_terms"](user_input=user_query):
+        logger.info("Guardrails greeting detected.")
+        # Handle greetings locally to avoid unnecessary LLM cost.
+        return True, "Hello! How can I assist you today with your project?", "greeting"
+
+    if "check_blocked_terms" in guardrails_actions and await guardrails_actions["check_blocked_terms"](user_input=user_query):
+        logger.warning("Guardrails blocked phrase detected.")
+        return False, "I cannot assist with requests that violate safety or security policies.", "blocked"
+
+    if "check_pii_and_mask" in guardrails_actions:
+        pii_result = await guardrails_actions["check_pii_and_mask"](user_input=user_query)
+    else:
+        pii_result = {"is_safe": True, "masked_input": user_query}
+
+    if not pii_result.get("is_safe", True):
+        logger.warning("Guardrails PII detection blocked the request.")
+        return False, pii_result.get("message", "Request blocked due to sensitive content."), "pii"
+
+    guard_input = pii_result.get("masked_input") or user_query
+    if "check_llama_guard_input" in guardrails_actions:
+        guard_result = await guardrails_actions["check_llama_guard_input"](user_input=guard_input)
+    else:
+        guard_result = {"is_safe": True, "hazards": ""}
+
+    if not guard_result.get("is_safe", True):
+        logger.warning("GuardRails Llama Guard input safety check failed: %s", guard_result.get("hazards", ""))
+        return False, f"Request blocked due to safety policy violation. Hazard Type(s): {guard_result.get('hazards', '')}.", "llama"
+
+    return True, "", "pass"
 
 
 def build_proxy_headers() -> Dict[str, str]:
@@ -154,11 +241,37 @@ async def ai_llms(request: ChatCompletionRequest) -> Any:
         logger.warning("Sanitizer blocked request: %s", sanitize_error)
         raise HTTPException(status_code=400, detail=sanitize_error)
 
-    is_safe, guardrails_output = await run_input_guard(sanitized_prompt)
+    is_safe, guardrails_output, stage = await validate_guardrails_input(sanitized_prompt)
     if not is_safe:
-        logger.warning("Input blocked by Guardrails: %s", guardrails_output)
-        return JSONResponse(status_code=403, content={"error": "input_blocked", "reason": guardrails_output})
+        status_code = 403 if stage in {"blocked", "llama"} else 400
+        return JSONResponse(status_code=status_code, content={"error": "input_blocked", "reason": guardrails_output})
 
+    if stage == "greeting" and guardrails_output:
+        return JSONResponse(status_code=200, content={"content": guardrails_output})
+
+    if request.stream:
+        logger.info("Guardrails passed; starting streaming LiteLLM chat completion.")
+        endpoint = f"{LITELLM_PROXY_URL}/chat/completions"
+        payload = {
+            "model": request.model or DEFAULT_CHAT_MODEL,
+            "messages": request.messages,
+            "temperature": request.temperature,
+            "top_p": request.top_p,
+            "max_tokens": request.max_tokens,
+            "n": request.n,
+            "stream": True,
+        }
+        generator = await call_litellm_api(endpoint, payload, stream=True)
+        return StreamingResponse(generator, media_type="text/event-stream")
+
+    if guardrails is not None:
+        logger.info("Guardrails passed; using Guardrails LLM pipeline for final output.")
+        result = await guardrails.generate_async(messages=request.messages)
+        if isinstance(result, dict) and "content" in result:
+            return JSONResponse(status_code=200, content=result)
+        return JSONResponse(status_code=200, content={"content": str(result)})
+
+    logger.info("Guardrails unavailable; falling back to direct LiteLLM chat completion.")
     endpoint = f"{LITELLM_PROXY_URL}/chat/completions"
     payload = {
         "model": request.model or DEFAULT_CHAT_MODEL,
@@ -167,15 +280,8 @@ async def ai_llms(request: ChatCompletionRequest) -> Any:
         "top_p": request.top_p,
         "max_tokens": request.max_tokens,
         "n": request.n,
-        "stream": request.stream,
+        "stream": False,
     }
-
-    if request.stream:
-        logger.info("Starting streaming chat completion through LiteLLM proxy")
-        generator = await call_litellm_api(endpoint, payload, stream=True)
-        return StreamingResponse(generator, media_type="text/event-stream")
-
-    logger.info("Starting standard chat completion through LiteLLM proxy")
     return await call_litellm_api(endpoint, payload, stream=False)
 
 

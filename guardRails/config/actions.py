@@ -28,20 +28,6 @@ HAZARD_MAP = {
 }
 
 
-@action(name="check_greeting_terms")
-async def check_greeting_terms(context: dict = None, user_input: str = None) -> bool:
-    message = user_input or (context.get("last_user_message") if context else "") or ""
-    if not message.strip():
-        return False
-
-    greetings = {
-        "hello", "hi", "hey", "good morning", "good evening", "good afternoon",
-        "thanks", "thank you", "thank you!", "thank you very much", "thank you so much"
-    }
-    cleaned_input = message.strip().lower()
-    return cleaned_input in greetings
-
-
 @action(name="check_blocked_terms")
 async def check_blocked_terms(context: dict = None, user_input: str = None) -> bool:
     message = user_input or (context.get("last_user_message") if context else "") or ""

@@ -12,6 +12,7 @@ rails:
     flows:
       - handle greeting
       - check input patterns
+      - check pii and mask
       - check llama guard input
 
 # Completely disables canonical LLM intent generation
