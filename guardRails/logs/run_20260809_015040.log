@@ -1,0 +1,282 @@
+2026-08-09 01:50:40,814 | INFO | __main__ | --- Processing Input Query: 'What is 2 + 2?' ---
+2026-08-09 01:50:40,923 | INFO | nemoguardrails.actions.action_dispatcher | Initializing action dispatcher
+2026-08-09 01:50:40,927 | INFO | nemoguardrails.actions.action_dispatcher | Added create_event to actions
+2026-08-09 01:50:40,928 | INFO | nemoguardrails.actions.action_dispatcher | Added wolfram alpha request to actions
+2026-08-09 01:50:40,929 | INFO | nemoguardrails.actions.action_dispatcher | Added retrieve_relevant_chunks to actions
+2026-08-09 01:50:40,939 | INFO | nemoguardrails.actions.action_dispatcher | Added call_activefence_api to actions
+2026-08-09 01:50:40,942 | INFO | nemoguardrails.actions.action_dispatcher | Added ai_defense_inspect to actions
+2026-08-09 01:50:40,943 | INFO | nemoguardrails.actions.action_dispatcher | Added GetAttentionPercentageAction to actions
+2026-08-09 01:50:40,944 | INFO | nemoguardrails.actions.action_dispatcher | Added UpdateAttentionMaterializedViewAction to actions
+2026-08-09 01:50:40,945 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_factcheck_output_api to actions
+2026-08-09 01:50:40,945 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_groundedness_output_api to actions
+2026-08-09 01:50:40,945 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_input_api to actions
+2026-08-09 01:50:40,946 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_output_api to actions
+2026-08-09 01:50:40,953 | INFO | nemoguardrails.actions.action_dispatcher | Added ClavataCheckAction to actions
+2026-08-09 01:50:40,955 | INFO | nemoguardrails.actions.action_dispatcher | Added call cleanlab api to actions
+2026-08-09 01:50:40,956 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_input to actions
+2026-08-09 01:50:40,957 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_output to actions
+2026-08-09 01:50:40,957 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_language to actions
+2026-08-09 01:50:40,959 | INFO | nemoguardrails.actions.action_dispatcher | Added context_bloat_detection to actions
+2026-08-09 01:50:40,963 | INFO | nemoguardrails.actions.action_dispatcher | Added crowdstrike_aidr_guard to actions
+2026-08-09 01:50:40,972 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore_check_facts to actions
+2026-08-09 01:50:40,972 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore request to actions
+2026-08-09 01:50:40,972 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-09 01:50:40,974 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler faithfulness to actions
+2026-08-09 01:50:40,974 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on bot message to actions
+2026-08-09 01:50:40,974 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on user message to actions
+2026-08-09 01:50:40,976 | INFO | nemoguardrails.actions.action_dispatcher | Added call gcpnlp api to actions
+2026-08-09 01:50:40,983 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_detect_pii to actions
+2026-08-09 01:50:40,983 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_mask_pii to actions
+2026-08-09 01:50:40,987 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_input to actions
+2026-08-09 01:50:40,987 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_output to actions
+2026-08-09 01:50:40,988 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_hallucination to actions
+2026-08-09 01:50:40,992 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_input to actions
+2026-08-09 01:50:40,992 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_output to actions
+2026-08-09 01:50:40,993 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_retrieval to actions
+2026-08-09 01:50:40,997 | INFO | nemoguardrails.actions.action_dispatcher | Added injection_detection to actions
+2026-08-09 01:50:41,001 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_heuristics to actions
+2026-08-09 01:50:41,001 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_model to actions
+2026-08-09 01:50:41,003 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_input to actions
+2026-08-09 01:50:41,003 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_output to actions
+2026-08-09 01:50:41,005 | INFO | nemoguardrails.actions.action_dispatcher | Added pangea_ai_guard to actions
+2026-08-09 01:50:41,007 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_api_check_output to actions
+2026-08-09 01:50:41,007 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_lynx_check_output_hallucination to actions
+2026-08-09 01:50:41,009 | INFO | nemoguardrails.actions.action_dispatcher | Added call_policyai_api to actions
+2026-08-09 01:50:41,013 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_detect_pii to actions
+2026-08-09 01:50:41,013 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_mask_pii to actions
+2026-08-09 01:50:41,016 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_pii to actions
+2026-08-09 01:50:41,016 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_pii to actions
+2026-08-09 01:50:41,017 | INFO | nemoguardrails.actions.action_dispatcher | Added protect_text to actions
+2026-08-09 01:50:41,019 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_regex_pattern to actions
+2026-08-09 01:50:41,020 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-09 01:50:41,022 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_input to actions
+2026-08-09 01:50:41,024 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_output to actions
+2026-08-09 01:50:41,025 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_sensitive_data to actions
+2026-08-09 01:50:41,025 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_sensitive_data to actions
+2026-08-09 01:50:41,027 | INFO | nemoguardrails.actions.action_dispatcher | Added topic_safety_check_input to actions
+2026-08-09 01:50:41,030 | INFO | nemoguardrails.actions.action_dispatcher | Added trend_ai_guard to actions
+2026-08-09 01:50:41,032 | INFO | nemoguardrails.actions.action_dispatcher | Added GetCurrentDateTimeAction to actions
+2026-08-09 01:50:41,033 | INFO | nemoguardrails.actions.action_dispatcher | Added check_blocked_terms to actions
+2026-08-09 01:50:41,033 | INFO | nemoguardrails.actions.action_dispatcher | Added check_greeting_terms to actions
+2026-08-09 01:50:41,033 | INFO | nemoguardrails.actions.action_dispatcher | Added check_llama_guard_input to actions
+2026-08-09 01:50:41,033 | INFO | nemoguardrails.actions.action_dispatcher | Registered Actions :: ['ClavataCheckAction', 'GetAttentionPercentageAction', 'GetCurrentDateTimeAction', 'UpdateAttentionMaterializedViewAction', 'ai_defense_inspect', 'alignscore request', 'alignscore_check_facts', 'autoalign_factcheck_output_api', 'autoalign_groundedness_output_api', 'autoalign_input_api', 'autoalign_output_api', 'call cleanlab api', 'call fiddler faithfulness', 'call fiddler safety on bot message', 'call fiddler safety on user message', 'call gcpnlp api', 'call_activefence_api', 'call_policyai_api', 'check_blocked_terms', 'check_greeting_terms', 'check_llama_guard_input', 'content_safety_check_input', 'content_safety_check_output', 'context_bloat_detection', 'create_event', 'crowdstrike_aidr_guard', 'detect_language', 'detect_pii', 'detect_regex_pattern', 'detect_sensitive_data', 'gliner_detect_pii', 'gliner_mask_pii', 'hf_classifier_check_input', 'hf_classifier_check_output', 'hf_classifier_check_retrieval', 'injection_detection', 'jailbreak_detection_heuristics', 'jailbreak_detection_model', 'llama_guard_check_input', 'llama_guard_check_output', 'mask_pii', 'mask_sensitive_data', 'pangea_ai_guard', 'patronus_api_check_output', 'patronus_lynx_check_output_hallucination', 'polygraf_detect_pii', 'polygraf_mask_pii', 'protect_text', 'retrieve_relevant_chunks', 'self_check_facts', 'self_check_hallucination', 'self_check_input', 'self_check_output', 'topic_safety_check_input', 'trend_ai_guard', 'validate_guardrails_ai_input', 'validate_guardrails_ai_output', 'wolfram alpha request']
+2026-08-09 01:50:41,033 | INFO | nemoguardrails.actions.action_dispatcher | Action dispatcher initialized
+2026-08-09 01:50:41,423 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UtteranceUserActionFinished', 'final_transcript': 'What is 2 + 2?'}
+2026-08-09 01:50:41,424 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'ea696f6c-1918-4c7b-b1d0-bc67cee512c5', 'event_created_at': '2026-08-08T20:20:41.424538+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'user_message': 'What is 2 + 2?'}}
+2026-08-09 01:50:41,424 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'efcaaeff-4008-4cf2-b414-9fd94ad3d349', 'event_created_at': '2026-08-08T20:20:41.424584+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRails'}}, 'action_result_key': None, 'action_uid': '9ff272a5-87ba-4b0a-99e8-b7445b81e241', 'is_system_action': True}
+2026-08-09 01:50:41,425 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'efcaaeff-4008-4cf2-b414-9fd94ad3d349', 'event_created_at': '2026-08-08T20:20:41.424584+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRails'}}, 'action_result_key': None, 'action_uid': '9ff272a5-87ba-4b0a-99e8-b7445b81e241', 'is_system_action': True}
+2026-08-09 01:50:41,425 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,425 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,425 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '77f9e777-b380-4f10-b5b7-98b6bf5721e9', 'event_created_at': '2026-08-08T20:20:41.425938+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '9ff272a5-87ba-4b0a-99e8-b7445b81e241', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRails'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'StartInputRails', 'uid': 'a599c34f-49d5-4b8d-8598-1f52e57fff24', 'event_created_at': '2026-08-08T20:20:41.425909+00:00', 'source_uid': 'NeMoGuardrails'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.425945+00:00'}
+2026-08-09 01:50:41,426 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInputRails {'uid': 'a599c34f-49d5-4b8d-8598-1f52e57fff24', 'event_created_at': '2026-08-08T20:20:41.425909+00:00', 'source_uid': 'NeMoGuardrails'}
+2026-08-09 01:50:41,426 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInputRails', 'uid': 'a599c34f-49d5-4b8d-8598-1f52e57fff24', 'event_created_at': '2026-08-08T20:20:41.425909+00:00', 'source_uid': 'NeMoGuardrails'}
+2026-08-09 01:50:41,427 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'f1ae7c1a-efe1-46de-b100-be0e618f0d0a', 'event_created_at': '2026-08-08T20:20:41.426999+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'input_flows': ['handle greeting', 'check input patterns', 'check llama guard input'], 'i': 0, 'triggered_input_rail': 'handle greeting'}}
+2026-08-09 01:50:41,442 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '22a2a058-cdf4-4fbf-9213-7dd092b96dc9', 'event_created_at': '2026-08-08T20:20:41.427020+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': 'ee691739-a971-48a3-902b-470705c8dee0', 'is_system_action': True}
+2026-08-09 01:50:41,443 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '22a2a058-cdf4-4fbf-9213-7dd092b96dc9', 'event_created_at': '2026-08-08T20:20:41.427020+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': 'ee691739-a971-48a3-902b-470705c8dee0', 'is_system_action': True}
+2026-08-09 01:50:41,443 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,443 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,443 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': 'c63d64a5-5e4a-4cf2-b13c-4b9c7ffd03f9', 'event_created_at': '2026-08-08T20:20:41.443912+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'ee691739-a971-48a3-902b-470705c8dee0', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'StartInputRail', 'uid': '0c165b2b-a6f8-4dd6-a193-6d767c9d990e', 'event_created_at': '2026-08-08T20:20:41.443853+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'handle greeting'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.443924+00:00'}
+2026-08-09 01:50:41,444 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInputRail {'uid': '0c165b2b-a6f8-4dd6-a193-6d767c9d990e', 'event_created_at': '2026-08-08T20:20:41.443853+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'handle greeting'}
+2026-08-09 01:50:41,444 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInputRail', 'uid': '0c165b2b-a6f8-4dd6-a193-6d767c9d990e', 'event_created_at': '2026-08-08T20:20:41.443853+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'handle greeting'}
+2026-08-09 01:50:41,445 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'd3098b0c-7856-4408-aae8-ad519642a9d4', 'event_created_at': '2026-08-08T20:20:41.445222+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'check_greeting_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_greeting', 'action_uid': 'fce1f288-4e63-4c63-963d-0bd7fc675473', 'is_system_action': False}
+2026-08-09 01:50:41,445 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'd3098b0c-7856-4408-aae8-ad519642a9d4', 'event_created_at': '2026-08-08T20:20:41.445222+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'check_greeting_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_greeting', 'action_uid': 'fce1f288-4e63-4c63-963d-0bd7fc675473', 'is_system_action': False}
+2026-08-09 01:50:41,445 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: check_greeting_terms
+2026-08-09 01:50:41,445 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: check_greeting_terms
+2026-08-09 01:50:41,445 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'e3f701ad-14ae-4cc4-9c22-fdc6c4940d42', 'event_created_at': '2026-08-08T20:20:41.445756+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'is_greeting': False}}
+2026-08-09 01:50:41,445 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '903d67c9-48f3-4ff4-ba88-061c353b5886', 'event_created_at': '2026-08-08T20:20:41.445778+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'fce1f288-4e63-4c63-963d-0bd7fc675473', 'action_name': 'check_greeting_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_greeting', 'status': 'success', 'is_success': True, 'return_value': False, 'events': [], 'is_system_action': False, 'action_finished_at': '2026-08-08T20:20:41.445785+00:00'}
+2026-08-09 01:50:41,446 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InternalSystemActionFinished', 'uid': '903d67c9-48f3-4ff4-ba88-061c353b5886', 'event_created_at': '2026-08-08T20:20:41.445778+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'fce1f288-4e63-4c63-963d-0bd7fc675473', 'action_name': 'check_greeting_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_greeting', 'status': 'success', 'is_success': True, 'return_value': False, 'events': [], 'is_system_action': False, 'action_finished_at': '2026-08-08T20:20:41.445785+00:00'}
+2026-08-09 01:50:41,446 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '3095c573-0a65-41ed-9e30-313c27a432a4', 'event_created_at': '2026-08-08T20:20:41.446734+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'i': 1}}
+2026-08-09 01:50:41,446 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'bf22d270-eb04-4235-a289-733a6bba7a09', 'event_created_at': '2026-08-08T20:20:41.446750+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '7564cd5a-d226-4eb7-934d-00b5bff3ec66', 'is_system_action': True}
+2026-08-09 01:50:41,446 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'bf22d270-eb04-4235-a289-733a6bba7a09', 'event_created_at': '2026-08-08T20:20:41.446750+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '7564cd5a-d226-4eb7-934d-00b5bff3ec66', 'is_system_action': True}
+2026-08-09 01:50:41,447 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,447 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,447 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': 'fab90317-df75-4036-96e8-b67ca4ca7842', 'event_created_at': '2026-08-08T20:20:41.447539+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '7564cd5a-d226-4eb7-934d-00b5bff3ec66', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'InputRailFinished', 'uid': 'f94179a1-0813-4836-8cf1-3f79a05d473b', 'event_created_at': '2026-08-08T20:20:41.447496+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'handle greeting'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.447548+00:00'}
+2026-08-09 01:50:41,447 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InputRailFinished {'uid': 'f94179a1-0813-4836-8cf1-3f79a05d473b', 'event_created_at': '2026-08-08T20:20:41.447496+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'handle greeting'}
+2026-08-09 01:50:41,447 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InputRailFinished', 'uid': 'f94179a1-0813-4836-8cf1-3f79a05d473b', 'event_created_at': '2026-08-08T20:20:41.447496+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'handle greeting'}
+2026-08-09 01:50:41,449 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'b673f408-e1c1-4117-93a1-8b19a5d85749', 'event_created_at': '2026-08-08T20:20:41.449726+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'triggered_input_rail': 'check input patterns'}}
+2026-08-09 01:50:41,449 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '3d0fbe26-d704-4ce5-8fc4-f225aaa0a4bd', 'event_created_at': '2026-08-08T20:20:41.449743+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '2b66ac26-e61c-4a89-a73c-b5bfd0c27adc', 'is_system_action': True}
+2026-08-09 01:50:41,450 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '3d0fbe26-d704-4ce5-8fc4-f225aaa0a4bd', 'event_created_at': '2026-08-08T20:20:41.449743+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '2b66ac26-e61c-4a89-a73c-b5bfd0c27adc', 'is_system_action': True}
+2026-08-09 01:50:41,450 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,450 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,450 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '8fc0ed87-7b0c-481f-983f-cd62ab579dde', 'event_created_at': '2026-08-08T20:20:41.450366+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '2b66ac26-e61c-4a89-a73c-b5bfd0c27adc', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'StartInputRail', 'uid': '5dab96c3-92c5-4f9d-bcc8-cbc29177f334', 'event_created_at': '2026-08-08T20:20:41.450342+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check input patterns'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.450371+00:00'}
+2026-08-09 01:50:41,450 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInputRail {'uid': '5dab96c3-92c5-4f9d-bcc8-cbc29177f334', 'event_created_at': '2026-08-08T20:20:41.450342+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check input patterns'}
+2026-08-09 01:50:41,450 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInputRail', 'uid': '5dab96c3-92c5-4f9d-bcc8-cbc29177f334', 'event_created_at': '2026-08-08T20:20:41.450342+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check input patterns'}
+2026-08-09 01:50:41,451 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '5a25d45a-c817-4649-8243-e35554844ebd', 'event_created_at': '2026-08-08T20:20:41.451827+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'check_blocked_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_blocked', 'action_uid': '90ab54af-0679-4ab0-baeb-1f4047e46846', 'is_system_action': False}
+2026-08-09 01:50:41,452 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '5a25d45a-c817-4649-8243-e35554844ebd', 'event_created_at': '2026-08-08T20:20:41.451827+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'check_blocked_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_blocked', 'action_uid': '90ab54af-0679-4ab0-baeb-1f4047e46846', 'is_system_action': False}
+2026-08-09 01:50:41,452 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: check_blocked_terms
+2026-08-09 01:50:41,452 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: check_blocked_terms
+2026-08-09 01:50:41,452 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '3b7309fd-64a8-4c9c-9b06-eec734e57c15', 'event_created_at': '2026-08-08T20:20:41.452633+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'is_blocked': False}}
+2026-08-09 01:50:41,452 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '86cd57bb-99c3-4a1c-a9af-f06b8c00780f', 'event_created_at': '2026-08-08T20:20:41.452664+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '90ab54af-0679-4ab0-baeb-1f4047e46846', 'action_name': 'check_blocked_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_blocked', 'status': 'success', 'is_success': True, 'return_value': False, 'events': [], 'is_system_action': False, 'action_finished_at': '2026-08-08T20:20:41.452675+00:00'}
+2026-08-09 01:50:41,453 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InternalSystemActionFinished', 'uid': '86cd57bb-99c3-4a1c-a9af-f06b8c00780f', 'event_created_at': '2026-08-08T20:20:41.452664+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '90ab54af-0679-4ab0-baeb-1f4047e46846', 'action_name': 'check_blocked_terms', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'is_blocked', 'status': 'success', 'is_success': True, 'return_value': False, 'events': [], 'is_system_action': False, 'action_finished_at': '2026-08-08T20:20:41.452675+00:00'}
+2026-08-09 01:50:41,454 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': 'f71fc7cb-868a-4db7-bd1c-c0777026ef63', 'event_created_at': '2026-08-08T20:20:41.454108+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'i': 2}}
+2026-08-09 01:50:41,454 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'f91ca7d9-20f5-4729-9d24-009989e341c5', 'event_created_at': '2026-08-08T20:20:41.454125+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '159e323a-528b-42fb-891e-e2c35b1b505d', 'is_system_action': True}
+2026-08-09 01:50:41,454 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'f91ca7d9-20f5-4729-9d24-009989e341c5', 'event_created_at': '2026-08-08T20:20:41.454125+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '159e323a-528b-42fb-891e-e2c35b1b505d', 'is_system_action': True}
+2026-08-09 01:50:41,454 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,454 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,454 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '603e09d6-c12c-4949-9e78-0fbbe6470d95', 'event_created_at': '2026-08-08T20:20:41.454878+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '159e323a-528b-42fb-891e-e2c35b1b505d', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'InputRailFinished', 'uid': 'eb90ccd1-7f24-448f-af4b-26d8466aaa82', 'event_created_at': '2026-08-08T20:20:41.454853+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check input patterns'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.454883+00:00'}
+2026-08-09 01:50:41,455 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InputRailFinished {'uid': 'eb90ccd1-7f24-448f-af4b-26d8466aaa82', 'event_created_at': '2026-08-08T20:20:41.454853+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check input patterns'}
+2026-08-09 01:50:41,455 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InputRailFinished', 'uid': 'eb90ccd1-7f24-448f-af4b-26d8466aaa82', 'event_created_at': '2026-08-08T20:20:41.454853+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check input patterns'}
+2026-08-09 01:50:41,456 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '16d83c21-4caf-4c80-ad4d-c91ed75f55f6', 'event_created_at': '2026-08-08T20:20:41.456699+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'triggered_input_rail': 'check llama guard input'}}
+2026-08-09 01:50:41,456 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '9ac3a8e9-285b-48ec-a4bc-22094c01746a', 'event_created_at': '2026-08-08T20:20:41.456718+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': 'f573ab15-a8f8-4fbb-85a2-9ad9687d6896', 'is_system_action': True}
+2026-08-09 01:50:41,457 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '9ac3a8e9-285b-48ec-a4bc-22094c01746a', 'event_created_at': '2026-08-08T20:20:41.456718+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': 'f573ab15-a8f8-4fbb-85a2-9ad9687d6896', 'is_system_action': True}
+2026-08-09 01:50:41,457 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,457 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,457 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '5c47bd8a-1f5c-47c1-9c34-113db28f4eb9', 'event_created_at': '2026-08-08T20:20:41.457647+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'f573ab15-a8f8-4fbb-85a2-9ad9687d6896', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'StartInputRail', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'StartInputRail', 'uid': '4eaea2fb-ea9c-49f2-99bd-2d853bdfe130', 'event_created_at': '2026-08-08T20:20:41.457622+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check llama guard input'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.457652+00:00'}
+2026-08-09 01:50:41,457 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInputRail {'uid': '4eaea2fb-ea9c-49f2-99bd-2d853bdfe130', 'event_created_at': '2026-08-08T20:20:41.457622+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check llama guard input'}
+2026-08-09 01:50:41,457 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInputRail', 'uid': '4eaea2fb-ea9c-49f2-99bd-2d853bdfe130', 'event_created_at': '2026-08-08T20:20:41.457622+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check llama guard input'}
+2026-08-09 01:50:41,459 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'df85a349-ef46-4bb4-8c04-f79729217ed2', 'event_created_at': '2026-08-08T20:20:41.459589+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'check_llama_guard_input', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'guard_result', 'action_uid': 'e451bb9c-f665-4472-879c-c5deb2579823', 'is_system_action': False}
+2026-08-09 01:50:41,459 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'df85a349-ef46-4bb4-8c04-f79729217ed2', 'event_created_at': '2026-08-08T20:20:41.459589+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'check_llama_guard_input', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'guard_result', 'action_uid': 'e451bb9c-f665-4472-879c-c5deb2579823', 'is_system_action': False}
+2026-08-09 01:50:41,460 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: check_llama_guard_input
+2026-08-09 01:50:41,460 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: check_llama_guard_input
+2026-08-09 01:50:41,460 | INFO | actions.py | [Input Rail] Evaluating Llama Guard 3 1B classification for: ''
+2026-08-09 01:50:41,741 | ERROR | actions.py | [Input Rail] Local Llama Guard 3 1B call failed: Server disconnected without sending a response.
+2026-08-09 01:50:41,741 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '88ddcb17-a6fb-4e55-a4fa-8906feb0c481', 'event_created_at': '2026-08-08T20:20:41.741806+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'guard_result': {'is_safe': True, 'hazards': ''}}}
+2026-08-09 01:50:41,741 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '286333e2-d9a0-4d48-b7d0-83f5bf632b7b', 'event_created_at': '2026-08-08T20:20:41.741836+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'e451bb9c-f665-4472-879c-c5deb2579823', 'action_name': 'check_llama_guard_input', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'guard_result', 'status': 'success', 'is_success': True, 'return_value': {'is_safe': True, 'hazards': ''}, 'events': [], 'is_system_action': False, 'action_finished_at': '2026-08-08T20:20:41.741842+00:00'}
+2026-08-09 01:50:41,742 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InternalSystemActionFinished', 'uid': '286333e2-d9a0-4d48-b7d0-83f5bf632b7b', 'event_created_at': '2026-08-08T20:20:41.741836+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': 'e451bb9c-f665-4472-879c-c5deb2579823', 'action_name': 'check_llama_guard_input', 'action_params': {'user_input': '$last_user_message'}, 'action_result_key': 'guard_result', 'status': 'success', 'is_success': True, 'return_value': {'is_safe': True, 'hazards': ''}, 'events': [], 'is_system_action': False, 'action_finished_at': '2026-08-08T20:20:41.741842+00:00'}
+2026-08-09 01:50:41,743 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '318187fb-aa5e-4aac-8014-5a331289a4c3', 'event_created_at': '2026-08-08T20:20:41.743459+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'i': 3}}
+2026-08-09 01:50:41,743 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'b6128d27-699a-4b45-8715-7c9f379b7f08', 'event_created_at': '2026-08-08T20:20:41.743475+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '3b13705e-f953-4cb5-bba6-c840bf8b419f', 'is_system_action': True}
+2026-08-09 01:50:41,743 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'b6128d27-699a-4b45-8715-7c9f379b7f08', 'event_created_at': '2026-08-08T20:20:41.743475+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'action_uid': '3b13705e-f953-4cb5-bba6-c840bf8b419f', 'is_system_action': True}
+2026-08-09 01:50:41,744 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,744 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,744 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '8c751ac3-8398-4408-b1af-a88d3633a4e2', 'event_created_at': '2026-08-08T20:20:41.744523+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '3b13705e-f953-4cb5-bba6-c840bf8b419f', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailFinished', 'flow_id': '$triggered_input_rail'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'InputRailFinished', 'uid': '14a3f1e2-5f31-401f-be11-718c9c1389af', 'event_created_at': '2026-08-08T20:20:41.744499+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check llama guard input'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.744528+00:00'}
+2026-08-09 01:50:41,744 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InputRailFinished {'uid': '14a3f1e2-5f31-401f-be11-718c9c1389af', 'event_created_at': '2026-08-08T20:20:41.744499+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check llama guard input'}
+2026-08-09 01:50:41,744 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InputRailFinished', 'uid': '14a3f1e2-5f31-401f-be11-718c9c1389af', 'event_created_at': '2026-08-08T20:20:41.744499+00:00', 'source_uid': 'NeMoGuardrails', 'flow_id': 'check llama guard input'}
+2026-08-09 01:50:41,746 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: ContextUpdate {'uid': '19400328-ce4b-41d6-b52f-bba0c58c8798', 'event_created_at': '2026-08-08T20:20:41.746245+00:00', 'source_uid': 'NeMoGuardrails', 'data': {'triggered_input_rail': None}}
+2026-08-09 01:50:41,746 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'c92840c0-6262-40d2-a6d3-e7c9615499b3', 'event_created_at': '2026-08-08T20:20:41.746261+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailsFinished'}}, 'action_result_key': None, 'action_uid': '4674f706-60f1-4abd-9935-79867101b930', 'is_system_action': True}
+2026-08-09 01:50:41,746 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'c92840c0-6262-40d2-a6d3-e7c9615499b3', 'event_created_at': '2026-08-08T20:20:41.746261+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailsFinished'}}, 'action_result_key': None, 'action_uid': '4674f706-60f1-4abd-9935-79867101b930', 'is_system_action': True}
+2026-08-09 01:50:41,746 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,746 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,747 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': '5234ab92-a7f3-48b3-a22f-7eea614e3cf1', 'event_created_at': '2026-08-08T20:20:41.746990+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '4674f706-60f1-4abd-9935-79867101b930', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'InputRailsFinished'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'InputRailsFinished', 'uid': 'e67df17b-ee95-489d-9447-0e098d337d8d', 'event_created_at': '2026-08-08T20:20:41.746970+00:00', 'source_uid': 'NeMoGuardrails'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.746995+00:00'}
+2026-08-09 01:50:41,747 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InputRailsFinished {'uid': 'e67df17b-ee95-489d-9447-0e098d337d8d', 'event_created_at': '2026-08-08T20:20:41.746970+00:00', 'source_uid': 'NeMoGuardrails'}
+2026-08-09 01:50:41,747 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'InputRailsFinished', 'uid': 'e67df17b-ee95-489d-9447-0e098d337d8d', 'event_created_at': '2026-08-08T20:20:41.746970+00:00', 'source_uid': 'NeMoGuardrails'}
+2026-08-09 01:50:41,749 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': 'b296be63-ca6f-469a-882c-b608ca08670b', 'event_created_at': '2026-08-08T20:20:41.749583+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'action_uid': '7ba38be4-858b-45bd-9bd8-de83ed1b5129', 'is_system_action': True}
+2026-08-09 01:50:41,749 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': 'b296be63-ca6f-469a-882c-b608ca08670b', 'event_created_at': '2026-08-08T20:20:41.749583+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'action_uid': '7ba38be4-858b-45bd-9bd8-de83ed1b5129', 'is_system_action': True}
+2026-08-09 01:50:41,750 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: create_event
+2026-08-09 01:50:41,750 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: create_event
+2026-08-09 01:50:41,750 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: InternalSystemActionFinished {'uid': 'b639009b-0038-4dda-bf64-1f861dca01a7', 'event_created_at': '2026-08-08T20:20:41.750495+00:00', 'source_uid': 'NeMoGuardrails', 'action_uid': '7ba38be4-858b-45bd-9bd8-de83ed1b5129', 'action_name': 'create_event', 'action_params': {'event': {'_type': 'UserMessage', 'text': '$user_message'}}, 'action_result_key': None, 'status': 'success', 'is_success': True, 'return_value': None, 'events': [{'type': 'UserMessage', 'uid': '2378c48e-39ff-40be-8bda-f23596d289b8', 'event_created_at': '2026-08-08T20:20:41.750449+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'What is 2 + 2?'}], 'is_system_action': True, 'action_finished_at': '2026-08-08T20:20:41.750506+00:00'}
+2026-08-09 01:50:41,750 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: UserMessage {'uid': '2378c48e-39ff-40be-8bda-f23596d289b8', 'event_created_at': '2026-08-08T20:20:41.750449+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'What is 2 + 2?'}
+2026-08-09 01:50:41,750 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'UserMessage', 'uid': '2378c48e-39ff-40be-8bda-f23596d289b8', 'event_created_at': '2026-08-08T20:20:41.750449+00:00', 'source_uid': 'NeMoGuardrails', 'text': 'What is 2 + 2?'}
+2026-08-09 01:50:41,752 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Event :: StartInternalSystemAction {'uid': '3f52462a-ec51-4655-ae3a-9b8d298a7e24', 'event_created_at': '2026-08-08T20:20:41.752299+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'action_uid': '042ebc36-17df-4599-8251-bd0a54c7be8d', 'is_system_action': True}
+2026-08-09 01:50:41,752 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Processing event: {'type': 'StartInternalSystemAction', 'uid': '3f52462a-ec51-4655-ae3a-9b8d298a7e24', 'event_created_at': '2026-08-08T20:20:41.752299+00:00', 'source_uid': 'NeMoGuardrails', 'action_name': 'generate_user_intent', 'action_params': {}, 'action_result_key': None, 'action_uid': '042ebc36-17df-4599-8251-bd0a54c7be8d', 'is_system_action': True}
+2026-08-09 01:50:41,752 | INFO | nemoguardrails.colang.v1_0.runtime.runtime | Executing action :: generate_user_intent
+2026-08-09 01:50:41,752 | INFO | nemoguardrails.actions.action_dispatcher | Executing registered action: generate_user_intent
+2026-08-09 01:50:41,755 | INFO | nemoguardrails.actions.llm.utils | Prompt :: 
+
+User: What is 2 + 2?
+Assistant:
+2026-08-09 01:50:41,761 | ERROR | nemoguardrails.rails.llm.llmrails | Error in generate_async: Error invoking LLM (model=gateway-model, provider=openai, endpoint=http://localhost:4000/v1): Server disconnected without sending a response.
+Traceback (most recent call last):
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_transports\default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_transports\default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpcore\_async\connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpcore\_async\connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpcore\_async\connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpcore\_async\http11.py", line 136, in handle_async_request
+    raise exc
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpcore\_async\http11.py", line 106, in handle_async_request
+    ) = await self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpcore\_async\http11.py", line 177, in _receive_response_headers
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpcore\_async\http11.py", line 231, in _receive_event
+    raise RemoteProtocolError(msg)
+httpcore.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\actions\llm\utils.py", line 81, in llm_call
+    response: LLMResponse = await model.generate_async(chat_prompt, stop=stop, **(llm_params or {}))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\llm\models\openai_chat.py", line 115, in generate_async
+    response = await self._client.chat_completion(self._model, messages, **params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\llm\clients\openai_compatible.py", line 60, in chat_completion
+    return await self._apost(self._ROUTE, payload)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\llm\clients\base.py", line 192, in _apost
+    response = await self._client.post(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_client.py", line 1859, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<13 lines>...
+    )
+    ^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_transports\default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\gaura\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\httpx\_transports\default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: Server disconnected without sending a response.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\rails\llm\llmrails.py", line 1061, in generate_async
+    new_events = await self.runtime.generate_events(state_events + events, processing_log=processing_log)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\colang\v1_0\runtime\runtime.py", line 154, in generate_events
+    next_events = await self._process_start_action(events)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\colang\v1_0\runtime\runtime.py", line 648, in _process_start_action
+    result, status = await self.action_dispatcher.execute_action(action_name, kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\actions\action_dispatcher.py", line 238, in execute_action
+    raise e
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\actions\action_dispatcher.py", line 215, in execute_action
+    result = await result
+             ^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\actions\llm\generation.py", line 541, in generate_user_intent
+    await llm_call(
+    ...<5 lines>...
+    )
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\logging\llm_tracker.py", line 51, in wrapper
+    result = await func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\actions\llm\utils.py", line 83, in llm_call
+    _raise_llm_call_exception(e, model)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\lite-llm\Lib\site-packages\nemoguardrails\actions\llm\utils.py", line 333, in _raise_llm_call_exception
+    raise LLMCallException(exception, detail=detail) from exception
+nemoguardrails.exceptions.LLMCallException: Error invoking LLM (model=gateway-model, provider=openai, endpoint=http://localhost:4000/v1): Server disconnected without sending a response.

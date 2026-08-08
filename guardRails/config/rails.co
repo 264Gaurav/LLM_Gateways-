@@ -14,7 +14,7 @@ define bot refuse off topic
 # Input Rail 1: Intercept greetings & simple patterns via regex/exact match
 # ------------------------------------------------------------------------------
 define subflow handle greeting
-  $is_greeting = execute check_greeting_terms(user_input=$last_user_message)
+  $is_greeting = execute check_greeting_terms(user_input=$user_message)
   if $is_greeting
     bot express greeting
     stop
@@ -24,7 +24,7 @@ define subflow handle greeting
 # Input Rail 2: Block known malicious phrases & off-topic jailbreaks
 # ------------------------------------------------------------------------------
 define subflow check input patterns
-  $is_blocked = execute check_blocked_terms(user_input=$last_user_message)
+  $is_blocked = execute check_blocked_terms(user_input=$user_message)
   if $is_blocked
     bot refuse off topic
     stop
@@ -34,8 +34,8 @@ define subflow check input patterns
 # Input Rail 3: External Llama Guard Safety Action
 # ------------------------------------------------------------------------------
 define subflow check llama guard input
-  $guard_result = execute check_llama_guard_input
-  
+  $guard_result = execute check_llama_guard_input(user_input=$user_message)
+
   if not $guard_result.is_safe
     bot say "Request blocked due to safety policy violation. Hazard Type(s): {$guard_result.hazards}."
     stop

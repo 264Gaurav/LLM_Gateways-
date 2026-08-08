@@ -9,9 +9,20 @@ Not appropriate , at all -->
 
 ## Evaluation pipeline 
 ### Golden preparation and extract the overall performance, reliability, optimised benchmark% in terms of cost , compute, latency etc.with comparison chart
+ - To evaluate litellm - smart routing evals
+ - litellm - semantic caching (correctly, not making mistakes) - also it will help to finetune the caching threshold
+ - 
 
+<!-- 
+## Use of Sparse vectors (along with Dense vector - using BGM-m3 embedding models) - Evaluate performance, improvisation etc. (Experiment) -->
 
-## Use of Sparse vectors (along with Dense vector - using BGM-m3 embedding models) - Evaluate performance, improvisation etc. (Experiment)
+<!-- 
+## GurdRails with - NemoGuardRail, LLamaGuard
+### Intercepting, greeting messages and avoid llm calls in those scenarios -->
 
 ## Guardrails at litellm
-## Fast api and backend implemenation
+
+## Fast api and backend implemenation - with and without streaming capabilities
+
+## Next step - Streamlit ui
+

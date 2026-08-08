@@ -3,13 +3,14 @@ import re
 import httpx
 from nemoguardrails.actions import action
 from logger import get_logger
+from dotenv import load_dotenv
 
 logger = get_logger(__name__)
-
+load_dotenv()
 LITELLM_ENDPOINT = "http://localhost:4000/v1/chat/completions"
 
 # Retrieve master key from environment or fallback to local key
-LITELLM_API_KEY = os.environ.get("LITELLM_MASTER_KEY", "your-actual-master-key-here")
+LITELLM_API_KEY = os.environ.get("LITELLM_MASTER_KEY")
 
 HAZARD_MAP = {
     "S1": "Violent Crimes",
@@ -37,7 +38,10 @@ async def check_greeting_terms(user_input: str) -> bool:
     if not user_input:
         return False
 
-    greetings = {"hello", "hi", "hey", "good morning", "good evening", "good afternoon"}
+    greetings = {
+        "hello", "hi", "hey", "good morning", "good evening", "good afternoon",
+        "thanks", "thank you", "thank you!", "thank you very much", "thank you so much"
+    }
     cleaned_input = user_input.strip().lower()
     
     is_greeting = cleaned_input in greetings
@@ -58,6 +62,9 @@ async def check_blocked_terms(user_input: str) -> bool:
     blocked_patterns = [
         r"\bhow to build a bomb\b",
         r"\bhack a database\b",
+        r"\bhack a bank account\b",
+        r"\bbypass transaction limits\b",
+        r"\bbypass fraud detection\b",
         r"\bignore previous instructions\b",
         r"\boverride safety rules\b",
     ]
@@ -72,11 +79,11 @@ async def check_blocked_terms(user_input: str) -> bool:
 
 
 @action(name="check_llama_guard_input")
-async def check_llama_guard_input(context: dict) -> dict:
+async def check_llama_guard_input(user_input: str) -> dict:
     """
     Runs Llama Guard 3 1B classification via local LiteLLM proxy.
     """
-    user_message = context.get("user_message", "")
+    user_message = user_input or ""
     logger.info(f"[Input Rail] Evaluating Llama Guard 3 1B classification for: '{user_message}'")
     
     payload = {
@@ -107,28 +114,30 @@ async def check_llama_guard_input(context: dict) -> dict:
             
             logger.info(f"[Llama Guard 3 1B Raw Output]: '{raw_content}'")
             
-            if "unsafe" in raw_content.lower():
-                lines = raw_content.split("\n")
+            normalized = raw_content.strip().lower()
+            codes = set(re.findall(r"\b(s\d{1,2})\b", normalized, flags=re.IGNORECASE))
+
+            if "unsafe" in normalized or codes:
                 detected_hazards = []
-                
-                for line in lines:
-                    code = line.strip().upper()
-                    if code in HAZARD_MAP:
-                        detected_hazards.append(f"{code}: {HAZARD_MAP[code]}")
-                
+
+                for code in codes:
+                    code_up = code.upper()
+                    if code_up in HAZARD_MAP:
+                        detected_hazards.append(f"{code_up}: {HAZARD_MAP[code_up]}")
+
                 hazard_str = ", ".join(detected_hazards) if detected_hazards else "Unspecified Hazard"
-                logger.warning(f"[Input Rail] Blocked by local Llama Guard 3 1B: {hazard_str}")
-                
+                logger.warning(f"[Input Rail] Blocked by local Llama Guard 3 1B: {hazard_str} | Raw: {raw_content}")
+
                 return {
                     "is_safe": False,
                     "hazards": hazard_str
                 }
-                
+
             return {"is_safe": True, "hazards": ""}
             
         except Exception as e:
             logger.error(f"[Input Rail] Local Llama Guard 3 1B call failed: {e}")
-            return {"is_safe": True, "hazards": ""}
+            return {"is_safe": False, "hazards": "Llama Guard unavailable"}
 
 
 

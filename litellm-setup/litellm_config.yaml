@@ -155,7 +155,7 @@ model_list:
     litellm_params:
       model: ollama_chat/llama-guard3:1b
       api_base: os.environ/OLLAMA_BASE_URL
-      request_timeout: 10
+      request_timeout: 30
       temperature: 0.0
 
   # Alias fallback mapping if actions target llama-guard-3-8b
@@ -163,7 +163,7 @@ model_list:
     litellm_params:
       model: ollama_chat/llama-guard3:1b
       api_base: os.environ/OLLAMA_BASE_URL
-      request_timeout: 10
+      request_timeout: 30
       temperature: 0.0
 
 
