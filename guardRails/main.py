@@ -1,4 +1,5 @@
 import os
+import re
 import asyncio
 import httpx
 from dotenv import load_dotenv
@@ -11,15 +12,47 @@ load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("LITELLM_MASTER_KEY")
 os.environ["LITELLM_MASTER_KEY"] = os.getenv("LITELLM_MASTER_KEY")
 
+def sanitize_user_query(query: str) -> tuple[str, str | None]:
+    if not query:
+        return query, None
+
+    low = query.lower()
+    secret_patterns = [
+        r"\bapi[_-]?key\b",
+        r"\bsecret\b",
+        r"\btoken\b",
+        r"sk-[A-Za-z0-9_-]{16,}\b",
+        r"ghp_[A-Za-z0-9_-]{36,}",
+        r"xox[baprs]-[A-Za-z0-9-]{10,}",
+    ]
+    for pattern in secret_patterns:
+        if re.search(pattern, low):
+            return "", "Detected a secret or API key in the request. Remove any keys, tokens, or secrets before retrying."
+
+    sanitized = re.sub(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}", "[EMAIL_REDACTED]", query)
+    sanitized = re.sub(r"\b(?:\+?\d[\d\s().-]{7,}\d)\b", "[PHONE_REDACTED]", sanitized)
+    sanitized = re.sub(r"\b\d{3}[- ]?\d{2}[- ]?\d{4}\b", "[SSN_REDACTED]", sanitized)
+
+    if sanitized != query:
+        logger.info("[PII Sanitizer] Sensitive data masked before sending to the LLM.")
+
+    return sanitized, None
+
+
 async def test_input_guard(user_query: str):
     logger.info(f"--- Processing Input Query: '{user_query}' ---")
+
+    sanitized_query, pii_error = sanitize_user_query(user_query)
+    if pii_error:
+        logger.warning(f"[PII Sanitizer] {pii_error}")
+        return pii_error
     
     config = RailsConfig.from_path("./config")
     nemo_rails = LLMRails(config)
     
     # Process prompt through NeMo + Llama Guard check action
     response = await nemo_rails.generate_async(
-        messages=[{"role": "user", "content": user_query}]
+        messages=[{"role": "user", "content": sanitized_query}]
     )
     
     return response["content"]

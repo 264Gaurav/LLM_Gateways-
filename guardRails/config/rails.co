@@ -1,8 +1,7 @@
 # ==============================================================================
-# Colang 1.0 - Deterministic Input Guardrails (Zero LLM Intent Calls)
+# Colang 1.0 - Deterministic Input Guardrails
 # ==============================================================================
 
-# Deterministic Bot Response Templates
 define bot express greeting
   "Hello! How can I assist you today with your project?"
 
@@ -11,31 +10,47 @@ define bot refuse off topic
 
 
 # ------------------------------------------------------------------------------
-# Input Rail 1: Intercept greetings & simple patterns via regex/exact match
+# Input Rail 1: Intercept greetings
 # ------------------------------------------------------------------------------
 define subflow handle greeting
-  $is_greeting = execute check_greeting_terms(user_input=$user_message)
+  $is_greeting = execute check_greeting_terms(user_input=$last_user_message)
   if $is_greeting
     bot express greeting
     stop
 
 
 # ------------------------------------------------------------------------------
-# Input Rail 2: Block known malicious phrases & off-topic jailbreaks
+# Input Rail 2: Block known malicious phrases
 # ------------------------------------------------------------------------------
 define subflow check input patterns
-  $is_blocked = execute check_blocked_terms(user_input=$user_message)
+  $is_blocked = execute check_blocked_terms(user_input=$last_user_message)
   if $is_blocked
     bot refuse off topic
     stop
 
 
 # ------------------------------------------------------------------------------
-# Input Rail 3: External Llama Guard Safety Action
+# Input Rail 3: Detect and mask PII / secrets
+# ------------------------------------------------------------------------------
+define subflow check pii and mask
+  $pii_result = execute check_pii_and_mask(user_input=$last_user_message)
+  if not $pii_result.is_safe
+    $msg = $pii_result.message
+    bot say "$msg"
+    stop
+  
+  # Export the masked string explicitly to the global context scope
+  $masked_user_input = $pii_result.masked_input
+
+
+# ------------------------------------------------------------------------------
+# Input Rail 4: External Llama Guard Safety Action
 # ------------------------------------------------------------------------------
 define subflow check llama guard input
-  $guard_result = execute check_llama_guard_input(user_input=$user_message)
+  # Pass the globally set $masked_user_input explicitly
+  $guard_result = execute check_llama_guard_input(user_input=$masked_user_input)
 
   if not $guard_result.is_safe
-    bot say "Request blocked due to safety policy violation. Hazard Type(s): {$guard_result.hazards}."
+    $hazards = $guard_result.hazards
+    bot say "Request blocked due to safety policy violation. Hazard Type(s): $hazards."
     stop
