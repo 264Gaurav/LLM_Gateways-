@@ -1,0 +1,62 @@
+2026-08-09 04:05:45,765 | INFO | server.main | Loading Guardrails configuration from C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\guardRails\config
+2026-08-09 04:05:45,867 | INFO | nemoguardrails.actions.action_dispatcher | Initializing action dispatcher
+2026-08-09 04:05:45,871 | INFO | nemoguardrails.actions.action_dispatcher | Added create_event to actions
+2026-08-09 04:05:45,872 | INFO | nemoguardrails.actions.action_dispatcher | Added wolfram alpha request to actions
+2026-08-09 04:05:45,874 | INFO | nemoguardrails.actions.action_dispatcher | Added retrieve_relevant_chunks to actions
+2026-08-09 04:05:45,884 | INFO | nemoguardrails.actions.action_dispatcher | Added call_activefence_api to actions
+2026-08-09 04:05:45,885 | INFO | nemoguardrails.actions.action_dispatcher | Added ai_defense_inspect to actions
+2026-08-09 04:05:45,888 | INFO | nemoguardrails.actions.action_dispatcher | Added GetAttentionPercentageAction to actions
+2026-08-09 04:05:45,888 | INFO | nemoguardrails.actions.action_dispatcher | Added UpdateAttentionMaterializedViewAction to actions
+2026-08-09 04:05:45,889 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_factcheck_output_api to actions
+2026-08-09 04:05:45,890 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_groundedness_output_api to actions
+2026-08-09 04:05:45,890 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_input_api to actions
+2026-08-09 04:05:45,890 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_output_api to actions
+2026-08-09 04:05:45,898 | INFO | nemoguardrails.actions.action_dispatcher | Added ClavataCheckAction to actions
+2026-08-09 04:05:45,900 | INFO | nemoguardrails.actions.action_dispatcher | Added call cleanlab api to actions
+2026-08-09 04:05:45,901 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_input to actions
+2026-08-09 04:05:45,901 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_output to actions
+2026-08-09 04:05:45,902 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_language to actions
+2026-08-09 04:05:45,903 | INFO | nemoguardrails.actions.action_dispatcher | Added context_bloat_detection to actions
+2026-08-09 04:05:45,906 | INFO | nemoguardrails.actions.action_dispatcher | Added crowdstrike_aidr_guard to actions
+2026-08-09 04:05:45,913 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore_check_facts to actions
+2026-08-09 04:05:45,914 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore request to actions
+2026-08-09 04:05:45,914 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-09 04:05:45,916 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler faithfulness to actions
+2026-08-09 04:05:45,916 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on bot message to actions
+2026-08-09 04:05:45,916 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on user message to actions
+2026-08-09 04:05:45,918 | INFO | nemoguardrails.actions.action_dispatcher | Added call gcpnlp api to actions
+2026-08-09 04:05:45,925 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_detect_pii to actions
+2026-08-09 04:05:45,925 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_mask_pii to actions
+2026-08-09 04:05:45,930 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_input to actions
+2026-08-09 04:05:45,930 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_output to actions
+2026-08-09 04:05:45,933 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_hallucination to actions
+2026-08-09 04:05:45,938 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_input to actions
+2026-08-09 04:05:45,938 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_output to actions
+2026-08-09 04:05:45,938 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_retrieval to actions
+2026-08-09 04:05:45,944 | INFO | nemoguardrails.actions.action_dispatcher | Added injection_detection to actions
+2026-08-09 04:05:45,947 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_heuristics to actions
+2026-08-09 04:05:45,948 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_model to actions
+2026-08-09 04:05:45,949 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_input to actions
+2026-08-09 04:05:45,949 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_output to actions
+2026-08-09 04:05:45,953 | INFO | nemoguardrails.actions.action_dispatcher | Added pangea_ai_guard to actions
+2026-08-09 04:05:45,955 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_api_check_output to actions
+2026-08-09 04:05:45,955 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_lynx_check_output_hallucination to actions
+2026-08-09 04:05:45,957 | INFO | nemoguardrails.actions.action_dispatcher | Added call_policyai_api to actions
+2026-08-09 04:05:45,960 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_detect_pii to actions
+2026-08-09 04:05:45,960 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_mask_pii to actions
+2026-08-09 04:05:45,964 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_pii to actions
+2026-08-09 04:05:45,964 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_pii to actions
+2026-08-09 04:05:45,966 | INFO | nemoguardrails.actions.action_dispatcher | Added protect_text to actions
+2026-08-09 04:05:45,968 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_regex_pattern to actions
+2026-08-09 04:05:45,969 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-09 04:05:45,971 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_input to actions
+2026-08-09 04:05:45,973 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_output to actions
+2026-08-09 04:05:45,975 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_sensitive_data to actions
+2026-08-09 04:05:45,976 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_sensitive_data to actions
+2026-08-09 04:05:45,977 | INFO | nemoguardrails.actions.action_dispatcher | Added topic_safety_check_input to actions
+2026-08-09 04:05:45,980 | INFO | nemoguardrails.actions.action_dispatcher | Added trend_ai_guard to actions
+2026-08-09 04:05:45,981 | INFO | nemoguardrails.actions.action_dispatcher | Added GetCurrentDateTimeAction to actions
+2026-08-09 04:05:45,984 | ERROR | nemoguardrails.actions.action_dispatcher | Failed to register actions.py in action dispatcher due to exception: No module named 'logger'
+2026-08-09 04:05:45,985 | INFO | nemoguardrails.actions.action_dispatcher | Registered Actions :: ['ClavataCheckAction', 'GetAttentionPercentageAction', 'GetCurrentDateTimeAction', 'UpdateAttentionMaterializedViewAction', 'ai_defense_inspect', 'alignscore request', 'alignscore_check_facts', 'autoalign_factcheck_output_api', 'autoalign_groundedness_output_api', 'autoalign_input_api', 'autoalign_output_api', 'call cleanlab api', 'call fiddler faithfulness', 'call fiddler safety on bot message', 'call fiddler safety on user message', 'call gcpnlp api', 'call_activefence_api', 'call_policyai_api', 'content_safety_check_input', 'content_safety_check_output', 'context_bloat_detection', 'create_event', 'crowdstrike_aidr_guard', 'detect_language', 'detect_pii', 'detect_regex_pattern', 'detect_sensitive_data', 'gliner_detect_pii', 'gliner_mask_pii', 'hf_classifier_check_input', 'hf_classifier_check_output', 'hf_classifier_check_retrieval', 'injection_detection', 'jailbreak_detection_heuristics', 'jailbreak_detection_model', 'llama_guard_check_input', 'llama_guard_check_output', 'mask_pii', 'mask_sensitive_data', 'pangea_ai_guard', 'patronus_api_check_output', 'patronus_lynx_check_output_hallucination', 'polygraf_detect_pii', 'polygraf_mask_pii', 'protect_text', 'retrieve_relevant_chunks', 'self_check_facts', 'self_check_hallucination', 'self_check_input', 'self_check_output', 'topic_safety_check_input', 'trend_ai_guard', 'validate_guardrails_ai_input', 'validate_guardrails_ai_output', 'wolfram alpha request']
+2026-08-09 04:05:45,985 | INFO | nemoguardrails.actions.action_dispatcher | Action dispatcher initialized
+2026-08-09 04:05:46,361 | INFO | server.main | Guardrails initialized successfully.

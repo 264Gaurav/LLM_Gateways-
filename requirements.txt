@@ -7,6 +7,10 @@ logfire>=3.0.0
 # Environment Variable Loader
 python-dotenv>=1.0.0
 
+fastapi>=0.105.0
+uvicorn[standard]>=0.24.0
+httpx>=0.26.0
+
 numpy
 langsmith
 
