@@ -15,6 +15,10 @@ uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
 - `POST /v1/chat/completions` - alias for `/ai/llms`
 - `POST /ai/embeddings` - embeddings through LiteLLM proxy
 - `POST /v1/embeddings` - alias for `/ai/embeddings`
+- `POST /ai/litellm/chat` - direct LiteLLM chat completions without Guardrails
+- `POST /v1/litellm/chat/completions` - alias for `/ai/litellm/chat`
+- `POST /ai/litellm/embeddings` - direct LiteLLM embeddings
+- `POST /v1/litellm/embeddings` - alias for `/ai/litellm/embeddings`
 
 ## Streaming
 
@@ -75,7 +79,7 @@ Content-Type: application/json
 Authorization: Bearer sk-...your-key...
 
 {
-  "model": "openai/text-embedding-3-small",
+  "model": "text-embedding-3-small",
   "input": "The quick brown fox jumps over the lazy dog."
 }
 ```

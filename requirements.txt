@@ -22,3 +22,5 @@ langchain-core
 nemoguardrails
 langchain-google-genai
 langchain-community
+streamlit>=1.26.0
+requests>=2.31.0

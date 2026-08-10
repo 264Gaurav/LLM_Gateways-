@@ -285,6 +285,60 @@ async def ai_llms(request: ChatCompletionRequest) -> Any:
     return await call_litellm_api(endpoint, payload, stream=False)
 
 
+@app.post("/ai/litellm/chat")
+@app.post("/v1/litellm/chat/completions", include_in_schema=False)
+async def direct_litellm_chat(request: ChatCompletionRequest) -> Any:
+    user_messages = [m["content"] for m in request.messages if m.get("role") == "user"]
+    prompt = "\n".join(user_messages).strip()
+
+    sanitized_prompt, sanitize_error = sanitize_user_query(prompt)
+    if sanitize_error:
+        logger.warning("Sanitizer blocked request: %s", sanitize_error)
+        raise HTTPException(status_code=400, detail=sanitize_error)
+
+    endpoint = f"{LITELLM_PROXY_URL}/chat/completions"
+    payload = {
+        "model": request.model or DEFAULT_CHAT_MODEL,
+        "messages": request.messages,
+        "temperature": request.temperature,
+        "top_p": request.top_p,
+        "max_tokens": request.max_tokens,
+        "n": request.n,
+        "stream": request.stream,
+    }
+
+    if request.stream:
+        generator = await call_litellm_api(endpoint, payload, stream=True)
+        return StreamingResponse(generator, media_type="text/event-stream")
+
+    return await call_litellm_api(endpoint, payload, stream=False)
+
+
+@app.post("/ai/litellm/embeddings")
+@app.post("/v1/litellm/embeddings", include_in_schema=False)
+async def direct_litellm_embeddings(request: EmbeddingsRequest) -> Any:
+    if isinstance(request.input, str):
+        sanitized_input, sanitize_error = sanitize_user_query(request.input)
+        if sanitize_error:
+            raise HTTPException(status_code=400, detail=sanitize_error)
+    elif isinstance(request.input, list):
+        for item in request.input:
+            if not isinstance(item, str):
+                raise HTTPException(status_code=400, detail="All embedding inputs must be strings.")
+            sanitized_item, sanitize_error = sanitize_user_query(item)
+            if sanitize_error:
+                raise HTTPException(status_code=400, detail=sanitize_error)
+
+    endpoint = f"{LITELLM_PROXY_URL}/embeddings"
+    payload = {
+        "model": request.model or DEFAULT_EMBEDDING_MODEL,
+        "input": request.input,
+    }
+
+    logger.info("Sending direct LiteLLM embedding request")
+    return await call_litellm_api(endpoint, payload, stream=False)
+
+
 @app.post("/ai/embeddings")
 @app.post("/v1/embeddings", include_in_schema=False)
 async def ai_embeddings(request: EmbeddingsRequest) -> Any:

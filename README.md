@@ -99,9 +99,60 @@ Once running, the local gateway should be available at:
 - LiteLLM UI: http://localhost:4000/ui
 - Redis Insight: http://localhost:8001
 
-### 4. Explore the examples
+### 4. Run the FastAPI gateway server
 
-You can then run the notebooks and scripts in the repository to test routing, caching, embeddings, observability, and guardrails.
+Open a new terminal in the repository root and run:
+
+```bash
+uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+This starts the application that exposes the project endpoints:
+
+- `/health`
+- `/ai/llms`
+- `/ai/embeddings`
+- `/ai/litellm/chat`
+- `/ai/litellm/embeddings`
+
+### 5. Start the Streamlit UI
+
+Open another terminal and run:
+
+```bash
+streamlit run client/streamlit.py
+```
+
+In the sidebar, configure:
+
+- `API base URL` (default: `http://localhost:8000`)
+- `Bearer API key` for the backend, if required
+- `Gateway mode`: choose between `Guardrails + LiteLLM` or `Direct LiteLLM`
+- chat settings such as temperature, top_p, max_tokens, and streaming
+
+The `client` folder includes a dedicated `README.md` with details about this Streamlit app.
+
+### 6. Use the project
+
+From the Streamlit UI, you can:
+
+- send chat requests through Guardrails or directly to LiteLLM
+- receive streamed chat responses as text arrives
+- generate embeddings via the local gateway or direct LiteLLM proxy
+- inspect raw API requests and responses
+- download chat history
+
+## What you get from this project
+
+This repository gives you a full local LLM gateway workflow with:
+
+- an easy-to-run Docker-based LiteLLM proxy
+- FastAPI gateway endpoints for safe and direct inference
+- Guardrails integration for validation, policy enforcement, and safer chat
+- direct LiteLLM paths for comparison and low-latency testing
+- a Streamlit developer console for interactive experimentation
+- embedding generation and raw API developer tools
+- a reusable foundation for building production-ready LLM services
 
 ## Summary
 
