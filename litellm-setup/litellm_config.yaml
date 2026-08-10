@@ -1,255 +1,836 @@
+# ============================================================
+# LiteLLM Production-Oriented Gateway Configuration
+# ============================================================
+#
+# Architecture:
+#
+# gateway-model
+#      |
+#      v
+# Complexity Router
+#      |
+#      +---- SIMPLE -----> budget
+#      |
+#      +---- MEDIUM -----> smart-fast
+#      |
+#      +---- COMPLEX ----> smart-best
+#      |
+#      +---- REASONING --> smart-reasoning
+#
+# Embeddings:
+#
+# qwen3-embedding
+#      |
+#      +---- Ollama Qwen3-Embedding-0.6B
+#      |
+#      +---- Qwen3-Embedding-0.6B fallback
+#
+# nomic-embedding
+#      |
+#      +---- Ollama Nomic
+#
+# Nomic is NEVER a fallback for Qwen3.
+#
+# Guard:
+#
+# llama-guard
+#      |
+#      +---- Ollama Llama Guard
+#      |
+#      +---- Groq Llama Guard fallback
+#
+# ============================================================
+
+
 model_list:
-  # ==========================================
-  # ROUTER ENTRYPOINT
-  # ==========================================
+
+  # ==========================================================
+  # SMART ROUTER ENTRYPOINT
+  # ==========================================================
+
   - model_name: gateway-model
     litellm_params:
       model: auto_router/complexity_router
       drop_params: true
 
       complexity_router_config:
-        session_affinity: false  # Re-evaluate every single incoming message
+
+        # Recalculate complexity for every request.
+        session_affinity: false
+
+        # ----------------------------------------------------
+        # TIER MAPPING
+        #
+        # These MUST match model_name values below.
+        # ----------------------------------------------------
+
         tiers:
+
           SIMPLE: budget
+
           MEDIUM: smart-fast
+
           COMPLEX: smart-best
+
           REASONING: smart-reasoning
+
+
+        # ----------------------------------------------------
+        # COMPLEXITY SCORE BOUNDARIES
+        #
+        # 0.00 - 0.10  -> SIMPLE
+        # 0.10 - 0.25  -> MEDIUM
+        # 0.25 - 0.55  -> COMPLEX
+        # 0.55+        -> REASONING
+        # ----------------------------------------------------
+
         tier_boundaries:
-          simple_medium: 0.10
-          medium_complex: 0.25
+
+          simple_medium: 0.05
+
+          medium_complex: 0.35
+
           complex_reasoning: 0.55
-      complexity_router_default_model: smart-fast
 
-  # ==========================================
-  # TIERED ROUTING GROUPS
-  # ==========================================
 
-  # Tier: COMPLEX / High Quality
+        # ----------------------------------------------------
+        # DEFAULT
+        #
+        # If the router cannot confidently classify the
+        # request, use the balanced model.
+        # ----------------------------------------------------
+
+        complexity_router_default_model: smart-fast
+
+
+        # ----------------------------------------------------
+        # TOKEN SIGNALS
+        #
+        # Longer prompts generally require more capable models.
+        # ----------------------------------------------------
+
+        token_thresholds:
+
+          simple: 20
+
+          complex: 400
+
+
+        # ----------------------------------------------------
+        # COMPLEXITY DIMENSION WEIGHTS
+        #
+        # These make routing more sensitive to the actual
+        # nature of the request rather than only prompt length.
+        # ----------------------------------------------------
+
+        dimension_weights:
+
+          tokenCount: 0.10
+
+          codePresence: 0.20
+
+          reasoningMarkers: 0.25
+
+          technicalTerms: 0.20
+
+          simpleIndicators: 0.05
+
+          multiStepPatterns: 0.10
+
+          questionComplexity: 0.10
+
+
+        # ----------------------------------------------------
+        # DOMAIN-SPECIFIC TECHNICAL KEYWORDS
+        #
+        # Particularly useful for your AI/engineering workload.
+        # ----------------------------------------------------
+
+        custom_technical_keywords:
+
+          - architecture
+
+          - system design
+
+          - distributed system
+
+          - microservices
+
+          - database
+
+          - vector database
+
+          - retrieval
+
+          - RAG
+
+          - embeddings
+
+          - embedding
+
+          - agent
+
+          - multi-agent
+
+          - LangGraph
+
+          - LangChain
+
+          - LiteLLM
+
+          - API
+
+          - authentication
+
+          - authorization
+
+          - RBAC
+
+          - ABAC
+
+          - security
+
+          - encryption
+
+          - Kubernetes
+
+          - Docker
+
+          - Kafka
+
+          - Redis
+
+          - PostgreSQL
+
+          - MongoDB
+
+          - Java
+
+          - Python
+
+          - TypeScript
+
+          - React
+
+          - debugging
+
+          - error analysis
+
+          - logs
+
+          - performance analysis
+
+          - optimization
+
+          - code review
+
+          - implementation
+
+          - refactor
+
+
+  # ==========================================================
+  # TIER: SMART BEST
+  # ==========================================================
+  #
+  # Complex architecture, difficult coding, deep analysis,
+  # large context, high-quality answers.
+  #
+  # PRIMARY:
+  # OpenRouter GPT-5.4-mini
+  #
+  # ==========================================================
+
   - model_name: smart-best
     litellm_params:
       model: openrouter/openai/gpt-5.4-mini
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
       num_retries: 2
+      request_timeout: 60
 
-  # Tier: MEDIUM / Ultra-Fast Everyday Chat
+
+  # ==========================================================
+  # TIER: SMART FAST
+  # ==========================================================
+  #
+  # Everyday technical/general questions.
+  #
+  # PRIMARY:
+  # Groq Llama 3.3 70B
+  #
+  # ==========================================================
+
   - model_name: smart-fast
     litellm_params:
       model: groq/llama-3.3-70b-versatile
       api_key: os.environ/GROQ_API_KEY
       num_retries: 2
+      request_timeout: 30
 
-  # Tier: REASONING / Analytical & Deep Thinking
+
+  # ==========================================================
+  # TIER: SMART REASONING
+  # ==========================================================
+  #
+  # Deep reasoning, multi-step analysis, difficult
+  # mathematical/architectural/technical problems.
+  #
+  # ==========================================================
+
   - model_name: smart-reasoning
     litellm_params:
       model: openai/big-pickle
       api_key: os.environ/ZEN_API_KEY
       api_base: https://opencode.ai/zen/v1
       num_retries: 2
+      request_timeout: 90
 
-  # Tier: SIMPLE / Free & Low-Cost
+
+  # ==========================================================
+  # TIER: BUDGET
+  # ==========================================================
+  #
+  # Simple queries where high-end reasoning isn't required.
+  #
+  # ==========================================================
+
   - model_name: budget
     litellm_params:
       model: gemini/gemini-2.5-flash
       api_key: os.environ/GEMINI_API_KEY
+      num_retries: 2
+      request_timeout: 30
 
-  # - model_name: budget
-  #   litellm_params:
-  #     model: groq/llama-3.1-8b-instant
-  #     api_key: os.environ/GROQ_API_KEY
-  #     num_retries: 1
 
-  # ==========================================
-  # DIRECT PROVIDER ENDPOINTS
-  # ==========================================
+  # ==========================================================
+  # DIRECT GROQ MODELS
+  # ==========================================================
 
-  # Groq (Ultra-low latency inference)
   - model_name: groq-fast
     litellm_params:
       model: groq/llama-3.3-70b-versatile
       api_key: os.environ/GROQ_API_KEY
+      request_timeout: 30
+
 
   - model_name: groq-instant
     litellm_params:
       model: groq/llama-3.1-8b-instant
       api_key: os.environ/GROQ_API_KEY
+      request_timeout: 30
 
-  # Nvidia NIM Cloud Endpoint
+
+  # ==========================================================
+  # NVIDIA NIM
+  # ==========================================================
+
   - model_name: nvidia-llama-70b
     litellm_params:
       model: nvidia_nim/meta/llama-3.3-70b-instruct
       api_key: os.environ/NVIDIA_API_KEY
+      request_timeout: 60
 
-  # Google Gemini Direct
+
+  # ==========================================================
+  # GEMINI
+  # ==========================================================
+
   - model_name: gemini-flash
     litellm_params:
       model: gemini/gemini-2.5-flash
       api_key: os.environ/GEMINI_API_KEY
+      request_timeout: 30
 
-  # OpenRouter Direct
+
+  # ==========================================================
+  # OPENROUTER
+  # ==========================================================
+
   - model_name: openrouter-fast
     litellm_params:
       model: openrouter/openai/gpt-5.4-mini
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
+      request_timeout: 60
 
-  # Zen Stealth Free Endpoints
+
+  # ==========================================================
+  # ZEN
+  # ==========================================================
+
   - model_name: zen-big-pickle
     litellm_params:
       model: openai/big-pickle
       api_key: os.environ/ZEN_API_KEY
       api_base: https://opencode.ai/zen/v1
+      request_timeout: 90
+
 
   - model_name: zen-minimax-free
     litellm_params:
       model: openai/minimax-m2.5-free
       api_key: os.environ/ZEN_API_KEY
       api_base: https://opencode.ai/zen/v1
+      request_timeout: 90
 
-  # Local Ollama Endpoints
+
+  # ==========================================================
+  # LOCAL OLLAMA LLMs
+  # ==========================================================
+
   - model_name: llama3
     litellm_params:
       model: ollama/llama3.1:8b
       api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 30
+
 
   - model_name: gemma
     litellm_params:
       model: ollama/gemma2:2b
       api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 30
 
-  # ==========================================
-  # EMBEDDING MODELS (Primary + Cloud Fallbacks)
-  # ==========================================
 
-  # Route standard text-embedding-3-small requests to local Ollama
-  - model_name: text-embedding-3-small
+  # ==========================================================
+  # ==========================================================
+  #
+  #                 EMBEDDING MODELS
+  #
+  # ==========================================================
+  # ==========================================================
+
+
+  # ==========================================================
+  # QWEN3 EMBEDDING — PRIMARY
+  # ==========================================================
+  #
+  # CANONICAL embedding model for your RAG system.
+  #
+  # Model:
+  #   Qwen3-Embedding-0.6B
+  #
+  # Provider:
+  #   Ollama
+  #
+  # ==========================================================
+
+  - model_name: qwen3-embedding
     litellm_params:
       model: ollama/qwen3-embedding:0.6b
       api_base: os.environ/OLLAMA_BASE_URL
       request_timeout: 30
+      num_retries: 1
 
-  # Alias matching local-embedding
+
+  # ==========================================================
+  # QWEN3 EMBEDDING — FALLBACK
+  # ==========================================================
+  #
+  # IMPORTANT:
+  #
+  # This MUST also be Qwen3-Embedding-0.6B.
+  #
+  # Possible backend:
+  #
+  #   HF Inference Endpoint
+  #   TEI
+  #   vLLM
+  #   another Ollama machine
+  #   another inference server
+  #
+  # DO NOT put Nomic/Gemini/OpenAI here.
+  #
+  # ==========================================================
+
+  - model_name: qwen3-embedding-fallback
+    litellm_params:
+      model: openai/Qwen3-Embedding-0.6B
+      api_base: os.environ/QWEN3_EMBEDDING_FALLBACK_URL
+      api_key: os.environ/QWEN3_EMBEDDING_FALLBACK_API_KEY
+      request_timeout: 60
+      num_retries: 1
+
+
+  # ==========================================================
+  # NOMIC EMBEDDING — EXPLICIT ALTERNATIVE
+  # ==========================================================
+  #
+  # NOT a Qwen3 fallback.
+  #
+  # Application must explicitly request:
+  #
+  #   model = "nomic-embedding"
+  #
+  # ==========================================================
+
+  - model_name: nomic-embedding
+    litellm_params:
+      model: ollama/nomic-embed-text
+      api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 30
+      num_retries: 1
+
+
+  # ==========================================================
+  # OPTIONAL LEGACY COMPATIBILITY ALIASES
+  # ==========================================================
+  #
+  # Keep these ONLY if existing application code already calls
+  # these names.
+  #
+  # They still use Qwen3.
+  #
+  # ==========================================================
+
   - model_name: local-embedding
     litellm_params:
       model: ollama/qwen3-embedding:0.6b
       api_base: os.environ/OLLAMA_BASE_URL
       request_timeout: 30
+      num_retries: 1
 
-  # Fallback 1: Gemini
-  - model_name: gemini-embedding
+
+  - model_name: text-embedding-3-small
     litellm_params:
-      model: gemini/text-embedding-004
-      api_key: os.environ/GEMINI_API_KEY
+      model: ollama/qwen3-embedding:0.6b
+      api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 30
+      num_retries: 1
 
-  # Fallback 2: OpenRouter
-  - model_name: openrouter-embedding
+
+  # ==========================================================
+  # LLAMA GUARD — PRIMARY
+  # ==========================================================
+
+  - model_name: llama-guard
     litellm_params:
-      model: openrouter/openai/text-embedding-3-small
-      api_key: os.environ/OPENROUTER_API_KEY
-      api_base: https://openrouter.ai/api/v1
+      model: ollama_chat/llama-guard3:1b
+      api_base: os.environ/OLLAMA_BASE_URL
+      request_timeout: 30
+      temperature: 0.0
+      num_retries: 1
 
-  # ==========================================
-  # LOCAL LLAMA GUARD (Ollama Endpoint)
-  # ==========================================
+
+  # ==========================================================
+  # LLAMA GUARD — GROQ FALLBACK
+  # ==========================================================
+
+  - model_name: llama-guard-groq
+    litellm_params:
+      model: groq/meta-llama/llama-guard-4-12b
+      api_key: os.environ/GROQ_API_KEY
+      request_timeout: 30
+      temperature: 0.0
+      num_retries: 1
+
+
+  # ==========================================================
+  # LLAMA GUARD COMPATIBILITY ALIASES
+  # ==========================================================
+
   - model_name: llama-guard-3-1b
     litellm_params:
       model: ollama_chat/llama-guard3:1b
       api_base: os.environ/OLLAMA_BASE_URL
       request_timeout: 30
       temperature: 0.0
+      num_retries: 1
 
-  # Alias fallback mapping if actions target llama-guard-3-8b
+
   - model_name: llama-guard-3-8b
     litellm_params:
       model: ollama_chat/llama-guard3:1b
       api_base: os.environ/OLLAMA_BASE_URL
       request_timeout: 30
       temperature: 0.0
+      num_retries: 1
 
 
-# ==========================================
-# GLOBAL ROUTER & FALLBACK SETTINGS
-# ==========================================
+# ============================================================
+# ROUTER SETTINGS
+# ============================================================
+
 router_settings:
+
+  # Retry provider failures.
   num_retries: 2
-  timeout: 60
-  allowed_fails: 1        # Cool down model after 1 failure (e.g. rate limit 429)
-  cooldown_time: 60        # Put rate-limited models on 60-second cooldown
 
-  # Clean, explicit tier-to-tier fallback chain
-  fallbacks:
-    - gateway-model: ["smart-fast", "budget", "openrouter-fast"]
-    - smart-best: ["nvidia-llama-70b", "zen-big-pickle", "openrouter-fast", "gemma"]
-    - smart-fast: ["groq-fast", "openrouter-fast", "llama3"]
-    - smart-reasoning: ["zen-big-pickle", "openrouter-fast", "groq-fast"]
-    - budget: ["groq-instant", "zen-minimax-free", "llama3"]
-    - gemini-flash: ["openrouter-fast", "zen-minimax-free", "llama3"]
-    
-    # Embedding Fallback Chain for Semantic Cache
-    - text-embedding-3-small: ["gemini-embedding", "openrouter-embedding"]
-    - local-embedding: ["gemini-embedding", "openrouter-embedding"]
+  # Maximum request duration.
+  timeout: 90
+
+  # Remove unhealthy deployment after one failure.
+  allowed_fails: 1
+
+  # Re-enable after cooldown.
+  cooldown_time: 60
 
 
-# ==========================================
-# Litellm CACHE CONFIGURATION
-# ==========================================
+# ============================================================
+# FALLBACK CHAINS
+# ============================================================
+#
+# IMPORTANT:
+#
+# These are FAILURE fallbacks.
+# They do NOT determine query complexity.
+#
+# Complexity routing happens BEFORE this.
+#
+# ============================================================
+
+fallbacks:
+
+  # ----------------------------------------------------------
+  # GATEWAY FAILURE
+  # ----------------------------------------------------------
+  #
+  # If the router itself cannot complete, use a balanced model.
+  #
+  # ----------------------------------------------------------
+
+  - gateway-model:
+      - smart-fast
+      - budget
+      - openrouter-fast
+
+
+  # ----------------------------------------------------------
+  # SMART BEST FAILURE
+  # ----------------------------------------------------------
+  #
+  # Preserve reasonably high capability.
+  #
+  # ----------------------------------------------------------
+
+  - smart-best:
+      - nvidia-llama-70b
+      - zen-big-pickle
+      - openrouter-fast
+
+
+  # ----------------------------------------------------------
+  # SMART FAST FAILURE
+  # ----------------------------------------------------------
+
+  - smart-fast:
+      - groq-fast
+      - openrouter-fast
+      - llama3
+
+
+  # ----------------------------------------------------------
+  # REASONING FAILURE
+  # ----------------------------------------------------------
+  #
+  # Do NOT immediately fall back to a tiny model.
+  #
+  # ----------------------------------------------------------
+
+  - smart-reasoning:
+      - zen-big-pickle
+      - openrouter-fast
+      - groq-fast
+
+
+  # ----------------------------------------------------------
+  # BUDGET FAILURE
+  # ----------------------------------------------------------
+
+  - budget:
+      - groq-instant
+      - zen-minimax-free
+      - llama3
+
+
+  # ----------------------------------------------------------
+  # GEMINI DIRECT FAILURE
+  # ----------------------------------------------------------
+
+  - gemini-flash:
+      - openrouter-fast
+      - zen-minimax-free
+      - llama3
+
+
+  # ==========================================================
+  # QWEN3 EMBEDDING FAILURE
+  # ==========================================================
+  #
+  # QWEN3 -> QWEN3 ONLY
+  #
+  # ==========================================================
+
+  - qwen3-embedding:
+      - qwen3-embedding-fallback
+
+
+  # ----------------------------------------------------------
+  # Compatibility aliases
+  # ----------------------------------------------------------
+
+  - local-embedding:
+      - qwen3-embedding-fallback
+
+  - text-embedding-3-small:
+      - qwen3-embedding-fallback
+
+
+  # ==========================================================
+  # LLAMA GUARD FAILURE
+  # ==========================================================
+
+  - llama-guard:
+      - llama-guard-groq
+
+  - llama-guard-3-1b:
+      - llama-guard-groq
+
+  - llama-guard-3-8b:
+      - llama-guard-groq
+
+
+# ============================================================
+# LITELLM SETTINGS
+# ============================================================
+
 litellm_settings:
-  drop_params: true  # Strips unsupported params (e.g. encoding_format) before sending to Ollama
-  
-  # Global Caching Configuration
+
+  # Remove parameters unsupported by the target provider.
+  drop_params: true
+
+  # Enable caching.
   cache: true
+
+  # Redis authentication.
   enable_redis_auth_cache: os.environ/REDIS_AUTH_CACHE
 
+  # ----------------------------------------------------------
+  # CACHE CONFIGURATION
+  # ----------------------------------------------------------
+
   cache_params:
-    type: os.environ/CACHE_TYPE  # Recommended value in .env: "redis-semantic" or "redis"
-    supported_call_types: ["completion", "acompletion"] # Explicitly omit 'embedding'
-    
-    # Connection Parameters
+
+    type: os.environ/CACHE_TYPE
+
+    supported_call_types:
+      - completion
+      - acompletion
+
     host: os.environ/REDIS_HOST
+
     port: os.environ/REDIS_PORT
+
     password: os.environ/REDIS_PASSWORD
+
     ttl: os.environ/REDIS_TTL
-    
-    # Semantic Caching Parameters (active when CACHE_TYPE=redis-semantic)
-    redis_semantic_cache_embedding_model: local-embedding
-    similarity_threshold: 0.86  # Unquoted float
+
+    # --------------------------------------------------------
+    # SEMANTIC CACHE EMBEDDING
+    #
+    # ALWAYS QWEN3.
+    #
+    # Do not change this to Nomic.
+    # --------------------------------------------------------
+
+    redis_semantic_cache_embedding_model: qwen3-embedding
+
+    similarity_threshold: 0.86
+
     namespace: "litellm.cache"
 
-  # Privacy & Verbosity
-  turn_off_message_logging: false
-  set_verbose: true  # Set to false once proxy logs look good in production
 
-  # Observability (Logfire)
-  callbacks: ["logfire"]
-  logfire_default_tags:
-    - "cache_hit"
-    - "cache_key"
-    - "semantic-similarity"
-    - "vector_search"
-    - "user_api_key_alias"
+# ============================================================
+# PRIVACY / DEBUGGING
+# ============================================================
+
+turn_off_message_logging: false
+
+# Development:
+# true
+#
+# Production:
+# false
+
+set_verbose: true
 
 
-# ==========================================
-# GENERAL & SECURITY SETTINGS
-# ==========================================
+# ============================================================
+# OBSERVABILITY
+# ============================================================
+
+callbacks:
+  - logfire
+
+logfire_default_tags:
+
+  - cache_hit
+
+  - cache_key
+
+  - semantic-similarity
+
+  - vector_search
+
+  - user_api_key_alias
+
+
+# ============================================================
+# GENERAL / SECURITY
+# ============================================================
+
 general_settings:
+
   master_key: os.environ/LITELLM_MASTER_KEY
+
   disable_responses_id_security: true
 
-  # Database logging for UI, Prompts, and Spend tracking
+  # Persist model configuration.
   store_model_in_db: true
+
+  # Persist prompts in spend logs.
   store_prompts_in_spend_logs: true
+
+  # PostgreSQL.
   database_url: os.environ/DATABASE_URL
-  
-  # Callbacks to persist request/response payloads to PostgreSQL DB and Logfire
-  success_callback: ["db", "logfire"]
-  failure_callback: ["db", "logfire"]
+
+  # ----------------------------------------------------------
+  # DATABASE CALLBACKS
+  # ----------------------------------------------------------
+
+  success_callback:
+    - db
+    - logfire
+
+  failure_callback:
+    - db
+    - logfire
 
 
 
 
 
-  # model_list:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+# model_list:
 #   # ==========================================
 #   # ROUTER ENTRYPOINT
 #   # ==========================================
@@ -301,9 +882,14 @@ general_settings:
 #   # Tier: SIMPLE / Free & Low-Cost
 #   - model_name: budget
 #     litellm_params:
-#       model: groq/llama-3.1-8b-instant
-#       api_key: os.environ/GROQ_API_KEY
-#       num_retries: 1
+#       model: gemini/gemini-2.5-flash
+#       api_key: os.environ/GEMINI_API_KEY
+
+#   # - model_name: budget
+#   #   litellm_params:
+#   #     model: groq/llama-3.1-8b-instant
+#   #     api_key: os.environ/GROQ_API_KEY
+#   #     num_retries: 1
 
 #   # ==========================================
 #   # DIRECT PROVIDER ENDPOINTS
@@ -370,7 +956,7 @@ general_settings:
 #   # Route standard text-embedding-3-small requests to local Ollama
 #   - model_name: text-embedding-3-small
 #     litellm_params:
-#       model: ollama/qwen3-embedding:0.6b 
+#       model: ollama/qwen3-embedding:0.6b
 #       api_base: os.environ/OLLAMA_BASE_URL
 #       request_timeout: 30
 
@@ -393,6 +979,24 @@ general_settings:
 #       model: openrouter/openai/text-embedding-3-small
 #       api_key: os.environ/OPENROUTER_API_KEY
 #       api_base: https://openrouter.ai/api/v1
+
+#   # ==========================================
+#   # LOCAL LLAMA GUARD (Ollama Endpoint)
+#   # ==========================================
+#   - model_name: llama-guard-3-1b
+#     litellm_params:
+#       model: ollama_chat/llama-guard3:1b
+#       api_base: os.environ/OLLAMA_BASE_URL
+#       request_timeout: 30
+#       temperature: 0.0
+
+#   # Alias fallback mapping if actions target llama-guard-3-8b
+#   - model_name: llama-guard-3-8b
+#     litellm_params:
+#       model: ollama_chat/llama-guard3:1b
+#       api_base: os.environ/OLLAMA_BASE_URL
+#       request_timeout: 30
+#       temperature: 0.0
 
 
 # # ==========================================

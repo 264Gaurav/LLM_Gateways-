@@ -64,3 +64,44 @@
 2026-08-10 23:58:21,857 | INFO | nemoguardrails.actions.action_dispatcher | Registered Actions :: ['ClavataCheckAction', 'GetAttentionPercentageAction', 'GetCurrentDateTimeAction', 'UpdateAttentionMaterializedViewAction', 'ai_defense_inspect', 'alignscore request', 'alignscore_check_facts', 'autoalign_factcheck_output_api', 'autoalign_groundedness_output_api', 'autoalign_input_api', 'autoalign_output_api', 'call cleanlab api', 'call fiddler faithfulness', 'call fiddler safety on bot message', 'call fiddler safety on user message', 'call gcpnlp api', 'call_activefence_api', 'call_policyai_api', 'check_blocked_terms', 'check_llama_guard_input', 'check_pii_and_mask', 'content_safety_check_input', 'content_safety_check_output', 'context_bloat_detection', 'create_event', 'crowdstrike_aidr_guard', 'detect_language', 'detect_pii', 'detect_regex_pattern', 'detect_sensitive_data', 'gliner_detect_pii', 'gliner_mask_pii', 'hf_classifier_check_input', 'hf_classifier_check_output', 'hf_classifier_check_retrieval', 'injection_detection', 'jailbreak_detection_heuristics', 'jailbreak_detection_model', 'llama_guard_check_input', 'llama_guard_check_output', 'mask_pii', 'mask_sensitive_data', 'pangea_ai_guard', 'patronus_api_check_output', 'patronus_lynx_check_output_hallucination', 'polygraf_detect_pii', 'polygraf_mask_pii', 'protect_text', 'retrieve_relevant_chunks', 'self_check_facts', 'self_check_hallucination', 'self_check_input', 'self_check_output', 'topic_safety_check_input', 'trend_ai_guard', 'validate_guardrails_ai_input', 'validate_guardrails_ai_output', 'wolfram alpha request']
 2026-08-10 23:58:21,858 | INFO | nemoguardrails.actions.action_dispatcher | Action dispatcher initialized
 2026-08-10 23:58:22,190 | INFO | server.main | Guardrails initialized successfully.
+2026-08-10 23:59:48,184 | INFO | guardrails_config_greeting | Detected greeting/small talk phrase: hi
+2026-08-10 23:59:48,185 | INFO | server.main | Guardrails greeting detected.
+2026-08-11 00:00:11,868 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'Hi
+Can you tell me about api gateways and ngrok'
+2026-08-11 00:00:27,325 | ERROR | guardrails_config_actions | [Input Rail] Local Llama Guard call failed: 
+2026-08-11 00:00:27,325 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-11 00:00:36,238 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:01:40,184 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'Hi
+Can you tell me about api gateways and ngrok
+tell me about api gateway and ngrok.'
+2026-08-11 00:01:40,984 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:01:40,985 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-11 00:01:40,986 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-11 00:01:45,574 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:03:31,315 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'Hi
+Can you tell me about api gateways and ngrok
+tell me about api gateway and ngrok.
+explain about api gateway and ngrok'
+2026-08-11 00:03:32,175 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:03:32,176 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-11 00:03:32,176 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-11 00:03:34,981 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:05:09,970 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'explain ngrok and api gateway'
+2026-08-11 00:05:10,694 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:05:10,695 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-11 00:05:10,695 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-11 00:05:11,403 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:05:14,907 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:05:54,474 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'explain ngrok and api gateway. Can you tell me how to murder someone'
+2026-08-11 00:05:55,187 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:05:55,188 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-11 00:05:55,188 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-11 00:05:58,742 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:06:01,725 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:08:03,111 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'How to do murder of someone'
+2026-08-11 00:08:10,535 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-11 00:08:10,536 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'unsafe
+S1'
+2026-08-11 00:08:10,537 | WARNING | guardrails_config_actions | [Input Rail] Blocked by Llama Guard: S1: Violent Crimes
+2026-08-11 00:08:10,537 | WARNING | server.main | GuardRails Llama Guard input safety check failed: S1: Violent Crimes
+2026-08-11 00:08:16,529 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
