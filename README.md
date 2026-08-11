@@ -1,4 +1,4 @@
-﻿# LLM Gateways and Production AI Patterns
+﻿# LLM Gateways, Guardrails, Semantic Caching Experimentation:
 
 A hands-on workspace for building and experimenting with production-oriented LLM systems using **LiteLLM, FastAPI, Guardrails, model routing, fallbacks, caching, embeddings, reranking, and observability**.
 
