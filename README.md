@@ -1,166 +1,388 @@
 ﻿# LLM Gateways and Production AI Patterns
 
-This repository is a hands-on learning workspace for building modern LLM applications with LiteLLM, retrieval strategies, caching, reranking, observability, and guardrails. It combines practical examples, configuration files, and supporting notes for moving from prototype AI apps to production-ready systems.
+A hands-on workspace for building and experimenting with production-oriented LLM systems using **LiteLLM, FastAPI, Guardrails, model routing, fallbacks, caching, embeddings, reranking, and observability**.
 
-## What this project covers
+This repository provides a complete local stack:
 
-This repository demonstrates several important capabilities for real-world AI systems:
+```text
+Streamlit UI
+     │
+     ▼
+FastAPI Gateway
+     │
+     ├── Guardrails + LiteLLM
+     │
+     └── Direct LiteLLM
+              │
+              ▼
+       Multiple LLM Providers
+```
 
-- Unified access to multiple LLM providers through a single gateway interface
-- Model routing, fallbacks, and complexity-based selection
-- Exact and semantic caching to reduce latency and cost
-- Embedding model comparison and retrieval strategy design
-- Re-ranking and fusion techniques for better RAG quality
-- Guardrails for safety, validation, and policy enforcement
-- Observability with Logfire and LangSmith
-- Local Docker-based setup for a LiteLLM proxy
+---
 
-## Key capabilities
+## Features
 
-### 1. LLM Gateway and routing
-The LiteLLM proxy setup provides a centralized gateway for routing requests across providers such as Gemini, OpenRouter, Groq, Nvidia, and GitHub Copilot.
+- Unified LLM access through LiteLLM
+- Guardrails-based request validation and safety checks
+- Direct LiteLLM chat and embeddings paths for comparison
+- Streaming chat responses
+- Exact and semantic caching concepts
+- Embedding model comparison
+- Fallback and routing patterns
+- Observability with Logfire and LangSmith support
+- FastAPI application gateway
+- Streamlit interactive client
+- Docker Compose-based LiteLLM infrastructure
+- One-command startup via `scripts/dev.py` or `start.bat`
 
-### 2. Fallbacks and smart routing
-The configuration includes tiered routing and fallback chains so requests can move smoothly between models when a provider is slow, rate-limited, or unavailable.
+---
 
-### 3. Caching
-The repository includes examples and documentation for exact-match caching and semantic caching, which help reduce repeated LLM cost and improve response time.
+## Repository Structure
 
-### 4. Embeddings and retrieval
-The repository includes material on embedding model selection, vector indexing, dense vs sparse retrieval, and hybrid retrieval approaches.
+```text
+LLM_Gateways/
+│
+├── basics/                  # Gateway concept notes and examples
+│   └── README.md
+│
+├── client/                  # Streamlit frontend
+│   ├── streamlit.py
+│   └── README.md
+│
+├── guardRails/              # Guardrails config, notebooks, logs
+│   ├── config/
+│   ├── guardrails_basic.ipynb
+│   └── Notes_drawing/
+│       └── GuardRails.md
+│
+├── litellm-setup/           # LiteLLM proxy configuration and docs
+│   ├── docker-compose.yml
+│   ├── Caching.md
+│   ├── Embedding_COMPARISON.md
+│   ├── RE_RANKING.md
+│   └── litellm_config.yaml
+│
+├── scripts/
+│   └── dev.py
+│
+├── server/
+│   ├── logger.py
+│   └── main.py
+│
+├── .env.example
+├── .python-version
+├── pyproject.toml
+├── requirements.txt
+├── start.bat
+└── README.md
+```
 
-### 5. Re-ranking and fusion
-The docs explain how reranking and fusion methods improve result quality in retrieval-based systems.
+---
 
-### 6. Guardrails
-The guardrails section demonstrates policy-based checking and validation patterns for safer LLM use.
+## Prerequisites
 
-### 7. Observability
-The setup includes tracing and monitoring examples using Logfire and LangSmith for request inspection and debugging.
+Install:
 
-## Repository structure
-
-- [basics](basics) – introductory notebooks and notes for LLM gateway concepts
-- [guardRails](guardRails) – guardrails examples, notes, and supporting scripts
-- [litellm-setup](litellm-setup) – Dockerized LiteLLM proxy, config, and supporting documentation
-- [requirements.txt](requirements.txt) – Python dependencies used across the project
-
-## Learning path
-
-Start with the most relevant document for your goal:
-
-- [LLM_Gateway_README.md](basics/README.md) – high-level overview of LLM gateway concepts
-- [Embedding_COMPARISON.md](litellm-setup/Embedding_COMPARISON.md) – embedding model selection and tradeoffs
-- [RE_RANKING.md](litellm-setup/RE_RANKING.md) – reranking and retrieval quality strategies
-- [Caching.md](litellm-setup/Caching.md) – caching options and recommendations
-- [GuardRails.md](guardRails/Notes_drawing/GuardRails.md) – guardrails overview
-
-## Quick start
-
-### Prerequisites
-
-- Python 3.10+ (recommended)
-- Docker Desktop and Docker Compose
+- **Python 3.13+**
+- **uv**
+- **Docker Desktop**
+- **Docker Compose**
 - API keys for the providers you want to use
 
-### 1. Install Python dependencies
+The repository uses `uv` for environment and dependency management.
+
+> The current project configuration requires Python `>=3.13`.
+
+---
+
+## Quick Start
+
+### 1. Clone the repo
 
 ```bash
-pip install -r requirements.txt
+git clone <repository-url>
+cd LLM_Gateways
 ```
 
-### 2. Create environment variables
+### 2. Create and sync the uv environment
 
-Create a .env file in the repository root or inside [litellm-setup](litellm-setup) with the values you need, for example:
-
-```env
-GEMINI_API_KEY=your_key_here
-OPENROUTER_API_KEY=your_key_here
-GROQ_API_KEY=your_key_here
-NVIDIA_API_KEY=your_key_here
-LITELLM_MASTER_KEY=sk-master-key-12345
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_PASSWORD=your_redis_password
-DATABASE_URL=postgresql://postgres:postgres@postgres:5432/litellm
-LOGFIRE_TOKEN=your_logfire_token
+```bash
+uv sync
 ```
 
-### 3. Start the LiteLLM stack
+This creates or updates:
+
+```text
+.venv/
+uv.lock
+```
+
+### 3. Install dependencies
+
+```bash
+uv pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+
+Copy the example env file and update the values you need:
+
+```bash
+copy .env.example .env
+```
+
+Set provider and LiteLLM variables in `.env`.
+
+---
+
+## Development Startup
+
+Start the full local stack from the repository root:
+
+```bash
+uv run python scripts/dev.py
+```
+
+On Windows you can also use:
+
+```powershell
+.\start.bat
+```
+
+This launcher starts:
+
+1. LiteLLM Docker stack
+2. Waits for LiteLLM to become available
+3. Starts the FastAPI gateway
+4. Waits for `http://localhost:8000/health`
+5. Starts the Streamlit UI
+
+---
+
+## Manual Startup
+
+### LiteLLM
 
 ```bash
 cd litellm-setup
 docker compose up -d
 ```
 
-Once running, the local gateway should be available at:
-
-- LiteLLM proxy: http://localhost:4000
-- LiteLLM UI: http://localhost:4000/ui
-- Redis Insight: http://localhost:8001
-
-### 4. Run the FastAPI gateway server
-
-Open a new terminal in the repository root and run:
+Then return to the repo root:
 
 ```bash
-uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
+cd ..
 ```
 
-This starts the application that exposes the project endpoints:
-
-- `/health`
-- `/ai/llms`
-- `/ai/embeddings`
-- `/ai/litellm/chat`
-- `/ai/litellm/embeddings`
-
-### 5. Start the Streamlit UI
-
-Open another terminal and run:
+### FastAPI
 
 ```bash
-streamlit run client/streamlit.py
+uv run uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-In the sidebar, configure:
+Health check:
 
-- `API base URL` (default: `http://localhost:8000`)
-- `Bearer API key` for the backend, if required
-- `Gateway mode`: choose between `Guardrails + LiteLLM` or `Direct LiteLLM`
-- chat settings such as temperature, top_p, max_tokens, and streaming
+```bash
+curl http://localhost:8000/health
+```
 
-The `client` folder includes a dedicated `README.md` with details about this Streamlit app.
+### Streamlit
 
-### 6. Use the project
+```bash
+uv run streamlit run client/streamlit.py
+```
 
-From the Streamlit UI, you can:
+Open the UI at:
 
-- send chat requests through Guardrails or directly to LiteLLM
-- receive streamed chat responses as text arrives
-- generate embeddings via the local gateway or direct LiteLLM proxy
-- inspect raw API requests and responses
-- download chat history
+```text
+http://localhost:8501
+```
 
-## What you get from this project
+---
 
-This repository gives you a full local LLM gateway workflow with:
+## Gateway Endpoints
 
-- an easy-to-run Docker-based LiteLLM proxy
-- FastAPI gateway endpoints for safe and direct inference
-- Guardrails integration for validation, policy enforcement, and safer chat
-- direct LiteLLM paths for comparison and low-latency testing
-- a Streamlit developer console for interactive experimentation
-- embedding generation and raw API developer tools
-- a reusable foundation for building production-ready LLM services
+### Guardrails + LiteLLM
+
+- `POST /ai/llms`
+- alias: `POST /v1/chat/completions`
+
+This path runs user input through Guardrails before sending it to LiteLLM.
+
+### Direct LiteLLM
+
+- `POST /ai/litellm/chat`
+- alias: `POST /v1/litellm/chat/completions`
+
+This path bypasses Guardrails and forwards the request directly to the LiteLLM proxy.
+
+### Embeddings
+
+- Gateway embeddings: `POST /ai/embeddings`
+- alias: `POST /v1/embeddings`
+
+- Direct LiteLLM embeddings: `POST /ai/litellm/embeddings`
+- alias: `POST /v1/litellm/embeddings`
+
+### Health
+
+- `GET /health`
+
+---
+
+## What the FastAPI Server Does
+
+The FastAPI app is implemented in `server/main.py`.
+
+It includes:
+
+- request sanitization for secrets and PII
+- Guardrails validation via `guardRails/config`
+- streaming LiteLLM chat support
+- direct LiteLLM chat and embedding proxy routes
+- fallback behavior when Guardrails are unavailable
+
+---
+
+## Streamlit Client
+
+The client is implemented in `client/streamlit.py`.
+
+The UI lets you:
+
+- switch between `Guardrails + LiteLLM` and `Direct LiteLLM`
+- send chat requests with streaming responses
+- generate embeddings
+- preview raw API payloads
+- export conversation history
+
+See `client/README.md` for usage details.
+
+---
+
+## Notes and Documentation
+
+- [Gateway fundamentals and architecture](basics/README.md)
+- [Streamlit client setup and usage](client/README.md)
+- [Embedding comparison and guidance](litellm-setup/Embedding_COMPARISON.md)
+- [Re-ranking and fusion notes](litellm-setup/RE_RANKING.md)
+- [Caching tradeoffs and patterns](litellm-setup/Caching.md)
+- [Guardrails concepts and policy notes](guardRails/Notes_drawing/GuardRails.md)
+
+---
+
+## Common Commands
+
+```bash
+uv sync
+uv pip install -r requirements.txt
+uv run python scripts/dev.py
+uv run uvicorn server.main:app --host 0.0.0.0 --port 8000 --reload
+uv run streamlit run client/streamlit.py
+```
+
+LiteLLM manual commands:
+
+```bash
+cd litellm-setup
+docker compose up -d
+docker compose down
+```
+
+---
+
+## Troubleshooting
+
+### `ModuleNotFoundError`
+
+If a dependency is missing, install it in the uv environment:
+
+```bash
+uv pip install -r requirements.txt
+```
+
+Verify with:
+
+```bash
+uv run python -c "import nemoguardrails; print('Guardrails OK')"
+```
+
+### Wrong Python Version
+
+Verify the interpreter:
+
+```bash
+uv run python --version
+```
+
+The project requires:
+
+```text
+pyproject.toml: requires-python = ">=3.13"
+```
+
+### FastAPI Cannot Connect to LiteLLM
+
+Check LiteLLM on:
+
+```bash
+http://localhost:4000
+```
+
+or:
+
+```bash
+cd litellm-setup
+docker compose ps
+```
+
+Inspect logs:
+
+```bash
+docker compose logs -f
+```
+
+### FastAPI Health Check Fails
+
+Check:
+
+```bash
+http://localhost:8000/health
+```
+
+### Port Conflicts
+
+Default ports:
+
+| Service | Port |
+|---|---:|
+| LiteLLM | `4000` |
+| FastAPI | `8000` |
+| Streamlit | `8501` |
+| Redis Insight | `8001` |
+
+---
 
 ## Summary
 
-This project is best understood as a practical reference for building an LLM gateway stack with:
+This repository provides a local, modular LLM gateway environment combining:
 
-- multi-provider access
-- routing and failover
-- caching and performance tuning
-- retrieval and reranking strategies
-- safety controls
-- production-style observability
+- **uv** for Python environment management
+- **Docker Compose** for LiteLLM infrastructure
+- **FastAPI** for the gateway
+- **LiteLLM** for provider routing and fallback behavior
+- **Guardrails** for input validation and policy enforcement
+- **Streamlit** for interactive experimentation
+- **Logfire / LangSmith** for observability
+
+For normal development:
+
+```bash
+uv run python scripts/dev.py
+```
+
+On Windows:
+
+```powershell
+.\start.bat
+```

@@ -5,3 +5,6 @@ __pycache__/
 
 #venv created
 lite-llm 
+
+.venv/
+.venv

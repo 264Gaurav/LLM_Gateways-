@@ -1,0 +1,32 @@
+[project]
+name = "llm-gateways"
+version = "0.1.0"
+description = "LLM Gateways and Production AI Patterns"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openai>=1.50.0",
+    "logfire>=3.0.0",
+    "python-dotenv>=1.0.0",
+
+    "fastapi>=0.105.0",
+    "uvicorn[standard]>=0.24.0",
+    "httpx>=0.26.0",
+
+    "numpy",
+    "langsmith",
+
+    "langchain-groq",
+    "langchain",
+    "langchain-core",
+    "langchain-google-genai",
+    "langchain-community",
+
+    "nemoguardrails",
+
+    "streamlit>=1.26.0",
+    "requests>=2.31.0",
+]
+
+[tool.uv]
+package = false
