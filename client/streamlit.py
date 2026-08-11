@@ -1,8 +1,10 @@
 import json
+import time
 from typing import Any, Dict, Optional
 
 import requests
 import streamlit as st
+import streamlit.components.v1 as components
 
 
 # ============================================================
@@ -25,9 +27,9 @@ DEFAULT_SETTINGS = {
     "api_base": "http://localhost:8000",
     "api_key": "",
     "model": "gateway-model",
-    "system_prompt": "You are a helpful assistant.",
+    "system_prompt": "",
     "stream": True,
-    "temperature": 0.7,
+    "temperature": 0.3,
     "top_p": 1.0,
     "max_tokens": 0,
 }
@@ -61,6 +63,14 @@ if "last_health" not in st.session_state:
 
 if "embedding_result" not in st.session_state:
     st.session_state.embedding_result = None
+
+# A submitted prompt is consumed before a request starts, preventing a
+# Streamlit rerun from replaying the previous input.
+if "pending_chat_prompt" not in st.session_state:
+    st.session_state.pending_chat_prompt = None
+
+if "editing_message_index" not in st.session_state:
+    st.session_state.editing_message_index = None
 
 
 # ============================================================
@@ -141,6 +151,10 @@ header[data-testid="stHeader"] {
 
 [data-testid="stChatInput"] {
     margin-bottom:1rem;
+}
+
+[data-testid="stChatInput"] textarea {
+    border-radius:14px;
 }
 
 .empty-state {
@@ -328,6 +342,18 @@ def parse_sse_line(line: str) -> Optional[str]:
     return None
 
 
+def typewriter_append(placeholder, visible_text: str, chunk: str) -> str:
+    """Render incoming text in small frames instead of jumping by token."""
+    # Three characters per frame retains a typewriter feel without making a
+    # long response noticeably slower than the model's stream.
+    for index in range(0, len(chunk), 2):
+        visible_text += chunk[index:index + 2]
+        placeholder.markdown(visible_text + "▌")
+        time.sleep(0.020)
+
+    return visible_text
+
+
 # ============================================================
 # API calls
 # ============================================================
@@ -360,6 +386,7 @@ def call_chat(
         payload["max_tokens"] = int(settings["max_tokens"])
 
     text = ""
+    visible_text = ""
 
     try:
         if settings["stream"]:
@@ -389,7 +416,11 @@ def call_chat(
 
                     if chunk:
                         text += chunk
-                        placeholder.markdown(text + "▌")
+                        visible_text = typewriter_append(
+                            placeholder,
+                            visible_text,
+                            chunk,
+                        )
             finally:
                 response.close()
 
@@ -575,14 +606,162 @@ def build_messages(history: list) -> list:
 
 
 def render_history(history: list) -> None:
-    for message in history:
+    for index, message in enumerate(history):
         role = message.get("role")
 
         if role not in ("user", "assistant"):
             continue
 
         with st.chat_message(role):
-            st.markdown(message.get("content", ""))
+            if role == "user" and not st.session_state.busy:
+                content, action = st.columns([12, 1], vertical_alignment="top")
+
+                with content:
+                    st.markdown(message.get("content", ""))
+
+                with action:
+                    if st.button(
+                        "✎",
+                        key=f"edit_message_{index}",
+                        help="Edit this message and re-query",
+                    ):
+                        st.session_state.editing_message_index = index
+                        st.rerun()
+            else:
+                st.markdown(message.get("content", ""))
+
+
+def render_edit_message_form(history: list) -> None:
+    """Let users replace a prior question without leaving orphaned turns."""
+    index = st.session_state.editing_message_index
+
+    if index is None:
+        return
+
+    if (
+        not isinstance(index, int)
+        or index < 0
+        or index >= len(history)
+        or history[index].get("role") != "user"
+    ):
+        st.session_state.editing_message_index = None
+        return
+
+    with st.container(border=True):
+        st.caption(
+            "Editing this question will replace it and remove the response "
+            "and any later turns before re-querying."
+        )
+        edited_prompt = st.text_area(
+            "Edit message",
+            value=history[index].get("content", ""),
+            key=f"edited_message_{index}",
+            height=110,
+            label_visibility="collapsed",
+        )
+        save_col, cancel_col, _ = st.columns([2, 1, 5])
+
+        with save_col:
+            requery = st.button(
+                "Update & re-query",
+                type="primary",
+                use_container_width=True,
+                disabled=not edited_prompt.strip(),
+            )
+
+        with cancel_col:
+            cancel = st.button("Cancel", use_container_width=True)
+
+    if requery:
+        # The edited user message and everything after it belong to the old
+        # branch of the conversation, so replace that branch cleanly.
+        del history[index:]
+        st.session_state.pending_chat_prompt = edited_prompt.strip()
+        st.session_state.editing_message_index = None
+        st.rerun()
+
+    if cancel:
+        st.session_state.editing_message_index = None
+        st.rerun()
+
+
+def render_chat_scroll_controls(force_to_bottom: bool) -> None:
+    """Keep active chats readable without pulling readers off older messages."""
+    force = "true" if force_to_bottom else "false"
+    components.html(
+        f"""
+<script>
+(() => {{
+  const doc = window.parent.document;
+  const win = window.parent;
+  const id = "gateway-scroll-to-latest";
+  let button = doc.getElementById(id);
+
+  const distanceFromBottom = () => {{
+    const root = doc.scrollingElement;
+    return root.scrollHeight - (win.scrollY + win.innerHeight);
+  }};
+  const scrollToLatest = () => {{
+    const chatInput = doc.querySelector('[data-testid="stChatInput"]');
+    const lastMessage = doc.querySelector('[data-testid="stChatMessage"]:last-of-type');
+    (chatInput || lastMessage)?.scrollIntoView({{ behavior: "smooth", block: "end" }});
+  }};
+  const updateButton = () => {{
+    const needsJump = distanceFromBottom() > 120;
+    button.classList.toggle("gateway-scroll-needed", needsJump);
+    button.style.pointerEvents = needsJump ? "auto" : "none";
+    button.style.opacity = needsJump ? ".35" : "0";
+  }};
+
+  if (!button) {{
+    button = doc.createElement("button");
+    button.id = id;
+    button.type = "button";
+    button.textContent = "↓";
+    button.title = "Jump to latest message";
+    button.setAttribute("aria-label", "Jump to latest message");
+    button.style.cssText = [
+      "position:fixed", "right:1.4rem", "bottom:5.5rem", "z-index:1000",
+      "width:2.5rem", "height:2.5rem", "border-radius:999px",
+      "border:1px solid rgba(128,128,128,.35)", "background:var(--background-color)",
+      "color:var(--text-color)", "box-shadow:0 4px 14px rgba(0,0,0,.18)",
+      "font-size:1.2rem", "cursor:pointer", "opacity:0", "transition:opacity .18s ease, transform .18s ease"
+    ].join(";");
+    button.addEventListener("mouseenter", () => {{
+      button.style.opacity = "1";
+      button.style.transform = "translateY(-2px)";
+    }});
+    button.addEventListener("mouseleave", () => {{
+      button.style.opacity = distanceFromBottom() > 120 ? ".35" : "0";
+      button.style.transform = "";
+    }});
+    button.addEventListener("click", scrollToLatest);
+    doc.body.appendChild(button);
+    win.addEventListener("scroll", updateButton, {{ passive: true }});
+  }};
+
+  const forceToBottom = {force};
+  if (forceToBottom || distanceFromBottom() < 180) {{
+    requestAnimationFrame(scrollToLatest);
+  }}
+  requestAnimationFrame(updateButton);
+}})();
+</script>
+        """,
+        height=0,
+    )
+
+
+def queue_chat_prompt() -> None:
+    """Capture and clear the widget value before Streamlit's main rerun."""
+    prompt = st.session_state.get("chat_prompt_input", "").strip()
+
+    if prompt and not st.session_state.busy:
+        st.session_state.pending_chat_prompt = prompt
+
+    # A later rerun (for example after a stream completes) cannot replay this
+    # value because the widget state has already been cleared.
+    st.session_state.chat_prompt_input = ""
 
 
 # ============================================================
@@ -851,10 +1030,19 @@ if feature == "chat":
     else:
         render_history(history)
 
-    prompt = st.chat_input(
+    render_edit_message_form(history)
+    render_chat_scroll_controls(force_to_bottom=False)
+
+    st.chat_input(
         "Message the assistant...",
+        key="chat_prompt_input",
+        on_submit=queue_chat_prompt,
         disabled=st.session_state.busy,
     )
+
+    # Pop first: a submitted value has one chance to create a request, even
+    # when subsequent calls to st.rerun() happen during or after streaming.
+    prompt = st.session_state.pop("pending_chat_prompt", None)
 
     if prompt and prompt.strip() and not st.session_state.busy:
         prompt = prompt.strip()
@@ -875,6 +1063,11 @@ if feature == "chat":
         with st.chat_message("assistant"):
             placeholder = st.empty()
 
+            # The user has just submitted a prompt, so keep the growing reply
+            # in view. If they later scroll up to read, the normal control
+            # leaves their position alone and exposes the jump button instead.
+            render_chat_scroll_controls(force_to_bottom=True)
+
             if st.session_state.settings["stream"]:
                 placeholder.markdown("_Connecting to the gateway…_")
             else:
@@ -882,7 +1075,14 @@ if feature == "chat":
 
             answer, error = call_chat(
                 endpoint=current_endpoint(),
-                messages=build_messages(history),
+                # Conversation remains visible in the UI, but every gateway
+                # request contains only this newly submitted question.
+                messages=build_messages([
+                    {
+                        "role": "user",
+                        "content": prompt,
+                    }
+                ]),
                 placeholder=placeholder,
             )
 

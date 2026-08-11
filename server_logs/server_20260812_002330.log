@@ -1,0 +1,97 @@
+2026-08-12 00:23:30,357 | INFO | server.main | Loaded Guardrails custom actions from C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\guardRails\config\actions.py
+2026-08-12 00:23:30,360 | INFO | server.main | Loaded Guardrails custom actions from C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\guardRails\config\greeting.py
+2026-08-12 00:23:30,360 | INFO | server.main | Loading Guardrails configuration from C:\Users\gaura\OneDrive\Desktop\fde\LLM_Gateways\guardRails\config
+2026-08-12 00:23:31,582 | INFO | nemoguardrails.actions.action_dispatcher | Initializing action dispatcher
+2026-08-12 00:23:31,588 | INFO | nemoguardrails.actions.action_dispatcher | Added create_event to actions
+2026-08-12 00:23:31,590 | INFO | nemoguardrails.actions.action_dispatcher | Added wolfram alpha request to actions
+2026-08-12 00:23:31,594 | INFO | nemoguardrails.actions.action_dispatcher | Added retrieve_relevant_chunks to actions
+2026-08-12 00:23:31,617 | INFO | nemoguardrails.actions.action_dispatcher | Added call_activefence_api to actions
+2026-08-12 00:23:31,621 | INFO | nemoguardrails.actions.action_dispatcher | Added ai_defense_inspect to actions
+2026-08-12 00:23:31,625 | INFO | nemoguardrails.actions.action_dispatcher | Added GetAttentionPercentageAction to actions
+2026-08-12 00:23:31,625 | INFO | nemoguardrails.actions.action_dispatcher | Added UpdateAttentionMaterializedViewAction to actions
+2026-08-12 00:23:31,628 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_factcheck_output_api to actions
+2026-08-12 00:23:31,629 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_groundedness_output_api to actions
+2026-08-12 00:23:31,629 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_input_api to actions
+2026-08-12 00:23:31,629 | INFO | nemoguardrails.actions.action_dispatcher | Added autoalign_output_api to actions
+2026-08-12 00:23:31,655 | INFO | nemoguardrails.actions.action_dispatcher | Added ClavataCheckAction to actions
+2026-08-12 00:23:31,658 | INFO | nemoguardrails.actions.action_dispatcher | Added call cleanlab api to actions
+2026-08-12 00:23:31,661 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_input to actions
+2026-08-12 00:23:31,661 | INFO | nemoguardrails.actions.action_dispatcher | Added content_safety_check_output to actions
+2026-08-12 00:23:31,661 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_language to actions
+2026-08-12 00:23:31,665 | INFO | nemoguardrails.actions.action_dispatcher | Added context_bloat_detection to actions
+2026-08-12 00:23:31,673 | INFO | nemoguardrails.actions.action_dispatcher | Added crowdstrike_aidr_guard to actions
+2026-08-12 00:23:31,692 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore_check_facts to actions
+2026-08-12 00:23:31,692 | INFO | nemoguardrails.actions.action_dispatcher | Added alignscore request to actions
+2026-08-12 00:23:31,692 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-12 00:23:31,695 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler faithfulness to actions
+2026-08-12 00:23:31,695 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on bot message to actions
+2026-08-12 00:23:31,695 | INFO | nemoguardrails.actions.action_dispatcher | Added call fiddler safety on user message to actions
+2026-08-12 00:23:31,697 | INFO | nemoguardrails.actions.action_dispatcher | Added call gcpnlp api to actions
+2026-08-12 00:23:31,713 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_detect_pii to actions
+2026-08-12 00:23:31,713 | INFO | nemoguardrails.actions.action_dispatcher | Added gliner_mask_pii to actions
+2026-08-12 00:23:31,727 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_input to actions
+2026-08-12 00:23:31,727 | INFO | nemoguardrails.actions.action_dispatcher | Added validate_guardrails_ai_output to actions
+2026-08-12 00:23:31,730 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_hallucination to actions
+2026-08-12 00:23:31,739 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_input to actions
+2026-08-12 00:23:31,740 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_output to actions
+2026-08-12 00:23:31,740 | INFO | nemoguardrails.actions.action_dispatcher | Added hf_classifier_check_retrieval to actions
+2026-08-12 00:23:31,747 | INFO | nemoguardrails.actions.action_dispatcher | Added injection_detection to actions
+2026-08-12 00:23:31,755 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_heuristics to actions
+2026-08-12 00:23:31,755 | INFO | nemoguardrails.actions.action_dispatcher | Added jailbreak_detection_model to actions
+2026-08-12 00:23:31,758 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_input to actions
+2026-08-12 00:23:31,758 | INFO | nemoguardrails.actions.action_dispatcher | Added llama_guard_check_output to actions
+2026-08-12 00:23:31,766 | INFO | nemoguardrails.actions.action_dispatcher | Added pangea_ai_guard to actions
+2026-08-12 00:23:31,769 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_api_check_output to actions
+2026-08-12 00:23:31,770 | INFO | nemoguardrails.actions.action_dispatcher | Added patronus_lynx_check_output_hallucination to actions
+2026-08-12 00:23:31,773 | INFO | nemoguardrails.actions.action_dispatcher | Added call_policyai_api to actions
+2026-08-12 00:23:31,782 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_detect_pii to actions
+2026-08-12 00:23:31,782 | INFO | nemoguardrails.actions.action_dispatcher | Added polygraf_mask_pii to actions
+2026-08-12 00:23:31,790 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_pii to actions
+2026-08-12 00:23:31,791 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_pii to actions
+2026-08-12 00:23:31,793 | INFO | nemoguardrails.actions.action_dispatcher | Added protect_text to actions
+2026-08-12 00:23:31,797 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_regex_pattern to actions
+2026-08-12 00:23:31,799 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_facts to actions
+2026-08-12 00:23:31,802 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_input to actions
+2026-08-12 00:23:31,805 | INFO | nemoguardrails.actions.action_dispatcher | Added self_check_output to actions
+2026-08-12 00:23:31,809 | INFO | nemoguardrails.actions.action_dispatcher | Added detect_sensitive_data to actions
+2026-08-12 00:23:31,810 | INFO | nemoguardrails.actions.action_dispatcher | Added mask_sensitive_data to actions
+2026-08-12 00:23:31,812 | INFO | nemoguardrails.actions.action_dispatcher | Added topic_safety_check_input to actions
+2026-08-12 00:23:31,818 | INFO | nemoguardrails.actions.action_dispatcher | Added trend_ai_guard to actions
+2026-08-12 00:23:31,821 | INFO | nemoguardrails.actions.action_dispatcher | Added GetCurrentDateTimeAction to actions
+2026-08-12 00:23:31,829 | INFO | nemoguardrails.actions.action_dispatcher | Added check_blocked_terms to actions
+2026-08-12 00:23:31,830 | INFO | nemoguardrails.actions.action_dispatcher | Added check_llama_guard_input to actions
+2026-08-12 00:23:31,830 | INFO | nemoguardrails.actions.action_dispatcher | Added check_pii_and_mask to actions
+2026-08-12 00:23:31,830 | INFO | nemoguardrails.actions.action_dispatcher | Registered Actions :: ['ClavataCheckAction', 'GetAttentionPercentageAction', 'GetCurrentDateTimeAction', 'UpdateAttentionMaterializedViewAction', 'ai_defense_inspect', 'alignscore request', 'alignscore_check_facts', 'autoalign_factcheck_output_api', 'autoalign_groundedness_output_api', 'autoalign_input_api', 'autoalign_output_api', 'call cleanlab api', 'call fiddler faithfulness', 'call fiddler safety on bot message', 'call fiddler safety on user message', 'call gcpnlp api', 'call_activefence_api', 'call_policyai_api', 'check_blocked_terms', 'check_llama_guard_input', 'check_pii_and_mask', 'content_safety_check_input', 'content_safety_check_output', 'context_bloat_detection', 'create_event', 'crowdstrike_aidr_guard', 'detect_language', 'detect_pii', 'detect_regex_pattern', 'detect_sensitive_data', 'gliner_detect_pii', 'gliner_mask_pii', 'hf_classifier_check_input', 'hf_classifier_check_output', 'hf_classifier_check_retrieval', 'injection_detection', 'jailbreak_detection_heuristics', 'jailbreak_detection_model', 'llama_guard_check_input', 'llama_guard_check_output', 'mask_pii', 'mask_sensitive_data', 'pangea_ai_guard', 'patronus_api_check_output', 'patronus_lynx_check_output_hallucination', 'polygraf_detect_pii', 'polygraf_mask_pii', 'protect_text', 'retrieve_relevant_chunks', 'self_check_facts', 'self_check_hallucination', 'self_check_input', 'self_check_output', 'topic_safety_check_input', 'trend_ai_guard', 'validate_guardrails_ai_input', 'validate_guardrails_ai_output', 'wolfram alpha request']
+2026-08-12 00:23:31,830 | INFO | nemoguardrails.actions.action_dispatcher | Action dispatcher initialized
+2026-08-12 00:23:32,810 | INFO | server.main | Guardrails initialized successfully.
+2026-08-12 00:24:13,373 | INFO | guardrails_config_greeting | Detected greeting/small talk phrase: hi
+2026-08-12 00:24:13,373 | INFO | server.main | Guardrails greeting detected.
+2026-08-12 00:24:34,163 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'Can you tell me about the reverse proxy and proxy server'
+2026-08-12 00:24:49,955 | ERROR | guardrails_config_actions | [Input Rail] Local Llama Guard call failed: 
+2026-08-12 00:24:49,970 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-12 00:25:00,533 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:25:44,517 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'What is api gateway'
+2026-08-12 00:25:45,708 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:25:45,710 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-12 00:25:45,712 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-12 00:25:46,676 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:26:54,782 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'What is api gateway'
+2026-08-12 00:26:55,869 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:26:55,870 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-12 00:26:55,870 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-12 00:26:56,916 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:27:12,222 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'Can you  tell me about load balancer'
+2026-08-12 00:27:19,991 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:27:19,992 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-12 00:27:19,993 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-12 00:27:31,277 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:28:46,747 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'what is api gateway?'
+2026-08-12 00:28:47,700 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:28:47,700 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-12 00:28:47,701 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-12 00:28:48,664 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:29:19,756 | INFO | guardrails_config_actions | [Input Rail] Evaluating Llama Guard 3 for: 'Explain api gateway? How it is used in software applications and why?'
+2026-08-12 00:29:27,093 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
+2026-08-12 00:29:27,096 | INFO | guardrails_config_actions | [Llama Guard Raw Output]: 'safe'
+2026-08-12 00:29:27,096 | INFO | server.main | Guardrails passed; starting streaming LiteLLM chat completion.
+2026-08-12 00:29:38,793 | INFO | httpx | HTTP Request: POST http://localhost:4000/v1/chat/completions "HTTP/1.1 200 OK"
